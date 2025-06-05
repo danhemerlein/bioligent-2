@@ -1,0 +1,27 @@
+{% unless product.available %}
+  {%- assign form_id = 'oos-' | append: product.handle -%}
+  {%- form 'customer', id: form_id -%}
+
+    {% unless form.posted_successfully? %}
+      <p class="text-size--large">{{ headline }}</p>
+    {% endunless %}
+
+    {%- render 'form-errors', form: form -%}
+
+    {%- if form.posted_successfully? -%}
+
+      <p class="text-size--large">{{ success }}</p>
+
+    {%- else -%}
+
+      <fieldset>
+        <input type="hidden" name="contact[tags]" value="oos-{{ product.handle }}">
+        <input type="email" class="newsletter__input" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter.email_label' | t }}" name="contact[email]" id="OOS-{{ form_id }}" aria-label="{{ 'general.newsletter.email_label' | t }}" autocorrect="off" autocapitalize="off" required>
+        <button type="submit" class="button button--solid" id="OOS-{{ form_id }}" aria-label="{{ 'general.newsletter.submit_label' | t }}" style="background-color: {{ button_color }}; border-color: {{ button_color }};">
+          <span class="button__text" aria-hidden="true">{{ 'general.newsletter.submit_label' | t | upcase}}</span>
+        </button>
+      </fieldset>
+
+    {%- endif -%}
+  {%- endform -%}
+{% endunless %}

@@ -1,0 +1,272 @@
+{{ 'ingredient-page.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-list.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-list-search.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-list-card.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-slick-slider.css' | asset_url | stylesheet_tag }}
+
+{% assign ingredient_list = shop.metaobjects.ingredient.values | where: 'pill_text', metaobject.pill_text %}
+
+<div class="ingredient-page container--large container--vertical-space remove-empty-space">
+  <div class="ingredient-page__hero bioligent-grid">
+    <div class="ingredient-page__image-container">
+      {%- render 'lazy-image', image: metaobject.image ratio: 1, class: ' lazy-image--to-reveal lazy-image--zoom-animation ingredient-card-image product-item__image-figure product-item__image-figure--top lazy-image--to-reveal lazy-image--zoom-animation product-item__image-no-slider' -%}
+    </div>
+
+    <div class="ingredient-page__text-container">
+
+      <div class="ingredient-page__pill ingredient-pill">
+        <p class="uppercase overline-large m-0">{{ metaobject.pill_text }}</p>
+      </div>
+
+      <h1 class="uppercase ingredient-page__product-title">{{ metaobject.title }}</h1>
+
+      <p class="ingredient-page__we_believe_statement body-medium">{{ metaobject.we_believe_statement }}</p>
+
+      <div class="ingredient-page__text-box-container">
+        {% render 'ingredient-page-text-box' title: "What it Does", text: metaobject.description %}
+
+        {% render 'ingredient-page-text-box' title: "Form", text: metaobject.form %}
+
+        {% render 'ingredient-page-text-box' title: "Found In", text: metaobject.found_in %}
+
+        {% render 'ingredient-page-text-box' title: "Country of Origin", text: metaobject.country_of_origin %}
+
+        {% render 'ingredient-page-text-box' title: "Final Location of Manufacturing", text: metaobject.final_location_of_manufacturing %}
+      </div>
+    </div>
+  </div>
+
+  {%- liquid
+    for product in collections['frontpage'].products
+      assign found = false
+
+      for ingredient in product.metafields.custom.ingredients.value
+        assign ingredient_name = ingredient.title
+
+        if ingredient_name contains metaobject.title
+          assign found = true
+        endif
+      endfor
+
+      if found
+        render 'our-ingredients-title'
+        break
+      endif
+    endfor
+  -%}
+
+  <div class="bioligent-grid ingredient-page__product-grid">
+    {%- liquid
+      for product in collections['frontpage'].products
+        assign found = false
+
+        for ingredient in product.metafields.custom.ingredients.value
+          assign ingredient_name = ingredient.title
+
+          if ingredient_name contains metaobject.title
+            assign found = true
+          endif
+        endfor
+
+        if found
+          render 'product-item', product: product, section_blocks: section.blocks, index: forloop.index
+        endif
+      endfor
+    -%}
+  </div>
+
+  <h2 class="heading-small md-heading-medium ingredient-page__our-products">Discover More {{ metaobject.pill_text }}</h2>
+
+  {% render 'ingredient-grid' array: ingredient_list title: 'plants-herbs' %}
+
+  <div class="see-all-container">
+    {% render 'bioligent-button' as: "link" variant: "green" right_icon: "bioligent-chevron" text: "See All Ingredients" disabled: false href: "/pages/our-ingredients" additional_class: "ingredient-page__see-all-button" %}
+  </div>
+
+</div>
+
+<script src="{{ 'ingredient-pagination.js' | asset_url }}" ></script>
+<script src="{{ 'ingredient-carousel.js' | asset_url }}" ></script>
+<script>
+  document.querySelectorAll('.ingredient-card-link').forEach(link => {
+    const rawHandle = link.dataset.title;
+    let finalHandle = rawHandle
+      .replace(/([a-zA-Z])(?=\d)/g, '$1-')
+      .replace(/(\d)(?=[a-zA-Z])/g, '$1-')
+      .replace(/®/g, '')
+
+    if (finalHandle === "thymoquin") {
+      finalHandle = "thymo-quin"
+    }
+
+    link.href = `/pages/ingredient/${finalHandle}`;
+  });
+</script>
+{% schema %}
+  {
+    "name": "Ingredient Page",
+    "blocks": [
+      {
+        "type": "price",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.price",
+        "limit": 1
+      },
+      {
+        "type": "title",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.title",
+        "limit": 1
+      },
+      {
+        "type": "description",
+        "name": "t:sections.main-product.blocks.description.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "range",
+            "id": "excerpt_limit",
+            "label": "t:sections.local-extra-words.sections.blog-posts.blocks.summary.settings.excerpt_limit",
+            "info": "t:sections.bundle-extra-words.sections.products_set.blocks.description.info",
+            "default": 15,
+            "step": 1,
+            "min": 5,
+            "max": 40
+          },
+          {
+            "type": "checkbox",
+            "id": "show_link",
+            "label": "t:sections.bundle-extra-words.sections.products_set.blocks.description.link",
+            "default": true
+          }
+        ]
+      },
+      {
+        "type": "vendor",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.vendor",
+        "limit": 1
+      },
+      {
+        "type": "rating",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.rating"
+      },
+      {
+        "type": "icons",
+        "name": "t:sections.local-extra-words.sections.main-product.blocks.icons.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.local-extra-words.sections.main-product.blocks.icons.help"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.text.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "metafield",
+            "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.text.label",
+            "info": "t:sections.local-extra-words.sections.product-card.blocks.text.info",
+            "default": "custom.product_text"
+          },
+          {
+            "type": "select",
+            "id": "text_color",
+            "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.color.label",
+            "options": [
+              {
+                "value": "",
+                "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.text.settings.text_color.option__1"
+              },
+              {
+                "value": "text-color--opacity",
+                "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.text.settings.text_color.option__2"
+              }
+            ],
+            "default": "text-color--opacity"
+          },
+          {
+            "type": "checkbox",
+            "id": "text_transform",
+            "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.transform.label",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "quick_buy",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.quick_buy",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_only_available",
+            "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.quick_buy.settings.show_only_available.label",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "variant_default",
+            "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.quick_buy.settings.variant_default.label",
+            "info": "t:sections.bundle-extra-words.sections.product_grid.blocks.quick_buy.settings.variant_default.info",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "show_price",
+            "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.quick_buy.settings.show_price.label",
+            "default": true
+          },
+          {
+            "type": "select",
+            "id": "unavailable_variants",
+            "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.quick_buy.settings.unavailable_variants.label",
+            "options": [
+              {
+                "value": "disable",
+                "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.quick_buy.settings.unavailable_variants.option_2"
+              },
+              {
+                "value": "hide",
+                "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.quick_buy.settings.unavailable_variants.option_1"
+              },
+              {
+                "value": "show",
+                "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.quick_buy.settings.unavailable_variants.option_3"
+              }
+            ],
+            "default": "hide"
+          }
+        ]
+      },
+      {
+        "type": "product_link",
+        "name": "t:sections.bundle-extra-words.sections.product_grid.blocks.product_link.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "t:sections.bundle-extra-words.sections.product_grid.blocks.product_link.settings.button_label.label",
+            "default": "View product"
+          }
+        ]
+      }
+    ],
+
+    "presets": [{
+      "name": "Collection",
+      "blocks": [
+        { "type": "price" },
+        { "type": "title" },
+        { "type": "quick_buy" }
+      ]
+    }],
+    "disabled_on": {
+      "groups": ["header"],
+      "templates": ["password"]
+    }
+  }
+{% endschema %}

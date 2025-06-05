@@ -1,0 +1,47 @@
+<!doctype html>
+  <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{%- render 'lang-dir' -%}">
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
+
+    {% if settings.favicon_image %}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />
+    {% endif %}
+
+    <title>{{ shop.name | escape }}</title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <link rel="preconnect" href="https://cdn.shopify.com">
+    {%- unless settings.headings_font.system? and settings.body_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    {% render 'head-variables' %}
+
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'section-main-gift-card.css' | asset_url | stylesheet_tag }}
+
+    {% # theme-check-disable %}
+    {{ 'vendor/qrcode.js' | shopify_asset_url | script_tag }}
+    {% # theme-check-enable %}
+
+    {{ content_for_header }}
+
+    <script>!function () {var reb2b = window.reb2b = window.reb2b || []; if (reb2b.invoked) return;reb2b.invoked = true;reb2b.methods = ["identify", "collect"]; reb2b.factory = function (method) {return function () {var args = Array.prototype.slice.call(arguments); args.unshift(method);reb2b.push(args);return reb2b;};}; for (var i = 0; i < reb2b.methods.length; i++) {var key = reb2b.methods[i];reb2b[key] = reb2b.factory(key);} reb2b.load = function (key) {var script = document.createElement("script");script.type = "text/javascript";script.async = true; script.src = "https://s3-us-west-2.amazonaws.com/b2bjsstore/b/" + key + "/5NRP9HGV3RO1.js.gz"; var first = document.getElementsByTagName("script")[0]; first.parentNode.insertBefore(script, first);}; reb2b.SNIPPET_VERSION = "1.0.1";reb2b.load("5NRP9HGV3RO1");}();</script>
+
+  </head>
+
+  <body class="template-gift-card no-touchevents">
+
+    {{ content_for_layout }}
+
+  </body>
+
+  </html>

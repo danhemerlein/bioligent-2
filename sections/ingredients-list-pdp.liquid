@@ -1,0 +1,62 @@
+{{ 'ingredient-list.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-list-search.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-list-card.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-slick-slider.css' | asset_url | stylesheet_tag }}
+
+<div class="container--large remove-empty-space" style="margin-top: 24px;">
+  <div class="ingredient-grid-container">
+    <div class="search-grids-container">
+      <h3 class="heading-medium grid-category-title"  {% if section.settings.heading_alignment == "center" %} style="text-align:center;"{% endif %}>See what's inside {{ product.title }}</h3>
+      {% render 'ingredient-grid' array: product.metafields.custom.ingredients.value, title: 'plants-herbs', is_pdp: true %}
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'ingredient-pagination.js' | asset_url }}" ></script>
+<script src="{{ 'ingredient-carousel.js' | asset_url }}" ></script>
+
+<script>
+  document.querySelectorAll('.ingredient-card-link').forEach(link => {
+    const rawHandle = link.dataset.title;
+    let finalHandle = rawHandle
+      .replace(/([a-zA-Z])(?=\d)/g, '$1-')
+      .replace(/(\d)(?=[a-zA-Z])/g, '$1-')
+      .replace(/®/g, '')
+
+    if (finalHandle === "thymoquin") {
+      finalHandle = "thymo-quin"
+    }
+
+    link.href = `/pages/ingredient/${finalHandle}`;
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Ingredient List PDP",
+  "settings": [
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredient List PDP",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

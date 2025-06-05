@@ -1,0 +1,18 @@
+{{ 'cyb-title-price.css' | asset_url | stylesheet_tag }}
+
+<h2>{{ title }}</h2>
+
+{% if subtitle != blank %}
+  <p class="cyb__subtitle">{{ subtitle }}</p>
+{% endif %}
+
+<div class="cyb__bundle-price-container">
+  <p>
+    <span class="js-bundle-discount">$0.00</span>
+  </p>
+  <p>
+    <span class="js-bundle-price">
+      <s>$0.00</s>
+    </span>
+  </p>
+</div>

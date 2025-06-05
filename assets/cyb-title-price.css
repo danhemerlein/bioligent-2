@@ -1,0 +1,10 @@
+.cyb__bundle-price-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+
+.cyb__bundle-price-container p {
+  font-size: 18px;
+}

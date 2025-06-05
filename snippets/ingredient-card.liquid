@@ -1,0 +1,28 @@
+<div class="ingredient-card js-ingredient-card" data-index="{{ index }}" data-type="{{ type }}" data-search-title-="{{ ingredient.title }}" data-search-desc="{{ ingredient.description }}" data-desktop="{{ desktop }}"
+data-is-desktop-pagination="{{ is_desktop_pagination }}"
+
+{% if is_pdp == true and desktop == 'true' and count < 5 %}
+  style="width: 20%;"
+{% endif %}
+
+>
+  <a href="#" data-title="{{ ingredient.title | handle }}" class="ingredient-card-link 123">
+    <div class="image-container-inner">
+      <div class="ingredient-pill hide-mobile">
+        <p class="uppercase overline-medium m-0">{{ ingredient.pill_text }}</p>
+      </div>
+      {%- render 'lazy-image', image: ingredient.image ratio: 1, class: ' lazy-image--to-reveal lazy-image--zoom-animation ingredient-card-image product-item__image-figure product-item__image-figure--top lazy-image--to-reveal lazy-image--zoom-animation product-item__image-no-slider' -%}
+    </div>
+
+    <div class="title-container">
+
+      <div class="ingredient-pill hide-desktop">
+        <p class="uppercase overline-medium m-0">{{ ingredient.pill_text }}</p>
+      </div>
+
+      <div class="title-container-inner">
+        <p class="title m-0">{{ ingredient.title }}</p>
+      </div>
+    </div>
+  </a>
+</div>

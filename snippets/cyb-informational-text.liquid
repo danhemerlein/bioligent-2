@@ -1,0 +1,12 @@
+{{ 'cyb-informational-text.css' | asset_url | stylesheet_tag }}
+
+<div class="cyb-informational-text__container">
+  {% for block in blocks %}
+    <div class="cyb-informational-text">
+      <div class="cyb-informational-text__icon">
+        {% render 'icon-pack' icon: 'circle-check' %}
+      </div>
+      <p>{{ block.settings.text }}</p>
+    </div>
+  {% endfor %}
+</div>

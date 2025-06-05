@@ -1,0 +1,200 @@
+{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.is_fullwidth -%}
+  {% style %}
+    @media screen and (max-width: {{ settings.theme_max_width }}px) {
+      #shopify-section-{{ section.id }} .rich-text__container--image-right .rich-text__text {
+        padding-inline-start: var(--gutter-container) !important;
+      }
+    }
+    @media screen and (max-width: {{ settings.theme_max_width }}px) {
+      #shopify-section-{{ section.id }} .rich-text__container--image-left .rich-text__text {
+        padding-inline-end: var(--gutter-container) !important;
+      }
+    }
+  {% endstyle %}
+{%- endif -%}
+
+<div id="element-{{ section.id }}" class="{% unless section.settings.is_fullwidth %} container--large {% else %} container--fullwidth {% endunless %} {% unless section.settings.remove_margin %} container--vertical-space{% if section.settings.gutter_decrease %}-small{% endif %} {% endunless %} {% if section.settings.remove_bottom_margin %} container--negative-margin {% endif %}"
+  style = "background-color: {{ section.settings.color_background_main }}; border-color: {{ section.settings.color_borders_main }}; border-radius: {{ section.settings.border_radius }}px;"
+  >
+
+  <div  class="card container--large
+    {% if section.settings.is_fullwidth %} card--no-radius card--no-sideborders {% endif %} rich-text"
+    style="display:flex"
+  >
+
+    <div class="two-up-rich-text__container {% if section.settings.is_fullwidth %} rich-text__container--fullwidth {% endif %}">
+
+      <div class="rich-text__text
+        align-content align-content--vertical-middle
+        {% unless section.settings.is_fullwidth %} gutter--xlarge {% endunless %}
+        {% if section.settings.is_fullwidth %} container--large gutter-top--xlarge gutter-bottom--xlarge {% endif %}"
+      >
+        <div class="two-up-rich-text__container-card-text card__text spacing--custom remove-empty-space">
+          <div>
+            <h2 class="heading-size--regular">
+              {{ section.settings.headline }}
+            </h2>
+            <p class="rte text-size--large">{{ section.settings.sub_headline }}</p>
+          </div>
+
+          <div>
+            <ul class="two-up-rich-text__container-ul rte text-size--large element--hide-on-desk ">
+              {% assign mobile_list = section.settings.mobile_list | split: ", " %}
+
+              {% for mobile_list_item in mobile_list %}
+                <li>
+                  {{ mobile_list_item }}
+                </li>
+              {% endfor %}
+            </ul>
+
+            <ul class="two-up-rich-text__container-ul rte text-size--large element--hide-on-small ">
+              {% assign desktop_list = section.settings.desktop_list | split: ", " %}
+
+              {% for desktop_list_item in desktop_list %}
+                <li>
+                  {{ desktop_list_item }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {%- render 'custom-colors', id: section.id, text: section.settings.color_text_main, background: section.settings.color_background_main, borders: section.settings.color_borders_main, hide_borders: section.settings.color_hide_borders, border_radius: section.settings.border_radius -%}
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Two Up Rich Text",
+  "class": "can-be-fullwidth merged-section supports-absolute-header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "headline"
+    },
+    {
+      "type": "text",
+      "id": "sub_headline",
+      "label": "Sub Headline"
+    },
+    {
+      "type": "text",
+      "id": "desktop_list",
+      "label": "Desktop List"
+    },
+      {
+      "type": "text",
+      "id": "mobile_list",
+      "label": "Mobile List"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "t:sections.local-extra-words.sections.rich-text.settings.height.label",
+      "info": "t:sections.local-extra-words.sections.rich-text.settings.height.info",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.image-with-text.settings.image_height.options__1.label"
+        },
+        {
+          "value": "regular",
+          "label": "t:sections.image-with-text.settings.image_height.options__2.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.image-with-text.settings.image_height.options__3.label"
+        }
+      ],
+      "default": "regular"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_fullwidth",
+      "label": "t:sections.local-extra-words.sections.rich-text.settings.fullwidth.label",
+      "default": false,
+      "info": "t:sections.local-extra-words.sections.rich-text.settings.fullwidth.info"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "t:sections.bundle-extra-words.settings_schema.labels.spacing",
+      "min": -12,
+      "max": 60,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.bundle-extra-words.settings_schema.card.settings.design.header"
+    },
+    {
+      "type": "color",
+      "id": "color_background_main",
+      "label": "t:sections.split-extra-words.settings_schema.colors.settings.background",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "color_text_main",
+      "label": "t:sections.split-extra-words.settings_schema.colors.settings.text",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "color_borders_main",
+      "label": "t:sections.local-extra-words.settings_schema.colors.settings.borders",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:sections.bundle-extra-words.settings_schema.buttons.settings.border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "color_hide_borders",
+      "label": "t:sections.local-extra-words.settings_schema.colors.settings.hide_border",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.bundle-extra-words.sections.headings.gutter.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "gutter_decrease",
+      "label": "t:sections.bundle-extra-words.sections.headings.gutter.content",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_margin",
+      "label": "t:sections.local-extra-words.sections.rich-text.settings.remove_margin.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_bottom_margin",
+      "label": "t:sections.local-extra-words.settings_schema.layout.sections.remove_bottom_margin",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Two Up Rich Text"
+    }
+  ]
+}
+{% endschema %}

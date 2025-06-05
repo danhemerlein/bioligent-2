@@ -1,0 +1,15 @@
+# Files excluded from Shopify CLI
+templates/*.json
+locales/en.default.json
+locales/zh-TW.json
+config/*_data.json
+notifications/*
+customer-app-forms/*
+ordergroove-offers/*
+mechanic-tasks/*
+shopify-scripts/*
+flows/*
+remote/*
+wishlist-king/*
+cordial-webhooks/*
+findation/*

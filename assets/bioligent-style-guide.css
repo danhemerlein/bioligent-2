@@ -1,0 +1,124 @@
+.display-flex-mobile {
+  display: flex;
+}
+
+.flex {
+  display: flex;
+}
+
+.display-block-mobile {
+  display: block;
+}
+
+.hide-mobile {
+  display: none;
+}
+
+.hide-desktop {
+  display: block;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.hide-button-text-mobile .bioligent-button-text {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hide-button-text-mobile .bioligent-button-text {
+    display: inline;
+  }
+
+  .flex-column-mobile {
+    flex-direction: row;
+  }
+  .display-flex-mobile {
+    display: none;
+  }
+
+  .display-block-mobile {
+    display: none;
+  }
+
+  .hide-mobile {
+    display: block;
+  }
+  .hide-desktop {
+    display: none;
+  }
+}
+
+.junip-stars-container {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.junip-stars-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background-color: rgb(0, 48, 26);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.junip-stars-container:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.junip-stars-container:not(:hover)::after {
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease, transform-origin 0s;
+}
+
+.media-icons {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bioligent-media-icon {
+  height: 60px;
+  width: 60px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 100%;
+  text-transform: uppercase;
+}
+.bioligent-media-icon p {
+  font-size: 12px !important;
+  line-height: normal !important;
+}
+@media (min-width: 768px) {
+  .bioligent-media-icon {
+    height: 80px;
+    width: 80px;
+  }
+  .bioligent-media-icon p {
+    font-size: 14px !important;
+  }
+  .media-icons {
+    gap: 1rem;
+  }
+}

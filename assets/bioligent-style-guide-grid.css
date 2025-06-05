@@ -1,0 +1,37 @@
+.grid-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.bioligent-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.grid-demo {
+  height: 812px;
+}
+
+.col {
+  background: rgba(255, 0, 0, 0.25);
+}
+
+@media (min-width: 768px) {
+  .grid-demo {
+    width: 100%;
+    height: 900px;
+  }
+
+  .bioligent-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+  }
+
+  .grid-rows {
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+}

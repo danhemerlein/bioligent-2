@@ -1,0 +1,59 @@
+{% if as == 'button' %}
+  {% assign class_name = "" %}
+  {% if variant == 'white' %}
+    {% assign class_name = "bioligent-button--white"  %}
+  {% elsif variant == 'green' %}
+    {% assign class_name = "bioligent-button--green"  %}
+  {% elsif variant == 'outline' %}
+    {% assign class_name = "bioligent-button--outline"  %}
+  {% endif %}
+
+  <button class="bioligent-button focus-visible {{ class_name }} {{ additional_class }}"
+    {% if disabled %}
+      disabled
+    {% endif %}
+    type="{{ type }}"
+  >
+    {% if left_icon != blank %}
+      <span class="button-icon icon--left">
+        {% render 'icon-pack' icon: left_icon %}
+      </span>
+    {% endif %}
+
+    <span class="bioligent-button-text text-center">
+      {{ text }}
+    </span>
+
+    {% if right_icon != blank %}
+      <span class="button-icon icon--right">
+        {% render 'icon-pack' icon: right_icon %}
+      </span>
+    {% endif %}
+  </button>
+{% else %}
+  {% assign class_name = "" %}
+  {% if variant == 'white' %}
+    {% assign class_name = "bioligent-link--white"  %}
+  {% elsif variant == 'green' %}
+    {% assign class_name = "bioligent-link--green"  %}
+  {% endif %}
+
+  <a href="{{ href }}" class="button-link flex focus-visible {{ class_name }} {% if disabled %}
+ button-link--disabled {% endif %} {{ additional_class }}" >
+    {% if left_icon != blank %}
+      <span class="button-icon icon--left">
+        {% render 'icon-pack' icon: left_icon %}
+      </span>
+    {% endif %}
+
+    <span class="bioligent-button-text text-center">
+      {{ text }}
+    </span>
+
+    {% if right_icon != blank %}
+      <span class="button-icon icon--right">
+        {% render 'icon-pack' icon: right_icon %}
+      </span>
+    {% endif %}
+  </a>
+{% endif %}

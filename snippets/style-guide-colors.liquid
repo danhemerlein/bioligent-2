@@ -1,0 +1,228 @@
+{% assign black = "title:Black|var:--base-black|hex:#000000|contrast:#FCFCFC" %}
+{% assign white = "title:White|var:--base-white|hex:#FFFFFF|contrast:#000000" %}
+
+{% assign raw_base_colors = black | append: "," | append: white | append: "," %}
+{% assign raw_colors_array = raw_base_colors | split: "," %}
+
+<div class="color-rows">
+  <h2>colors</h2>
+  <div class="color-row">
+    <div class="color-row__title">
+      <p>Base</p>
+    </div>
+
+    <div class="color-row__colors">
+      {% for color_string in raw_colors_array %}
+        {% assign details = color_string | split: "|" %}
+        {% assign title = details[0] | split: ":" | last %}
+        {% assign var = details[1] | split: ":" | last %}
+        {% assign hex = details[2] | split: ":" | last %}
+        {% assign contrast = details[3] | split: ":" | last %}
+        <div class="color-card">
+          <div class="color-card__color" style="background-color: var({{ var }});">
+            <p class="contrast-p" style="color: {{ contrast }};">AAA</p>
+          </div>
+          <div class="color-card__text">
+            <p class="text-color">{{ title }}</p>
+            <p class="text-hex">{{ hex }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="color-row">
+    <div class="color-row__title">
+      <p>Bioligent Green</p>
+    </div>
+
+    {% assign b-green-50 = "title:50|var:--bioligent-green-50|hex:#B4E1C4|contrast:#0A180F" %}
+    {% assign b-green-100 = "title:100|var:--bioligent-green-100|hex:#9BD7B0|contrast:#0A180F" %}
+    {% assign b-green-200 = "title:200|var:--bioligent-green-200|hex:#7AC995|contrast:#0A180F" %}
+    {% assign b-green-300 = "title:300|var:--bioligent-green-300|hex:#4db772|contrast:#0A180F" %}
+    {% assign b-green-400 = "title:400|var:--bioligent-green-400|hex:#337e4d|contrast:#ffffff" %}
+    {% assign b-green-500 = "title:500|var:--bioligent-green-500|hex:#132F1D|contrast:#ffffff" %}
+    {% assign b-green-600 = "title:600|var:--bioligent-green-600|hex:#102818|contrast:#ffffff" %}
+    {% assign b-green-700 = "title:700|var:--bioligent-green-700|hex:#0E2215|contrast:#ffffff" %}
+    {% assign b-green-800 = "title:800|var:--bioligent-green-800|hex:#0C1D12|contrast:#ffffff" %}
+    {% assign b-green-900 = "title:900|var:--bioligent-green-900|hex:#0A180F|contrast:#ffffff" %}
+
+    {% assign raw_green_colors = b-green-50 | append: "," | append: b-green-100 | append: "," | append: b-green-200 | append: ","| append: b-green-300 | append: "," | append: b-green-400 | append: "," | append: b-green-500 | append: "," | append: b-green-600 | append: "," | append: b-green-700 | append: "," | append: b-green-800 | append: "," | append: b-green-900 | append: "," %}
+    {% assign raw_colors_array = raw_green_colors | split: "," %}
+
+    <div class="color-row__colors">
+      {% for color_string in raw_colors_array %}
+        {% assign details = color_string | split: "|" %}
+        {% assign title = details[0] | split: ":" | last %}
+        {% assign var = details[1] | split: ":" | last %}
+        {% assign hex = details[2] | split: ":" | last %}
+        {% assign contrast = details[3] | split: ":" | last %}
+        <div class="color-card">
+          <div class="color-card__color" style="background-color: var({{ var }});">
+            <p class="contrast-p" style="color: {{ contrast }};">AAA</p>
+          </div>
+          <div class="color-card__text">
+            <p class="text-color">{{ title }}</p>
+            <p class="text-hex">{{ hex }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="color-row">
+    <div class="color-row__title">
+      <p>Edgewater</p>
+    </div>
+
+    {% assign edgewater-50 = "title:50|var:--edgewater-50|hex:#F0F8F3|contrast:#0A180F" %}
+    {% assign edgewater-100 = "title:100|var:--edgewater-100|hex:#EBF6EF|contrast:#0A180F" %}
+    {% assign edgewater-200 = "title:200|var:--edgewater-200|hex:#E5F3E9|contrast:#0A180F" %}
+    {% assign edgewater-300 = "title:300|var:--edgewater-300|hex:#DCEFE2|contrast:#0A180F" %}
+    {% assign edgewater-400 = "title:400|var:--edgewater-400|hex:#D1E9D8|contrast:#0A180F" %}
+    {% assign edgewater-500 = "title:500|var:--edgewater-500|hex:#C1E2CB|contrast:#0A180F" %}
+    {% assign edgewater-600 = "title:600|var:--edgewater-600|hex:#96CEA7|contrast:#ffffff" %}
+    {% assign edgewater-700 = "title:700|var:--edgewater-700|hex:#72BD88|contrast:#ffffff" %}
+    {% assign edgewater-800 = "title:800|var:--edgewater-800|hex:#53AF6E|contrast:#ffffff" %}
+    {% assign edgewater-900 = "title:900|var:--edgewater-900|hex:#46955E|contrast:#ffffff" %}
+
+    {% assign raw_green_colors = edgewater-50 | append: "," | append: edgewater-100 | append: "," | append: edgewater-200 | append: ","| append: edgewater-300 | append: "," | append: edgewater-400 | append: "," | append: edgewater-500 | append: "," | append: edgewater-600 | append: "," | append: edgewater-700 | append: "," | append: edgewater-800 | append: "," | append: edgewater-900 | append: "," %}
+    {% assign raw_colors_array = raw_green_colors | split: "," %}
+
+    <div class="color-row__colors">
+      {% for color_string in raw_colors_array %}
+        {% assign details = color_string | split: "|" %}
+        {% assign title = details[0] | split: ":" | last %}
+        {% assign var = details[1] | split: ":" | last %}
+        {% assign hex = details[2] | split: ":" | last %}
+        {% assign contrast = details[3] | split: ":" | last %}
+        <div class="color-card">
+          <div class="color-card__color" style="background-color: var({{ var }});">
+            <p class="contrast-p" style="color: {{ contrast }};">AAA</p>
+          </div>
+          <div class="color-card__text">
+            <p class="text-color">{{ title }}</p>
+            <p class="text-hex">{{ hex }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="color-row">
+    <div class="color-row__title">
+      <p>Burnham</p>
+    </div>
+
+    {% assign burnham-50 = "title:50|var:--burnham-50|hex:#F9FAFA|contrast:#0A180F" %}
+    {% assign burnham-100 = "title:100|var:--burnham-100|hex:#F7F8F8|contrast:#0A180F" %}
+    {% assign burnham-200 = "title:200|var:--burnham-200|hex:#F4F6F5|contrast:#0A180F" %}
+    {% assign burnham-300 = "title:300|var:--burnham-300|hex:#F0F3F2|contrast:#0A180F" %}
+    {% assign burnham-400 = "title:400|var:--burnham-400|hex:#ECEFEE|contrast:#0A180F" %}
+    {% assign burnham-500 = "title:500|var:--burnham-500|hex:#E5EAE8|contrast:#0A180F" %}
+    {% assign burnham-600 = "title:600|var:--burnham-600|hex:#BFCBC6|contrast:#0A180F" %}
+    {% assign burnham-700 = "title:700|var:--burnham-700|hex:#9EB1A9|contrast:#0A180F" %}
+    {% assign burnham-800 = "title:800|var:--burnham-800|hex:#829A91|contrast:#0A180F" %}
+    {% assign burnham-900 = "title:900|var:--burnham-900|hex:#6C867B|contrast:#0A180F" %}
+
+    {% assign raw_green_colors = burnham-50 | append: "," | append: burnham-100 | append: "," | append: burnham-200 | append: ","| append: burnham-300 | append: "," | append: burnham-400 | append: "," | append: burnham-500 | append: "," | append: burnham-600 | append: "," | append: burnham-700 | append: "," | append: burnham-800 | append: "," | append: burnham-900 | append: "," %}
+    {% assign raw_colors_array = raw_green_colors | split: "," %}
+
+    <div class="color-row__colors">
+      {% for color_string in raw_colors_array %}
+        {% assign details = color_string | split: "|" %}
+        {% assign title = details[0] | split: ":" | last %}
+        {% assign var = details[1] | split: ":" | last %}
+        {% assign hex = details[2] | split: ":" | last %}
+        {% assign contrast = details[3] | split: ":" | last %}
+        <div class="color-card">
+          <div class="color-card__color" style="background-color: var({{ var }});">
+            <p class="contrast-p" style="color: {{ contrast }};">AAA</p>
+          </div>
+          <div class="color-card__text">
+            <p class="text-color">{{ title }}</p>
+            <p class="text-hex">{{ hex }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="color-row">
+    <div class="color-row__title">
+      <p>Spring Wood</p>
+    </div>
+
+    {% assign spring-wood-50 = "title:50|var:--spring-wood-50|hex:#FDFDFB|contrast:#0A180F" %}
+    {% assign spring-wood-100 = "title:100|var:--spring-wood-100|hex:#FCFCFA|contrast:#0A180F" %}
+    {% assign spring-wood-200 = "title:200|var:--spring-wood-200|hex:#FBFCF8|contrast:#0A180F" %}
+    {% assign spring-wood-300 = "title:300|var:--spring-wood-300|hex:#FAFBF6|contrast:#0A180F" %}
+    {% assign spring-wood-400 = "title:400|var:--spring-wood-400|hex:#F8F9F3|contrast:#0A180F" %}
+    {% assign spring-wood-500 = "title:500|var:--spring-wood-500|hex:#F6F7EF|contrast:#0A180F" %}
+    {% assign spring-wood-600 = "title:600|var:--spring-wood-600|hex:#DBDFBE|contrast:#0A180F" %}
+    {% assign spring-wood-700 = "title:700|var:--spring-wood-700|hex:#C4CA95|contrast:#0A180F" %}
+    {% assign spring-wood-800 = "title:800|var:--spring-wood-800|hex:#B0B872|contrast:#0A180F" %}
+    {% assign spring-wood-900 = "title:900|var:--spring-wood-900|hex:#9FA955|contrast:#0A180F" %}
+
+    {% assign raw_green_colors = spring-wood-50 | append: "," | append: spring-wood-100 | append: "," | append: spring-wood-200 | append: ","| append: spring-wood-300 | append: "," | append: spring-wood-400 | append: "," | append: spring-wood-500 | append: "," | append: spring-wood-600 | append: "," | append: spring-wood-700 | append: "," | append: spring-wood-800 | append: "," | append: spring-wood-900 | append: "," %}
+    {% assign raw_colors_array = raw_green_colors | split: "," %}
+
+    <div class="color-row__colors">
+      {% for color_string in raw_colors_array %}
+        {% assign details = color_string | split: "|" %}
+        {% assign title = details[0] | split: ":" | last %}
+        {% assign var = details[1] | split: ":" | last %}
+        {% assign hex = details[2] | split: ":" | last %}
+        {% assign contrast = details[3] | split: ":" | last %}
+        <div class="color-card">
+          <div class="color-card__color" style="background-color: var({{ var }});">
+            <p class="contrast-p" style="color: {{ contrast }};">AAA</p>
+          </div>
+          <div class="color-card__text">
+            <p class="text-color">{{ title }}</p>
+            <p class="text-hex">{{ hex }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="color-row">
+    <div class="color-row__title">
+      <p>Neutral Grey</p>
+    </div>
+
+    {% assign neutral-grey-50 = "title:50|var:--neutral-grey-50|hex:#DADDE3|contrast:#0A180F" %}
+    {% assign neutral-grey-100 = "title:100|var:--neutral-grey-100|hex:#CED1D9|contrast:#0A180F" %}
+    {% assign neutral-grey-200 = "title:200|var:--neutral-grey-200|hex:#BDC2CD|contrast:#0A180F" %}
+    {% assign neutral-grey-300 = "title:300|var:--neutral-grey-300|hex:#A7AEBC|contrast:#0A180F" %}
+    {% assign neutral-grey-400 = "title:400|var:--neutral-grey-400|hex:#8A93A6|contrast:#0A180F" %}
+    {% assign neutral-grey-500 = "title:500|var:--neutral-grey-500|hex:#667085|contrast:#ffffff" %}
+    {% assign neutral-grey-600 = "title:600|var:--neutral-grey-600|hex:#575F71|contrast:#ffffff" %}
+    {% assign neutral-grey-700 = "title:700|var:--neutral-grey-700|hex:#4A5160|contrast:#ffffff" %}
+    {% assign neutral-grey-800 = "title:800|var:--neutral-grey-800|hex:#3F4552|contrast:#ffffff" %}
+    {% assign neutral-grey-900 = "title:900|var:--neutral-grey-900|hex:#353A45|contrast:#ffffff" %}
+
+    {% assign raw_green_colors = neutral-grey-50 | append: "," | append: neutral-grey-100 | append: "," | append: neutral-grey-200 | append: ","| append: neutral-grey-300 | append: "," | append: neutral-grey-400 | append: "," | append: neutral-grey-500 | append: "," | append: neutral-grey-600 | append: "," | append: neutral-grey-700 | append: "," | append: neutral-grey-800 | append: "," | append: neutral-grey-900 | append: "," %}
+    {% assign raw_colors_array = raw_green_colors | split: "," %}
+
+    <div class="color-row__colors">
+      {% for color_string in raw_colors_array %}
+        {% assign details = color_string | split: "|" %}
+        {% assign title = details[0] | split: ":" | last %}
+        {% assign var = details[1] | split: ":" | last %}
+        {% assign hex = details[2] | split: ":" | last %}
+        {% assign contrast = details[3] | split: ":" | last %}
+        <div class="color-card">
+          <div class="color-card__color" style="background-color: var({{ var }});">
+            <p class="contrast-p" style="color: {{ contrast }};">AAA</p>
+          </div>
+          <div class="color-card__text">
+            <p class="text-color">{{ title }}</p>
+            <p class="text-hex">{{ hex }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

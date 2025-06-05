@@ -1,0 +1,37 @@
+{{ 'cyb-bundle-grid.css' | asset_url | stylesheet_tag }}
+
+<div class="cyb-bundle-grid">
+  {% for i in (1..5) %}
+    <div class="cyb-bundle-grid__container js-bundle-grid-item {% if forloop.index == 4 or forloop.index == 5 %}cyb-bundle-grid__item--desktop-center{% endif %}">
+
+      <div class="cyb-bundle-grid__show-mobile">
+        {% if forloop.index == 1 %}
+          <p class="cyb__discount">10% Off</p>
+        {% elsif forloop.index == 2 %}
+          <p class="cyb__discount">15% Off</p>
+        {% else %}
+          <p class="cyb__discount">25% Off</p>
+        {% endif %}
+      </div>
+
+      <div class="cyb-bundle-grid__item " data-index="{{ forloop.index0 }}">
+        {%- render 'lazy-image', ratio: 1, class: 'product-item__image-figure product-item__image-figure--top lazy-image--to-reveal lazy-image--zoom-animation product-item__image-no-slider cyb-bundle-grid__hidden' -%}
+      </div>
+
+      <button class="js-bundle-remove cyb-bundle-grid__hidden cyb-bundle-grid__remove-bundle-item" data-index="{{ forloop.index0 }}">
+          <span class="cyb-bundle-grid__show-desktop">&#x2715;</span>
+          <span class="cyb-bundle-grid__show-mobile">remove</span>
+      </button>
+
+      <div class="cyb-bundle-grid__show-desktop">
+        {% if forloop.index == 1 %}
+          <p class="cyb__discount">10% Off</p>
+        {% elsif forloop.index == 2 %}
+          <p class="cyb__discount">15% Off</p>
+        {% else %}
+          <p class="cyb__discount">25% Off</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

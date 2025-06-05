@@ -1,0 +1,122 @@
+.cyb-product-list__ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  grid-row-start: 2;
+  border-top: 1px solid #efefef;
+  padding-top: 1.5rem;
+}
+
+.cyb-product-list__li {
+  display: flex;
+  flex-direction: column;
+}
+
+.cyb-product-list__div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.cyb-product-list__product-title {
+  margin: 0;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.cyb-product-list__product-subtitle {
+  margin: 0;
+  font-size: 12px;
+}
+
+.cyb-product-list__product-button {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.cyb-product-list__product-button:disabled {
+  background-color: rgb(240, 78, 55);
+  border-color: rgb(240, 78, 55);
+  color: white;
+  opacity: 0.54;
+}
+
+.cyb-product-list__product-link {
+  text-decoration: underline;
+}
+
+.cyb-product-list__ul figure {
+  border-radius: 12px;
+  transition: border-radius 0.3s linear;
+}
+
+.cyb-product-list__ul figure:hover {
+  border-radius: 0;
+  transform: scale(1.05);
+}
+
+.cyb-product-list__ul img {
+  transition: width 175ms linear, height 175ms linear, left 175ms linear,
+    top 175ms linear, opacity 0.35s ease-out;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cyb-product-list__ul figure:hover img {
+  width: 102%;
+  height: 102%;
+  top: -1%;
+  left: -1%;
+}
+
+.cyb-product-list__li-image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.cyb-product-list__li-image--featured {
+  transition: opacity 0.35s ease-out;
+}
+
+.cyb-product-list__li-image-container:hover
+  .cyb-product-list__li-image--featured {
+  opacity: 0;
+}
+
+.cyb-product-list__li-image-container:hover
+  .cyb-product-list__li-image--hover-image {
+  opacity: 1;
+}
+
+.cyb-product-list__li-image--hover-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.35s ease-out;
+}
+
+@media (min-width: 768px) {
+  .cyb-product-list__product-subtitle {
+    font-size: 16px;
+  }
+
+  .cyb-product-list__ul {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-column-end: 8;
+    padding-top: 0;
+    border: none;
+  }
+
+  .cyb-product-list__li {
+    display: list-item;
+  }
+
+  .cyb-product-list__div {
+    display: block;
+  }
+}

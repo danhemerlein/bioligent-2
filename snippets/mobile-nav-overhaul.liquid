@@ -1,0 +1,45 @@
+{{ 'mobile-nav-overhaul.css' | asset_url | stylesheet_tag }}
+
+<ul class="new-mobile-nav__ul">
+  <li>
+    <p class="menu-link text-weight--bold text-size--large" style="margin-bottom: 0;">
+      Shop
+    </p>
+
+    <div class="new-mobile-nav__product-grid new-mobile-nav__with-border {% if mobile_columns == 'two' %} new-mobile-nav__two-column-grid {% elsif mobile_columns == 'three' %} new-mobile-nav__three-column-grid {% elsif mobile_columns == 'four' %} new-mobile-nav__four-column-grid {% endif %}">
+      {% for product in products_list %}
+        <a href="{{ product.url }}">
+          <img class="new-mobile-nav__product-image" src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+          <p class="new-mobile-nav__product-title">
+            {{ product.title }}
+          </p>
+        </a>
+      {% endfor %}
+    </div>
+  </li>
+
+  <li>
+    <p class="menu-link text-weight--bold text-size--large" style="margin-bottom: 0;">
+      Subscribe & Save (Up to 25% Off)
+    </p>
+
+    <div class="new-mobile-nav__product-grid new-mobile-nav__with-border">
+      <a href="{{ sub_save_url }}">
+        <img class="new-mobile-nav__product-image" src="{{ sub_save_image | img_url: '300x300' }}" alt="{{ sub_save_cta }}">
+
+        <p class="new-mobile-nav__product-title">
+          {{ sub_save_cta }}
+        </p>
+      </a>
+    </div>
+  </li>
+
+  {% for link in linklists[text_link_list].links %}
+    <li style="padding-bottom: 0.5rem; display: block; {% if forloop.index0 == 0 %} padding-top: 1rem; {% endif %}">
+      <a class="{% if forloop.index0 < 3 %}text-weight--bold {% endif %} text-size--large" href="{{ link.url }}">
+        {{ link.title }}
+      </a>
+    </li>
+  {% endfor %}
+
+</ul>

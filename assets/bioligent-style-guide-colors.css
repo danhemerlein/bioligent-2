@@ -1,0 +1,141 @@
+:root {
+  --base-black: #000000;
+  --base-white: #ffffff;
+  --bioligent-green-50: #b4e1c4;
+  --bioligent-green-100: #9bd7b0;
+  --bioligent-green-200: #7ac995;
+  --bioligent-green-300: #4db772;
+  --bioligent-green-400: #337e4d;
+  --bioligent-green-500: #132f1d;
+  --bioligent-green-600: #102818;
+  --bioligent-green-700: #0e2215;
+  --bioligent-green-800: #0c1d12;
+  --bioligent-green-900: #0a180f;
+
+  --edgewater-50: #f0f8f3;
+  --edgewater-100: #ebf6ef;
+  --edgewater-200: #e5f3e9;
+  --edgewater-300: #dcefe2;
+  --edgewater-400: #d1e9d8;
+  --edgewater-500: #c1e2cb;
+  --edgewater-600: #96cea7;
+  --edgewater-700: #72bd88;
+  --edgewater-800: #53af6e;
+  --edgewater-900: #46955e;
+
+  --burnham-50: #f9fafa;
+  --burnham-100: #f7f8f8;
+  --burnham-200: #f4f6f5;
+  --burnham-300: #f0f3f2;
+  --burnham-400: #ecefee;
+  --burnham-500: #e5eae8;
+  --burnham-600: #bfcbc6;
+  --burnham-700: #9eb1a9;
+  --burnham-800: #829a91;
+  --burnham-900: #6c867b;
+
+  --spring-wood-50: #fdfdfb;
+  --spring-wood-100: #fcfcfa;
+  --spring-wood-200: #fbfcf8;
+  --spring-wood-300: #fafbf6;
+  --spring-wood-400: #f8f9f3;
+  --spring-wood-500: #f6f7ef;
+  --spring-wood-600: #dbdfbe;
+  --spring-wood-700: #c4ca95;
+  --spring-wood-800: #b0b872;
+  --spring-wood-900: #9fa955;
+
+  --neutral-grey-50: #dadde3;
+  --neutral-grey-100: #ced1d9;
+  --neutral-grey-200: #bdc2cd;
+  --neutral-grey-300: #a7aebc;
+  --neutral-grey-400: #8a93a6;
+  --neutral-grey-500: #667085;
+  --neutral-grey-600: #575f71;
+  --neutral-grey-700: #4a5160;
+  --neutral-grey-800: #3f4552;
+  --neutral-grey-900: #353a45;
+}
+
+.color-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.color-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.color-row__title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.color-row__colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+
+.color-card {
+  height: 156px;
+  width: 150px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.color-card__color {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.color-card__text {
+  padding: 12px;
+}
+
+p.contrast-p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+p.text-color {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #101828;
+}
+
+p.text-hex {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #667085;
+}
+
+.base-black {
+  color: var(--base-black);
+}
+
+.base-white {
+  color: var(--base-white);
+}
+
+@media (min-width: 768px) {
+  .color-rows {
+    gap: 64px;
+  }
+
+  .color-row {
+    flex-direction: row;
+  }
+  .color-row__title {
+    flex: 0 0 400px;
+  }
+}

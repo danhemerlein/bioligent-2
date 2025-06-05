@@ -1,0 +1,128 @@
+{% assign has_pagination = false %}
+{% if array.size > 10 %}
+  {% assign has_pagination = true %}
+{% endif %}
+
+{% assign count = 0 %}
+{% for item in array %}
+  {% assign count = count | plus: 1 %}
+{% endfor %}
+
+{% if count > 10 %}
+  {% assign has_pagination = true %}
+{% endif %}
+
+<div class="desktop-ingredient-grid ingredient-grid {% if has_pagination == false %}
+      desktop-ingredient-grid-mb
+{% endif %}
+{% if is_pdp and count < 5 %}
+desktop-ingredient-grid--pdp-override
+{% endif %}
+
+"
+
+>
+
+  {% if is_pdp == false %}
+    {% assign first_eight = array | slice: 0, 10 %}
+    {% assign remainder = array | slice: 10, array.size %}
+
+    {% for item in first_eight %}
+      {% render 'ingredient-card' ingredient: item, index: forloop.index, type: title, mobile: false, desktop: 'true' count: count, is_pdp: is_pdp %}
+    {% endfor %}
+  {% else %}
+    {% for ingredient in array %}
+      {% if forloop.index0 < 10 %}
+        {% render 'ingredient-card' ingredient: ingredient, index: forloop.index, type: title, mobile: false, desktop: 'true' count: count, is_pdp: is_pdp %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% if has_pagination %}
+  <div class="js-paginated-cards" style="height: 0; overflow: hidden; opacity: 0;" data-type="{{ title }}">
+    <div class="desktop-ingredient-grid ingredient-grid {% if has_pagination == false %} ingredient-grid-mb-desktop {% endif %}">
+      {% if is_pdp == false %}
+        {% for item in remainder %}
+          {% render 'ingredient-card' ingredient: item, index: forloop.index, type: title, mobile: false, desktop: 'true', is_desktop_pagination: 'true' %}
+        {% endfor %}
+      {% else %}
+        {% for ingredient in array %}
+          {% if forloop.index0 >= 10 %}
+            {% render 'ingredient-card' ingredient: ingredient, index: forloop.index, type: title, mobile: false, desktop: 'true', is_desktop_pagination: 'true' %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% if has_pagination %}
+  <div class="see-all-container w-full">
+    <button class="js-{{ title }}-see-more js-see-more-button title see-more-button" data-type="{{ title }}">
+      <span class="js-button-text">
+        See All
+      </span>
+
+      <span class="js-button-icon">
+        {% render 'icon-pack' icon: "bioligent-chevron" %}
+      </span>
+    </button>
+  </div>
+{% endif %}
+
+<div class="mobile-ingredient-grid ingredient-grid ingredient-grid-mb-mobile {% if has_pagination == false %} ingredient-grid-mb-desktop {% endif %} js-ingredient-grid-slider">
+  {% if is_pdp == false %}
+
+
+  {% for i in (0..array.size) %}
+    {% assign mod = i | modulo: 2 %}
+    {% if mod == 0 %}
+      {% assign first = array[i] %}
+      {% assign next_index = i | plus: 1 %}
+      {% assign second = array[next_index] %}
+
+      {% if first == nil and second == nil %}
+        {% continue %}
+      {% endif %}
+
+      <div class="ingredient-row">
+        {% if first %}
+          {% render 'ingredient-card' ingredient: first, index: i, type: title, mobile: true %}
+        {% endif %}
+        {% if second %}
+          {% render 'ingredient-card' ingredient: second, index: next_index, type: title, mobile: true %}
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+  {% else %}
+    {% assign ingredients = array %}
+    {% assign count = ingredients.size %}
+    {% assign first = nil %}
+    {% assign second = nil %}
+    {% assign index = 0 %}
+
+    {% for ingredient in ingredients %}
+      {% if index == 0 %}
+        {% assign first = ingredient %}
+      {% elsif index == 1 %}
+        {% assign second = ingredient %}
+        <div class="ingredient-row">
+          {% if first %}
+            {% render 'ingredient-card' ingredient: first, index: index, type: title, mobile: true %}
+          {% endif %}
+          {% if second %}
+            {% render 'ingredient-card' ingredient: second, index: index, type: title, mobile: true %}
+          {% endif %}
+        </div>
+        {% assign first = nil %}
+        {% assign second = nil %}
+        {% assign index = -1 %}
+      {% endif %}
+
+      {% assign index = index | plus: 1 %}
+    {% endfor %}
+  {% endif %}
+</div>
+

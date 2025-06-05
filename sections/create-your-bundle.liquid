@@ -1,0 +1,134 @@
+{{ 'create-your-bundle.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'create-your-bundle.js' | asset_url }}" defer></script>
+{% if section.settings.hide_page %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('.cyb-header').style.display = 'none';
+      document.querySelector('.cyb-your-bundle').style.display = 'none';
+    });
+  </script>
+{% endif %}
+
+{% assign products = section.settings.products %}
+{% if section.settings.collection != blank %}
+  {% assign products = section.settings.collection.products %}
+{% else %}
+  {% assign products = section.settings.products %}
+{% endif %}
+
+
+<div class="cyb-header" style="background-color: {{ section.settings.header_bg_color }};">
+  <div class="container--large gutter-top--xlarge gutter-bottom--xlarge container--large-with-mobile-padding  align-content align-content--horizontal-center align-content--vertical-middle card__text-parent">
+    <div class="card__text  spacing--custom remove-empty-space" style="--spacing:9px; mix-blend-mode: normal; ">
+      <h2 class="text-font--heading heading-size--regular gutter-bottom--small">
+        {{ section.settings.header_headline }}
+      </h2>
+      <span class="text-size--large">
+        {{ section.settings.header_subheadline }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="container--large container--large-with-mobile-padding align-content align-content--horizontal-center align-content--vertical-middle card__text-parent" style="max-width: 1500px;">
+  <div class="cyb-container">
+    {% render 'cyb-product-list' products: products %}
+
+    <div class="cyb-your-bundle">
+      {% render 'cyb-title-price' title: section.settings.title, subtitle: section.settings.subtitle %}
+
+      {% render 'cyb-bundle-grid' %}
+
+      <button class="cyb-bundle-atc js-cyb-bundle-atc button button--solid">
+        ADD TO CART
+      </button>
+
+      <select class="cyb-bundle-atc-select js-cyb-bundle-atc-select" name="selling_plan" id="selling_plan">
+        ADD TO CART
+        <option value="Every 4 weeks">Every 4 weeks</option>
+        <option value="Every 8 weeks">Every 8 weeks</option>
+        <option value="Every 12 weeks">Every 12 weeks</option>
+      </select>
+
+      {% render 'cyb-informational-text' blocks: section.blocks %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Create Your Bundle",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_page",
+      "label": "Disable Page",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "header_headline",
+      "label": "Header Headline"
+    },
+    {
+      "type": "text",
+      "id": "header_subheadline",
+      "label": "Header Sub Headline"
+    },
+        {
+      "type": "color",
+      "id": "header_bg_color",
+      "label": "Header Background Color"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products",
+      "info": "Select the products to display in the bundle."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Select the collection to display in the bundle. This will override the products selected above."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    }
+  ],
+
+  "blocks": [
+    {
+    "type": "text",
+    "name": "Informational Text",
+    "settings": [
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text"
+      }
+    ]
+  }
+  ],
+  "presets": [
+    {
+      "name": "Create Your Bundle",
+      "category": "Custom",
+       "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

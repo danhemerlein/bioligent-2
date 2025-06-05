@@ -1,0 +1,42 @@
+{{ 'custom-product-list.css' | asset_url | stylesheet_tag }}
+
+{%- assign row_layout = false -%}
+{%- if products.count >= 4 -%}
+  {%- assign row_layout = true -%}
+{%- endif -%}
+
+<div class="product-list {% if row_layout %} product-list--row-layout {% endif %}">
+
+  <p class="product-list__heading">
+    {{ heading | escape }}
+  </p>
+
+  <ul class="product-list__ul">
+    {% for product in products %}
+      <li class="product-list__li">
+        <div class="product-item-compact__image">
+          <a href="{{ product.url }}" class="">
+            {%- render 'lazy-image-small', image: product.featured_media, aspect_ratio: 1, class: 'lazy-image--scale-animation' -%}
+          </a>
+        </div>
+
+        <div class="product-list__text">
+          <a href="{{ product.url }}">
+            <p class="product-list__product-title">
+              {{ product.title }}
+            </p>
+
+            <p class="product-list__product-subtitle">
+              {{ product.metafields.descriptors.subtitle }}
+            </p>
+
+            <p class="product-list__product-price">
+              {{ product.price |  money }}
+            </p>
+          </a>
+        </div>
+
+      </li>
+    {% endfor %}
+  </ul>
+</div>

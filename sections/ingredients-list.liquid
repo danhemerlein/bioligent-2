@@ -1,0 +1,89 @@
+{{ 'ingredient-list.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-list-search.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-list-card.css' | asset_url | stylesheet_tag }}
+{{ 'ingredient-slick-slider.css' | asset_url | stylesheet_tag }}
+
+<div class="container--large remove-empty-space" style="margin-top: 24px;">
+  <div class="ingredient-grid-container">
+    {% assign sorted_ingredients = shop.metaobjects.ingredient.values | sort: 'pill_text' %}
+    {% assign vitamins = shop.metaobjects.ingredient.values | where: 'pill_text', 'Vitamins' %}
+    {% assign specialty_compounds = shop.metaobjects.ingredient.values | where: 'pill_text', 'Specialty Compounds' %}
+    {% assign minerals = shop.metaobjects.ingredient.values | where: 'pill_text', 'Minerals' %}
+    {% assign plants_herbs = shop.metaobjects.ingredient.values | where: 'pill_text', 'Plants/Herbs' %}
+
+    <div class="search-grids-container js-ingredient-search-results">
+      <form class="search-bar-container js-ingredient-search-form">
+        <input type="text" id="ingredient-search" placeholder="Type ingredient" class="search-bar js-ingredient-search-input">
+        {% render 'bioligent-button' as: "button" variant: "green" right_icon: "search" text:"Search" disabled: false type: 'submit' additional_class: "hide-button-text-mobile" %}
+      </form>
+
+      <div class="js-plants-herbs-grid-container">
+        <h3 class="heading-medium grid-category-title">Plants/Herbs</h3>
+        {% render 'ingredient-grid' array: plants_herbs, title: 'plants-herbs' %}
+      </div>
+
+      <div class="js-vitamins-grid-container">
+        <h3 class="heading-medium grid-category-title">Vitamins</h3>
+        {% render 'ingredient-grid' array: vitamins, title: 'vitamins' %}
+      </div>
+
+      <div class="js-specialty-compounds-grid-container">
+        <h3 class="heading-medium grid-category-title">Specialty Compounds</h3>
+        {% render 'ingredient-grid' array: specialty_compounds, title: 'specialty-compounds' %}
+      </div>
+
+      <div class="js-minerals-grid-container">
+        <h3 class="heading-medium grid-category-title">Minerals</h3>
+        {% render 'ingredient-grid' array: minerals, title: 'minerals' %}
+      </div>
+
+      <div class="js-mobile-search-results mobile-search-results ingredient-card--hidden">
+        <h3 class="heading-medium grid-category-title">Search Results</h3>
+        <div class="ingredient-row">
+          {% assign combined = plants_herbs | concat: vitamins |  concat: specialty_compounds | concat: minerals %}
+          {% for item in combined %}
+            {% render 'ingredient-card' ingredient: item, index: forloop.index type: title mobile: true %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="js-no-results ingredient-card--hidden no-results">
+      <h3 class="heading-medium m-0 text-center">No results found 🍃</h3>
+      <p class="body-large m-0 text-center">Try another search term</p>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'ingredient-pagination.js' | asset_url }}" ></script>
+<script src="{{ 'ingredient-search.js' | asset_url }}" ></script>
+<script src="{{ 'ingredient-carousel.js' | asset_url }}" ></script>
+
+<script>
+  document.querySelectorAll('.ingredient-card-link').forEach(link => {
+    const rawHandle = link.dataset.title;
+    let finalHandle = rawHandle
+      .replace(/([a-zA-Z])(?=\d)/g, '$1-')
+      .replace(/(\d)(?=[a-zA-Z])/g, '$1-')
+      .replace(/®/g, '')
+
+    if (finalHandle === "thymoquin") {
+      finalHandle = "thymo-quin"
+    }
+
+    link.href = `/pages/ingredient/${finalHandle}`;
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Ingredient List",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Ingredient List",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,107 @@
+.ingredient-page__image-container {
+  grid-column: span 4;
+}
+
+.ingredient-page__text-container {
+  grid-column: span 4;
+}
+
+.ingredient-page__text-box {
+  border: 4px solid var(--burnham-100);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ingredient-page__product-grid img {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.ingredient-page__product-grid .product-item {
+  grid-column: span 4;
+}
+
+.ingredient-page__product-title {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.ingredient-page__text-box-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.ingredient-page__our-products {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .ingredient-page__product-title {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .ingredient-page__product-grid .product-item {
+    grid-column: span 3;
+  }
+
+  .ingredient-page__image-container {
+    grid-column: span 5;
+  }
+
+  .ingredient-page__text-container {
+    grid-column: span 7;
+  }
+
+  .ingredient-page__text-box {
+    padding: 12px 16px;
+  }
+
+  .ingredient-page__text-box-container div:not(:first-of-type) {
+    width: calc(50% - 8px);
+  }
+
+  .ingredient-page__we_believe_statement {
+    max-width: 90%;
+  }
+
+  .ingredient-page__hero {
+    margin-bottom: 48px;
+  }
+  .ingredient-page__our-products {
+    margin-bottom: 32px;
+  }
+  .ingredient-page__product-grid {
+    margin-bottom: 32px;
+  }
+}
+
+.ingredient-page__see-all-button {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.ingredient-page__see-all-button .icon--right {
+  /* margin-left: 16px; */
+  transform: rotate(-90deg);
+}
+
+.see-all-container.w-full {
+  display: none !important;
+}
+
+.ingredient-page .icon--right {
+  width: 13px;
+  height: 20px;
+}
+
+.see-all-container:not(.w-full) {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}

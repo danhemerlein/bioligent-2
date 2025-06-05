@@ -1,0 +1,59 @@
+{{ 'cyb-product-list.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-item.css' | asset_url | stylesheet_tag }}
+
+<ul class="cyb-product-list__ul">
+  {% for product in products %}
+    <li class="cyb-product-list__li">
+      <div class='cyb-product-list__li-image-container'>
+        <div class="cyb-product-list__li-image--featured">
+          {%- render 'lazy-image', image: product.featured_media, alt: product.title, ratio: 1, , class: 'product-item__image-figure product-item__image-figure--top lazy-image--zoom-animation product-item__image-no-slider lazy-image--to-reveal' -%}
+        </div>
+
+        {% for media in product.media %}
+          {% if forloop.index == 2 %}
+            <div class="cyb-product-list__li-image--hover-image">
+              {%- render 'lazy-image', image: media, alt: product.title, ratio: 1, , class: 'product-item__image-figure product-item__image-figure--top lazy-image--zoom-animation product-item__image-no-slider lazy-image--to-reveal' -%}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="cyb-product-list__div">
+        <p class="cyb-product-list__product-title">
+          {{ product.title }}
+        </p>
+
+        <p class="cyb-product-list__product-subtitle">
+          {{ product.metafields.descriptors.subtitle }}
+        </p>
+
+        <button class="cyb-product-list__product-button button button--solid js-bundle-add" data-variant-id="{{ product.selected_or_first_available_variant.id }}" data-product-id="{{ product.id }}" data-image-url="{{ product.featured_media | img_url: 'large' }}" data-product-handle="{{ product.handle }}" data-product-title="{{ product.title }}"
+        data-selling-plan-id="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}"
+        data-selling-plan-name="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.name }}"
+        data-selling-plans='{{ product.selling_plan_groups | json }}'
+
+        data-price="{{ product.price }}"
+        {% if product.available == false %}
+          disabled
+        {% endif %}
+        >
+          <span>
+            {% if product.available %}
+              ADD -
+              <span class="js-bundle-product-price" data-price="{{ product.price }}"></span>
+            {% else %}
+              OUT OF STOCK
+            {% endif %}
+          </span>
+        </button>
+
+        <p>
+          <a href="{{ product.url }}" target="_blank" class="cyb-product-list__product-link">
+            View details
+          </a>
+        </p>
+
+      </div>
+    </li>
+  {% endfor %}
+</ul>

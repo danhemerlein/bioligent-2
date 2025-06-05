@@ -1,0 +1,215 @@
+.style-guide-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.button-group-container {
+  flex-direction: column;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.buttons-container {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.button-group {
+  gap: 16px;
+}
+
+.bioligent-button {
+  transition: all 175ms linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 24px;
+  gap: 8px;
+  border: none;
+  box-shadow: none;
+}
+
+.bioligent-button:disabled {
+  opacity: 50%;
+  pointer-events: none;
+}
+
+.bioligent-button:focus,
+.bioligent-button:focus-visible {
+  outline-color: var(--bioligent-green-50);
+  outline-offset: 1px;
+}
+
+.bioligent-button *,
+.bioligent-button * {
+  transition: all 175ms linear;
+}
+
+.bioligent-button--white {
+  background-color: var(--base-white);
+  color: var(--bioligent-green-500);
+}
+
+.bioligent-button--white:hover {
+  background-color: var(--bioligent-green-500);
+  color: var(--base-white);
+}
+
+.bioligent-button--white svg,
+.bioligent-button--white path {
+  fill: var(--bioligent-green-500);
+}
+
+.bioligent-button--white:hover svg,
+.bioligent-button--white:hover path {
+  fill: var(--base-white);
+}
+
+.bioligent-button--green {
+  background-color: var(--bioligent-green-500);
+  color: var(--base-white);
+  border: 1px solid var(--bioligent-green-500);
+}
+
+.bioligent-button--green:hover {
+  background-color: var(--base-white);
+  color: var(--bioligent-green-500);
+}
+
+.bioligent-button--green svg,
+.bioligent-button--green path {
+  fill: var(--base-white);
+}
+
+.bioligent-button--green:hover svg,
+.bioligent-button--green:hover path {
+  fill: var(--bioligent-green-500);
+}
+
+.bioligent-button--outline {
+  background-color: transparent;
+  border: 1px solid var(--burnham-700);
+  color: var(--neutral-grey-800);
+}
+
+.bioligent-button--outline:hover {
+  background-color: var(--base-white);
+  fill: var(--bioligent-green-500);
+}
+
+.bioligent-button--outline svg,
+.bioligent-button--outline path {
+  color: var(--neutral-grey-800);
+}
+
+.bioligent-button--outline:hover svg,
+.bioligent-button--outline:hover path {
+  fill: var(--bioligent-green-500);
+}
+
+.button-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-link {
+  min-width: 134px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.button-link {
+  min-width: 134px;
+  justify-content: center;
+  align-items: center;
+  transition: all 175ms linear;
+  gap: 8px;
+  padding: 1px;
+}
+
+.button-link--disabled {
+  opacity: 50%;
+  pointer-events: none;
+}
+
+.bioligent-link--white {
+  color: var(--base-white);
+  border-bottom: 1px solid var(--base-white);
+}
+
+.bioligent-link--white:hover {
+  color: var(--bioligent-green-500);
+  border-color: var(--bioligent-green-500);
+}
+
+.bioligent-link--white:focus,
+.bioligent-link--white:focus-visible {
+  color: var(--bioligent-green-500);
+  outline-color: var(--bioligent-green-50);
+  outline-offset: 1px;
+  background-color: var(--base-white);
+}
+
+.bioligent-link--white svg,
+.bioligent-link--white path {
+  fill: var(--base-white);
+}
+
+.bioligent-link--white:focus svg,
+.bioligent-link--white:focus path,
+.bioligent-link--white:hover svg,
+.bioligent-link--white:hover path {
+  fill: var(--bioligent-green-500);
+}
+
+.bioligent-link--green {
+  color: var(--bioligent-green-500);
+  border-bottom: 1px solid var(--bioligent-green-500);
+}
+
+.bioligent-link--green:hover {
+  color: var(--bioligent-green-300);
+  border-color: var(--bioligent-green-300);
+}
+
+.bioligent-link--green:focus,
+.bioligent-link--green:focus-visible {
+  color: var(--bioligent-green-300);
+  outline-color: var(--bioligent-green-300);
+  outline-offset: 1px;
+  background-color: var(--base-white);
+}
+
+.bioligent-link--green svg,
+.bioligent-link--green path {
+  fill: var(--bioligent-green-500);
+}
+
+.bioligent-link--green:focus svg,
+.bioligent-link--green:focus path,
+.bioligent-link--green:hover svg,
+.bioligent-link--green:hover path {
+  fill: var(--bioligent-green-300);
+}
+
+@media (min-width: 768px) {
+  .button-group-container {
+    flex-direction: row;
+    gap: unset;
+    margin-top: 0;
+  }
+
+  .bioligent-button-title {
+    flex: 0 0 400px;
+  }
+}

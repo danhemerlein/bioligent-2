@@ -1,0 +1,85 @@
+.ingredient-card {
+  padding: 8px;
+  background-color: var(--burnham-500);
+  border-radius: 12px;
+  display: flex !important;
+}
+
+.ingredient-card--hidden {
+  display: none !important;
+}
+
+.ingredient-pill {
+  padding: 4px 8px;
+  background-color: var(--burnham-400);
+  color: var(--neutral-grey-800);
+  width: fit-content;
+  border-radius: 16px;
+  margin-right: auto;
+}
+
+.title-container {
+  border-radius: 8px;
+  padding: 16px;
+  background-color: var(--base-white);
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.image-container-inner {
+  border-radius: 8px;
+  padding: 8px;
+  background-color: var(--base-white);
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ingredient-card-link {
+  display: inline-flex;
+  width: 100%;
+  gap: 8px;
+}
+
+.ingredient-card-image {
+  width: 100%;
+}
+
+.ingredient-row {
+  display: flex !important;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .ingredient-card {
+    padding: 2px;
+    flex-direction: column;
+    border: 4px solid var(--burnham-500);
+  }
+  .ingredient-card-link {
+    flex-direction: column;
+    gap: unset;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .image-container-inner {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .title-container {
+    width: 100%;
+    padding: 16px;
+    display: block;
+    margin-top: 4px;
+    display: flex;
+    flex: 1;
+  }
+}
