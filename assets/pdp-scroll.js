@@ -8,15 +8,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const absoluteButtonTop = buttonRect.top + window.pageYOffset
     const viewportHeight = window.innerHeight
     const scrollPosition =
-      absoluteButtonTop - viewportHeight / 2 + buttonRect.height / 2
+      absoluteButtonTop -
+      viewportHeight / 2 +
+      buttonRect.height / 2 -
+      viewportHeight * 0.2
 
     window.scrollTo({
       top: scrollPosition,
       behavior: 'smooth',
     })
   }
-
-  console.log(productLinks)
 
   // Add click handler to each link
   productLinks.forEach((link) => {
@@ -30,15 +31,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (addToCartButton) {
         centerButtonInViewport(addToCartButton)
-        
+
         // Add resize handler to keep button centered
         const resizeHandler = () => {
           centerButtonInViewport(addToCartButton)
         }
-        
+
         // Add resize listener
         window.addEventListener('resize', resizeHandler)
-        
+
         // Remove resize listener after 1 second of no resizing
         let resizeTimeout
         window.addEventListener('resize', () => {
