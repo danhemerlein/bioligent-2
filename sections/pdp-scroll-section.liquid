@@ -1,0 +1,74 @@
+{{ 'pdp-scroll-section.css' | asset_url | stylesheet_tag }}
+
+<div class="pdp-scroll-section container--large container--vertical-space-small remove-empty-space">
+  <div>
+    {% if section.settings.title != blank %}
+      <p class="pdp-scroll-section__title heading-large">{{ section.settings.title }}</p>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="pdp-scroll-section__subheading sub-heading-medium">
+        {{ section.settings.subheading }}
+      </p>
+    {% endif %}
+  </div>
+
+  <div class="pdp-scroll-section__image-and-value-props">
+    {% if section.settings.image %}
+      {%- render 'lazy-image', image: section.settings.image, alt: product.title, ratio: 1, class: 'lazy-image--to-reveal' -%}
+    {% endif %}
+
+    <div class="pdp-scroll-section__value-props">
+      {% for block in section.blocks %}
+        <div class="pdp-scroll-section__value-prop">
+          {{ block.settings.text }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "PDP Scroll Section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Section Title"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "Section Sub Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "richtext",
+      "name": "Value Prop",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Value Prop Text",
+            "default": "<p><strong>Immune Defense</strong><p>Packed with antioxidants to help balance your immune response and keep it functioning at its best.</p></p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PDP Scroll Section"
+    }
+  ]
+}
+{% endschema %}
