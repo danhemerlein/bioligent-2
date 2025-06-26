@@ -56,12 +56,19 @@
 
   .pdp-scroll-section__image-and-value-props {
     grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--gutter-xlarge) * 0.8);
+    padding: 2rem 0;
+  }
+
+  .pdp-scroll-section__value-props {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-right: 1rem;
   }
 
   .pdp-scroll-section__value-prop p {
     text-align: left;
-  }
-
-  .pdp-scroll-section__value-props {
+    max-width: 100%;
   }
 }
