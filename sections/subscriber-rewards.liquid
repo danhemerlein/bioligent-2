@@ -1,0 +1,176 @@
+<div class="subscriber-rewards-main-section" >
+  <div class="subscriber-rewards-inner-section container--large" >
+    <div class="subscriber-rewards-content-section" >
+      <div class="subscriber-rewards-info-section" >
+        <div class="subscriber-rewards-inner-info-section" >
+          {%- for block in section.blocks -%}
+            <div class="subscriber-rewards-info-item" >
+              <div class="subscriber-rewards-info-item-inner" >
+                <div class="subscriber-rewards-icon-section" >
+                  <img src="{{ block.settings.icon | img_url: 'master' }}" alt="{{ block.settings.icon.alt }}" width="{{ block.settings.icon.width }}" height="{{ block.settings.icon.height }}" />
+                </div>
+                <div class="subscriber-rewards-title-section" >
+                  <h2>
+                    {{ block.settings.title }}
+                  </h2>
+                </div>
+                <div class="subscriber-rewards-description-section" >
+                  {{ block.settings.description }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="subscriber-rewards-option-section desktop-subscriber-rewards-option" >
+        <img src="{{ section.settings.subscriber_rewards_desktop_image | img_url: 'master'  }}" alt="{{ section.settings.subscriber_rewards_desktop_image.alt }}" width="100%" height="auto" />
+      </div>
+      <div class="subscriber-rewards-option-section mobile-subscriber-rewards-option" >
+        <img src="{{ section.settings.subscriber_rewards_mobile_image | img_url: 'master'  }}" alt="{{ section.settings.subscriber_rewards_desktop_image.alt }}" width="100%" height="auto" />
+      </div>
+    </div>
+  </div>
+</div>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+.subscriber-rewards-main-header-section {
+    background-color: #ccffe0;
+    padding: 66px 0px;
+}
+.subscriber-rewards-inner-info-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    vertical-align: middle;
+    gap: 15px;
+}
+  .subscriber-rewards-inner-info-section .subscriber-rewards-info-item {
+    flex: 0 0 calc(33.33% - 10px);
+    max-width: calc(33.33% - 10px);
+}
+.subscriber-rewards-info-item .subscriber-rewards-info-item-inner {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    gap: 25px;
+}
+  .subscriber-rewards-info-section {
+    padding: 72px 0px;
+}
+  .subscriber-rewards-main-title {
+    text-align: center;
+}
+.subscriber-rewards-main-title h1 {
+    font-size: 54px;
+    line-height: 120%;
+    margin: 0;
+  color: #01301B;
+}
+  .subscriber-rewards-info-item .subscriber-rewards-info-item-inner .subscriber-rewards-title-section h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 44px;
+}
+.subscriber-rewards-option-section.mobile-subscriber-rewards-option {
+    display: none;
+}
+  .subscriber-rewards-icon-section img {
+    display: block;
+}
+@media (max-width: 767px) {
+.subscriber-rewards-option-section.mobile-subscriber-rewards-option {
+    display: block;
+}
+.subscriber-rewards-option-section.desktop-subscriber-rewards-option {
+    display: none;
+}
+}
+@media (max-width: 668px) {
+.subscriber-rewards-inner-info-section .subscriber-rewards-info-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.subscriber-rewards-info-item .subscriber-rewards-info-item-inner {
+    gap: 15px;
+}
+.subscriber-rewards-inner-info-section {
+    gap: 25px;
+}
+}
+@media (max-width: 568px) {
+.subscriber-rewards-main-title h1 {
+    font-size: 34px;
+}
+.subscriber-rewards-info-section {
+    padding: 36px 0px;
+}
+.subscriber-rewards-info-item .subscriber-rewards-info-item-inner .subscriber-rewards-title-section h2 {
+    font-size: 28px;
+    line-height: 38px;
+}
+}
+@media (max-width: 480px) {
+  .subscriber-rewards-main-title h1 {
+    font-size: 25px;
+  }
+  .subscriber-rewards-info-item .subscriber-rewards-info-item-inner .subscriber-rewards-title-section h2 {
+    font-size: 25px;
+    line-height: 35px;
+  }
+}
+</style>
+{% schema %}
+{
+  "name": "Subscriber Rewards",
+  "tag": "section",
+  "class": "subscriber-rewards-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Subscriber Rewards Desktop Image",
+      "id": "subscriber_rewards_desktop_image"
+    },
+    {
+      "type": "image_picker",
+      "label": "Subscriber Rewards Mobile Image",
+      "id": "subscriber_rewards_mobile_image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefits_with_content",
+      "name": "Benefits With Content",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Icon",
+          "id": "icon"
+        },
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "title",
+          "default": "Unlock 15% Savings On All Orders",
+          "placeholder": "Please Enter Title"
+        },
+        {
+          "type": "richtext",
+          "label": "Description",
+          "id": "description",
+          "default": "<p>1st Recurring Order: Exclusive travel-sized gift 2nd Recurring Order + Beyond: Save 15%</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subscriber Rewards"
+    }
+  ]
+}
+{% endschema %}
