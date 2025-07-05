@@ -3,57 +3,85 @@ document.addEventListener('DOMContentLoaded', function () {
   const stickySection = document.querySelector('.sticky')
   const timeline = document.querySelector('.timeline')
 
-  console.log(valueProps, stickySection, timeline)
-
   if (!stickySection || valueProps.length === 0) return
 
-  let sectionTop = stickySection.offsetTop
-  let sectionHeight = stickySection.offsetHeight
+  let sectionTop = 0
+  let sectionHeight = 0
   let windowHeight = window.innerHeight
+
+  // Function to calculate positions with proper timing
+  function calculatePositions() {
+    const rect = stickySection.getBoundingClientRect()
+    sectionTop = rect.top + window.scrollY
+    sectionHeight = rect.height
+    windowHeight = window.innerHeight
+  }
+
+  // Initial calculation with a small delay to ensure elements are rendered
+  setTimeout(() => {
+    calculatePositions()
+    handleScroll() // Initial call after positions are calculated
+  }, 100)
 
   function handleScroll() {
     const scrollY = window.scrollY
     const sectionBottom = sectionTop + sectionHeight
 
+    // Recalculate positions if they seem wrong (safety check)
+    if (sectionTop === 0 || sectionHeight === 0) {
+      calculatePositions()
+    }
+
+    console.log('Scroll check:', {
+      scrollY,
+      sectionTop,
+      sectionBottom,
+      sectionHeight,
+      windowHeight,
+    })
+
     // Only animate when we're within the sticky section
     if (scrollY >= sectionTop && scrollY <= sectionBottom) {
       console.log("Only animate when we're within the sticky section")
 
-      const scrollProgress =
+      // Calculate how far through the section we are (0 to 1)
+      const sectionProgress =
         (scrollY - sectionTop) / (sectionHeight - windowHeight)
 
-      // Animate timeline height
+      // Animate timeline height more gradually
       if (timeline) {
-        const timelineHeight = Math.min(100, scrollProgress * 100)
+        const timelineHeight = Math.min(100, sectionProgress * 100)
         timeline.style.height = `${timelineHeight}%`
-
-        // Fade out timeline when height is 5% or less
-        if (timelineHeight <= 5) {
-          const opacity = timelineHeight / 5 // Fade from 0 to 1 as height goes from 0 to 5%
-          timeline.style.opacity = opacity
-        } else {
-          timeline.style.opacity = 1
-        }
+        // Timeline fades in more slowly
+        timeline.style.opacity =
+          sectionProgress > 0.1 ? 1 : sectionProgress / 0.1
       }
 
+      // Show value props with larger, overlapping fade windows for smoother transitions
       valueProps.forEach((prop, index) => {
-        const propThreshold = index / (valueProps.length - 1)
-        const fadeInStart = propThreshold * 0.8 // Start fading in at 80% of the way through the previous prop
-        const fadeInEnd = propThreshold
+        // Each value prop gets a 35% window to fade in (larger than before)
+        const propStart = Math.max(0, index * 0.25) // Start earlier
+        const propEnd = Math.min(1, (index + 1) * 0.35) // End later
 
         let opacity = 0
-        if (scrollProgress >= fadeInStart) {
-          opacity = Math.min(
-            1,
-            (scrollProgress - fadeInStart) / (fadeInEnd - fadeInStart)
-          )
+
+        if (sectionProgress >= propStart) {
+          if (sectionProgress >= propEnd) {
+            opacity = 1 // Fully visible
+          } else {
+            // Fade in over the larger window with smoother easing
+            const fadeProgress =
+              (sectionProgress - propStart) / (propEnd - propStart)
+            // Use a smoother easing function
+            opacity = Math.pow(fadeProgress, 0.7) // Makes the fade more gradual
+          }
         }
 
         prop.style.opacity = opacity
       })
     } else if (scrollY < sectionTop) {
       // Reset all to 0 opacity when above the section
-      console.log('// Reset all to 0 opacity when above the section')
+
       if (timeline) {
         timeline.style.height = '0%'
         timeline.style.opacity = 0
@@ -63,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function () {
       })
     } else if (scrollY > sectionBottom) {
       // Set all to 1 opacity when below the section
-      console.log('// Set all to 1 opacity when below the section')
       if (timeline) {
         timeline.style.height = '100%'
         timeline.style.opacity = 1
@@ -77,17 +104,12 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', handleScroll)
   window.addEventListener('resize', function () {
     // Recalculate positions on resize
-    const newSectionTop = stickySection.offsetTop
-    const newSectionHeight = stickySection.offsetHeight
-    const newWindowHeight = window.innerHeight
-
-    sectionTop = newSectionTop
-    sectionHeight = newSectionHeight
-    windowHeight = newWindowHeight
-
+    calculatePositions()
     handleScroll()
   })
 
-  // Initial call
-  handleScroll()
+  // Additional safety check - recalculate after a longer delay
+  setTimeout(() => {
+    calculatePositions()
+  }, 500)
 })

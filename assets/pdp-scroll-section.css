@@ -2,7 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 3rem;
+  padding: 2rem;
+  gap: 2rem;
 }
 
 .pdp-scroll-section__title,
@@ -69,7 +70,9 @@
 
 @media (min-width: 768px) {
   .sticky {
-    margin-top: 3rem;
+    margin-top: 2rem;
+    padding: 3rem;
+    gap: unset;
   }
 
   .pdp-scroll-section__subheading {

@@ -3,15 +3,17 @@
 
 <div class="container--large container--vertical-space-small remove-empty-space sticky">
 
-  {% if section.settings.title != blank %}
-    <p class="pdp-scroll-section__title heading-large">{{ section.settings.title }}</p>
-  {% endif %}
+  <div>
+    {% if section.settings.title != blank %}
+      <p class="pdp-scroll-section__title heading-large">{{ section.settings.title }}</p>
+    {% endif %}
 
-  {% if section.settings.subheading != blank %}
-    <p class="pdp-scroll-section__subheading sub-heading-medium">
-      {{ section.settings.subheading }}
-    </p>
-  {% endif %}
+    {% if section.settings.subheading != blank %}
+      <p class="pdp-scroll-section__subheading sub-heading-medium">
+        {{ section.settings.subheading }}
+      </p>
+    {% endif %}
+  </div>
 
   <div class="value-props-image-container">
     {% if section.settings.image %}
