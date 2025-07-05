@@ -1,27 +1,33 @@
 {{ 'pdp-scroll-section.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pdp-scroll-section.js' | asset_url }}" defer></script>
 
-<div class="pdp-scroll-section container--large container--vertical-space-small remove-empty-space">
-  <div>
-    {% if section.settings.title != blank %}
-      <p class="pdp-scroll-section__title heading-large">{{ section.settings.title }}</p>
-    {% endif %}
+<div class="container--large container--vertical-space-small remove-empty-space sticky">
 
-    {% if section.settings.subheading != blank %}
-      <p class="pdp-scroll-section__subheading sub-heading-medium">
-        {{ section.settings.subheading }}
-      </p>
-    {% endif %}
-  </div>
+  {% if section.settings.title != blank %}
+    <p class="pdp-scroll-section__title heading-large">{{ section.settings.title }}</p>
+  {% endif %}
 
-  <div class="pdp-scroll-section__image-and-value-props">
+  {% if section.settings.subheading != blank %}
+    <p class="pdp-scroll-section__subheading sub-heading-medium">
+      {{ section.settings.subheading }}
+    </p>
+  {% endif %}
+
+  <div class="value-props-image-container">
     {% if section.settings.image %}
-      {%- render 'lazy-image', image: section.settings.image, alt: product.title, ratio: 1, class: 'lazy-image--to-reveal' -%}
+      <div class="image-container">
+        {%- render 'lazy-image', image: section.settings.image, alt: product.title, ratio: 1, class: 'lazy-image--to-reveal' -%}
+      </div>
     {% endif %}
 
-    <div class="pdp-scroll-section__value-props">
+    <div class="value-props">
+      <div class="timeline"></div>
       {% for block in section.blocks %}
-        <div class="pdp-scroll-section__value-prop">
-          {{ block.settings.text }}
+        <div class="value-prop" style="opacity: 0;">
+          <span></span>
+          <div>
+            {{ block.settings.text }}
+          </div>
         </div>
       {% endfor %}
     </div>
