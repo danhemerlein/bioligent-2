@@ -1515,12 +1515,11 @@ html[dir="ltr"] .sticky-header {
   color: var(--bioligent-green-500);
   background-color: #ffc72c;
   position: absolute;
-  top: -25%;
-  right: -10%;
-
+  top: -35%;
+  right: -15%;
   font-size: 12px;
   line-height: 120%;
-  padding: 2px 4px;
+  padding: 4px 8px;
   border-radius: 8px;
   display: flex;
   align-items: center;
