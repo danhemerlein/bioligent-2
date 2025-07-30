@@ -24,7 +24,7 @@
   endif;
 -%}
 
-<li class="has-submenu submenu-is-mega-menu js-mega-menu-item" {{ shopify_attributes }}>
+<li class="has-submenu focus submenu-is-mega-menu js-mega-menu-item" {{ shopify_attributes }}>
 
   <a class="menu-link {{ links_weight }}"
     {% if show_more_url %} href="{{ show_more_url }}" {% else %} tabindex="0" {% endif %}
@@ -36,7 +36,7 @@
   <ul class="submenu mega-menu" id="SiteNavLabel-{{ link.handle }}-{{ type }}">
 
     <div class="submenu-holder desktop-submenu-holder
-      {% if type == 'classic' %} container--large {% endif %}
+      {% comment %} {% if type == 'classic' %} container--large {% endif %} {% endcomment %}
       {% if show_promotion_1 or show_promotion_2 %} submenu-holder--promotion-width-{{ promotion_width }} {% endif %}
       {% if show_promotion_1 and show_promotion_2 %} submenu-holder--promotion-both {% endif %}
     ">
@@ -54,10 +54,14 @@
             <li class="mega-link {% if link.links != blank %} has-babymenu {% endif %}">
 
               <a class="menu-link {% unless link.links != blank %} no-focus-link {% endunless %} {{ links_weight }}" href="{{ link.url }}">
-                <span><span class="{{ links_class }}">{{ link.title | escape }}</span></span>
-                {%- if link.links != blank -%}
-                  <span class="icon">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
-                {%- endif -%}
+                <span>
+                  <span class="{{ links_class }}">
+                    {{ link.title | escape }}
+                  </span>
+                </span>
+                
+                <span class="icon">{%- render 'theme-symbols', icon: 'chevron-2' -%}</span>
+                
               </a>
 
               {%- if link.links != blank -%}
@@ -80,7 +84,7 @@
           </ul>
         {%- endfor -%}
 
-        <div class="grid product-grid grid--layout {% if type == 'sidebar' %} grid-2 {% else %} grid-6 {% endif %} grid-portable-2"
+        <div class="mega-menu-product-grid grid product-grid grid--layout {% if type == 'sidebar' %} grid-2 {% else %} grid-6 {% endif %} grid-portable-2"
           style="{% if desktop_columns == 'three' %} grid-template-columns: 1fr 1fr 1fr !important; {% elsif desktop_columns == 'four' %} grid-template-columns: 1fr 1fr 1fr 1fr !important; {% elsif desktop_columns == 'five' %} grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important; {% endif %}"
 
           >
@@ -137,8 +141,26 @@
                   endif
                 -%}
 
+                <div class="mega-menu-product-item__title">
+                  <span class="text-size--regular text-weight--bold">
+                    {%- liquid
+                      unless blank_product
+                        echo item.title | escape
+                      else
+                        echo 'general.onboarding.product_title' | t
+                      endunless
+                    -%}
+                  </span>
+                </div>
+
+
+                <div class="product-item__price mega-menu-product-item__price">
+                  {%- render 'product-price', target: item, variant: product_variant, product_price_varies: item.price_varies -%}
+                </div>
+
               </div>
 
+              {% comment %} 
               <div class="card__text product-item__text gutter-top--small spacing--large remove-empty-space">
 
                 {%- if isproduct -%}
@@ -149,7 +171,7 @@
                     <div class="remove-line-height-space" data-js-product-item-price>
                       {%- unless blank_product -%}
                         {%- assign product_variant = item.selected_or_first_available_variant -%}
-                        {%- render 'product-price', target: item, variant: product_variant, product_price_varies: item.price_varies -%}
+                        
                       {%- else -%}
                         {{ 9999 | money }}
                       {%- endunless -%}
@@ -157,26 +179,21 @@
                   </div>
                 {%- endif -%}
 
+                {% comment %}
                 <div class="product-item__title">
                   <div class="remove-line-height-space--small">
-                    <span class="{{ links_class }} text-size--regular text-weight--bold">
-                      {%- liquid
-                        unless blank_product
-                          echo item.title | escape
-                        else
-                          echo 'general.onboarding.product_title' | t
-                        endunless
-                      -%}
-                    </span>
-                    {%- if item.metafields.descriptors.subtitle != blank -%}
+                  
+                     {%- if item.metafields.descriptors.subtitle != blank -%}
                       <p style="font-size: 14px;">
                         {{ item.metafields.descriptors.subtitle }}
                       </p>
-                    {%- endif -%}
+                    {%- endif -%} 
                   </div>
                 </div>
+                {% endcomment %}
 
-              </div>
+              </div> 
+              {% endcomment %}
 
             </a>
 
