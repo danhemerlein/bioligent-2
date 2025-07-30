@@ -428,6 +428,7 @@
   grid-area: account;
   justify-self: end;
 }
+
 @media screen and (max-width: 1023px) {
   .header__top .area--account {
     display: none;
@@ -1496,5 +1497,28 @@ html[dir="ltr"] .sticky-header {
 @media screen and (max-width: 767px) {
   .area--menu-classic {
     display: none;
+  }
+}
+
+.build-a-bundle-button {
+  min-width: 134px;
+  background-color: #c1e2cb;
+  padding: 10px 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  display: none;
+}
+
+.header-right-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 1023px) {
+  .build-a-bundle-button {
+    display: flex;
   }
 }

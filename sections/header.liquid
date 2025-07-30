@@ -299,6 +299,12 @@
     <div class="container--large">
       <div class="header__top header__top--logo-{{ section.settings.alignment }} {% if section.settings.custom_icon_select == 'no-icon' %}no-custom-link{% endif %} site-header--menu-{{ section.settings.menu_type }}" id="header-top" style="height:calc(var(--header-logo) + var(--header-vertical-space))">
 
+        <div class="header-container header-container--bottom no-header-blocks">
+          <div class="header__bottom {% if section.settings.show_header_border_top %} header__bottom--border {% endif %} container--large">
+            {{ header_menu_classic }}
+          </div>
+        </div>
+
         <!-- logo -->
 
         <div id="logo" class="logo area--logo">
@@ -342,66 +348,72 @@
 
         </div>
 
-        {%- if section.settings.custom_icon_select != 'no-icon' -%}
-          <a href="{{ section.settings.custom_icon_link }}"
-            class="area--custom-icon icon-button icon-button--text-{{ section.settings.label_style }}"
-            {% if section.settings.open_in_new_window %}target="_blank"{% endif %}
-            title="{{ section.settings.label_text | escape }}"
-          >
-            <span class="button__icon button__icon--special" role="img" aria-hidden="true">
-              {%- render 'icon-pack', icon: section.settings.custom_icon_select -%}
-            </span>
+        <div class="header-right-container area--cart"> 
+          {%- if section.settings.custom_icon_select != 'no-icon' -%}
+            <a href="{{ section.settings.custom_icon_link }}"
+              class="area--custom-icon icon-button icon-button--text-{{ section.settings.label_style }}"
+              {% if section.settings.open_in_new_window %}target="_blank"{% endif %}
+              title="{{ section.settings.label_text | escape }}"
+            >
+              <span class="button__icon button__icon--special" role="img" aria-hidden="true">
+                {%- render 'icon-pack', icon: section.settings.custom_icon_select -%}
+              </span>
 
-            {%- if section.settings.label_text != blank and section.settings.label_style != 'none' -%}
-              <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ section.settings.label_text | escape }}</span>
-            {%- endif -%}
-          </a>
-        {%- endif -%}
-
-        <a href="{{ routes.search_url }}" class="area--search  icon-button icon-button--text-{{ section.settings.label_style }} {% if section.settings.hide_search %} element--hide {% endif %}"
-          title="{{ 'general.accessibility_labels.open_search' | t }}"
-          data-js-open-search-drawer data-js-sidebar-handle
-          aria-expanded="false" aria-controls="site-search-sidebar" role="button"
-        >
-          <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'search' -%}</span>
-          {%- if section.settings.label_style != 'none' -%}
-            <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.search' | t }}</span>
-          {%- endif -%}
-        </a>
-
-        {%- if shop.customer_accounts_enabled -%}
-          {% # theme-check-disable %}
-            {%- if customer -%}
-              <a class="area--account icon-button icon-button--text-{{ section.settings.label_style }}" href="{{ routes.account_url }}">
-            {%- else -%}
-              <a class="area--account icon-button icon-button--text-{{ section.settings.label_style }}" href="{{ routes.account_login_url }}">
-            {%- endif -%}
-              <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'account' -%}</span>
-              {%- if section.settings.label_style != 'none' -%}
-                <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.account.title' | t }}</span>
+              {%- if section.settings.label_text != blank and section.settings.label_style != 'none' -%}
+                <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ section.settings.label_text | escape }}</span>
               {%- endif -%}
             </a>
-          {% # theme-check-enable %}
-        {%- endif -%}
-
-        <a
-          class="no-js-hidden area--cart icon-button icon-button--text-{{ section.settings.label_style }} {% if section.settings.hide_cart %} element--hide {% endif %}"
-          {% if settings.cart_action == 'overlay' and template != 'cart' %}
-            data-js-sidebar-handle aria-expanded="false" aria-controls="site-cart-sidebar" role="button"
-          {% else %}
-            href="{{ routes.cart_url }}"
-          {% endif %}
-          title="{{ 'general.accessibility_labels.open_cart' | t }}" tabindex="0"
-        >
-          <span class="visually-hidden">{{ 'general.accessibility_labels.open_cart' | t }}</span>
-          <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'cart' -%}</span>
-
-          {%- if section.settings.label_style != 'none' -%}
-            <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.cart' | t }}</span>
           {%- endif -%}
 
-          <span data-header-cart-count aria-hidden="true" class="icon-button__label">{{ cart.item_count }}</span>
-        </a>
+          <a href="{{ routes.search_url }}" class="area--search  icon-button icon-button--text-{{ section.settings.label_style }} {% if section.settings.hide_search %} element--hide {% endif %}"
+            title="{{ 'general.accessibility_labels.open_search' | t }}"
+            data-js-open-search-drawer data-js-sidebar-handle
+            aria-expanded="false" aria-controls="site-search-sidebar" role="button"
+          >
+            <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'search' -%}</span>
+            {%- if section.settings.label_style != 'none' -%}
+              <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.search' | t }}</span>
+            {%- endif -%}
+          </a>
+
+          {%- if shop.customer_accounts_enabled -%}
+            {% # theme-check-disable %}
+              {%- if customer -%}
+                <a class="area--account icon-button icon-button--text-{{ section.settings.label_style }}" href="{{ routes.account_url }}">
+              {%- else -%}
+                <a class="area--account icon-button icon-button--text-{{ section.settings.label_style }}" href="{{ routes.account_login_url }}">
+              {%- endif -%}
+                <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'account' -%}</span>
+                {%- if section.settings.label_style != 'none' -%}
+                  <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.account.title' | t }}</span>
+                {%- endif -%}
+              </a>
+            {% # theme-check-enable %}
+          {%- endif -%}
+
+          <a
+            class="no-js-hidden area--cart icon-button icon-button--text-{{ section.settings.label_style }} {% if section.settings.hide_cart %} element--hide {% endif %}"
+            {% if settings.cart_action == 'overlay' and template != 'cart' %}
+              data-js-sidebar-handle aria-expanded="false" aria-controls="site-cart-sidebar" role="button"
+            {% else %}
+              href="{{ routes.cart_url }}"
+            {% endif %}
+            title="{{ 'general.accessibility_labels.open_cart' | t }}" tabindex="0"
+          >
+            <span class="visually-hidden">{{ 'general.accessibility_labels.open_cart' | t }}</span>
+            <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'cart' -%}</span>
+
+            {%- if section.settings.label_style != 'none' -%}
+              <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.cart' | t }}</span>
+            {%- endif -%}
+
+            <span data-header-cart-count aria-hidden="true" class="icon-button__label">{{ cart.item_count }}</span>
+          </a>
+
+          <a class="build-a-bundle-button" href="{{ section.settings.desktop_nav_link }}">
+            Build A Bundle
+          </a>
+        </div>
 
         <noscript>
           <a
@@ -444,14 +456,7 @@
 
   </div>
 
-  <div class="header-container header-container--bottom no-header-blocks">
 
-    <div class="header__bottom {% if section.settings.show_header_border_top %} header__bottom--border {% endif %} container--large">
-
-      {{ header_menu_classic }}
-
-    </div>
-  </div>
 </main-header>
 
 <sidebar-drawer id="site-menu-sidebar" class="sidebar sidebar--left" tabindex="-1" role="dialog" aria-modal="true" style="display:none">
