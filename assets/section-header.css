@@ -844,7 +844,7 @@ html[dir="ltr"] .site-nav.style--classic .submenu:after {
   z-index: 99;
   opacity: 1;
   visibility: visible;
-  transition: opacity 10ms linear, visibility 10ms linear;
+  transition: opacity 100ms linear, visibility 100ms linear;
 }
 .no-touchevents .site-nav.style--classic .has-submenu:hover .submenu:after,
 .site-nav.style--classic .has-submenu.focus .submenu:after,
@@ -871,17 +871,33 @@ html[dir="ltr"] .site-nav.style--classic .submenu:after {
   max-width: 22.5rem;
 }
 .site-nav.style--classic .submenu.normal-menu .submenu-holder {
-  padding: 1.25rem 0;
   min-width: 9.375rem;
   margin-top: -1px;
+  border-radius: 8px;
+  background-color: var(--edgewater-300);
+  min-width: 215px;
 }
 .site-nav.style--classic .submenu.normal-menu .submenu-holder > li {
   display: block;
   position: relative;
 }
 .site-nav.style--classic .submenu.normal-menu .submenu-holder .menu-link {
-  padding: 0.625rem 1.875rem;
+  padding: 24px;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--bioligent-green-500);
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
+.site-nav.style--classic
+  .submenu.normal-menu
+  .submenu-holder
+  li:not(:first-of-type) {
+  border-top: 1px solid var(--edgewater-500);
+}
+
 .site-nav.style--classic .submenu.normal-menu .submenu-holder .icon {
   position: relative;
   transform: rotate(-90deg);
