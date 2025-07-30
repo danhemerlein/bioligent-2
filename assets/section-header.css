@@ -1566,3 +1566,27 @@ html[dir="ltr"] .sticky-header {
 .menu-link--babymenu svg path {
   fill: var(--bioligent-green-500) !important;
 }
+
+.submenu--force-visible {
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  top: calc(
+    var(--header-logo) + var(--header-vertical-space) / 2 + 0.1875rem
+  ) !important;
+  z-index: 99 !important;
+}
+
+.submenu--force-visible .submenu-holder {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.learn-submenu-holder .text-animation--underline-in-header {
+  background-image: linear-gradient(
+    to right,
+    var(--bioligent-green-500),
+    var(--bioligent-green-500)
+  );
+}
