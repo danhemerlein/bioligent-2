@@ -31,7 +31,7 @@
 			<span><span class="{{ links_class }}">{{ link.title | escape }}</span></span>
 
 			{% if link.links != blank %}
-				<span class="icon">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
+				<span class="icon">{%- render 'theme-symbols', icon: 'chevron-2' -%}</span>
 			{% endif %}
 
 		</a>
@@ -44,7 +44,7 @@
 
 					{%- if type == 'sidebar' -%}
 						<li class="submenu-back">
-							<a><span class="icon">{%- render 'theme-symbols', icon: 'chevron' -%}</span>{{ 'general.accessibility_labels.back' | t }}</a>
+							<a><span class="icon">{%- render 'theme-symbols', icon: 'chevron-2' -%}</span>{{ 'general.accessibility_labels.back' | t }}</a>
 						</li>
 					{%- endif -%}
 
@@ -59,7 +59,7 @@
 								<a class="menu-link {% if childlink.active or childlink.child_active %} active {% endif %} {% unless childlink.links != blank %} no-focus-link {% endunless %} {{ links_weight }}" href="{{ childlink.url }}">
 									<span><span class="{{ links_class }}">{{ childlink.title | escape }}</span></span>
 									{%- if childlink.links != blank -%}
-										<span class="icon">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
+										<span class="icon">{%- render 'theme-symbols', icon: 'chevron-2' -%}</span>
 									{%- endif -%}
 								</a>
 
@@ -70,7 +70,7 @@
 
 											{%- if type == 'sidebar' -%}
 												<li class="submenu-back">
-													<a><span class="icon">{%- render 'theme-symbols', icon: 'chevron' -%}</span>{{ 'general.accessibility_labels.back' | t }}</a>
+													<a><span class="icon">{%- render 'theme-symbols', icon: 'chevron-2' -%}</span>{{ 'general.accessibility_labels.back' | t }}</a>
 												</li>
 											{%- endif -%}
 

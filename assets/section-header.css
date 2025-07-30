@@ -1502,12 +1502,33 @@ html[dir="ltr"] .sticky-header {
 
 .build-a-bundle-button {
   min-width: 134px;
-  background-color: #c1e2cb;
-  padding: 10px 20px;
+  background-color: var(--edgewater-500);
+  padding: 10px 12px;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
   display: none;
+  position: relative;
+}
+
+.build-a-bundle-button span:first-of-type {
+  color: var(--bioligent-green-500);
+}
+
+.build-a-bundle-button span:last-of-type {
+  color: var(--bioligent-green-500);
+  background-color: #ffc72c;
+  position: absolute;
+  top: -25%;
+  right: -10%;
+
+  font-size: 12px;
+  line-height: 120%;
+  padding: 2px 4px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-right-container {
