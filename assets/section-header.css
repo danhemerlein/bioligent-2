@@ -620,6 +620,7 @@ html[dir="ltr"] .icon-button .button__icon {
   background: var(--color-borders-header);
   transition: all 175ms linear;
 }
+
 .html-password .header__bottom--border:before {
   background: var(--color-borders-main);
 }
@@ -724,7 +725,6 @@ search-form {
   line-height: 1;
   color: var(--color-text-header);
   position: relative;
-  padding: 0.9375rem 1.25rem;
   cursor: pointer;
   z-index: 9;
   display: inline-flex;
@@ -867,7 +867,6 @@ html[dir="ltr"] .site-nav.style--classic .submenu:after {
   max-width: 22.5rem;
 }
 .site-nav.style--classic .submenu.normal-menu .submenu-holder {
-  min-width: 9.375rem;
   margin-top: -1px;
   border-radius: 8px;
   background-color: var(--edgewater-300);
@@ -1553,4 +1552,13 @@ html[dir="ltr"] .sticky-header {
   .build-a-bundle-button {
     display: flex;
   }
+}
+
+.site-nav-container nav .link-list {
+  gap: 1.25rem;
+}
+
+.menu-link--babymenu svg,
+.menu-link--babymenu svg path {
+  fill: var(--bioligent-green-500) !important;
 }
