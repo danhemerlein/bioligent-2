@@ -56,11 +56,13 @@
 								{% endif %}
 							>
 
-								<a class="menu-link {% if childlink.active or childlink.child_active %} active {% endif %} {% unless childlink.links != blank %} no-focus-link {% endunless %} {{ links_weight }}" href="{{ childlink.url }}">
-									<span><span class="{{ links_class }}">{{ childlink.title | escape }}</span></span>
-									{%- if childlink.links != blank -%}
-										<span class="icon">{%- render 'theme-symbols', icon: 'chevron-2' -%}</span>
-									{%- endif -%}
+								<a class="menu-link menu-link--babymenu {% if childlink.active or childlink.child_active %} active {% endif %} {% unless childlink.links != blank %} no-focus-link {% endunless %} {{ links_weight }}" href="{{ childlink.url }}">
+									<span class="{{ links_class }}">
+										{{ childlink.title | escape }}
+									</span>
+									<span class="icon">
+										{%- render 'theme-symbols', icon: 'chevron-2' -%}
+									</span>									
 								</a>
 
 								{%- if childlink.links != blank -%}
