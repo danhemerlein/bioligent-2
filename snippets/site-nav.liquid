@@ -40,7 +40,7 @@
 
 			<ul class="submenu normal-menu" id="SiteNavLabel-{{ link.handle }}-{{ type }}">
 
-				<div class="submenu-holder">
+				<div class="submenu-holder learn-submenu-holder">
 
 					{%- if type == 'sidebar' -%}
 						<li class="submenu-back">
@@ -57,7 +57,7 @@
 							>
 
 								<a class="menu-link menu-link--babymenu {% if childlink.active or childlink.child_active %} active {% endif %} {% unless childlink.links != blank %} no-focus-link {% endunless %} {{ links_weight }}" href="{{ childlink.url }}">
-									<span class="{{ links_class }}">
+									<span class="{{ links_class }} pps">
 										{{ childlink.title | escape }}
 									</span>
 									<span class="icon">
