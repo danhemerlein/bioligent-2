@@ -32,44 +32,58 @@
     <script src="{{ 'section-announcement-bar.js' | asset_url }}" defer></script>
   {%- endif -%}
 
-  <announcement-bar id="announcement-{{ section.id }}" style="display:block" data-js-inert>
+  <announcement-bar id="announcement-{{ section.id }}" data-js-inert>
     <div class="container--large">
-      <div class="announcement-bar">
+      <div class="announcement-bar {% if section.settings.enable_slider == false %} announcement-bar--no-slider {% endif %}">
 
-        <div class="announcement-bar__social-icons lap-hide">
-          {%- liquid
-            if section.settings.show_social_icons
-              render 'social-icons'
-            endif
-          -%}
-        </div>
-        
-        <div class="announcement-bar__content">
-          {%- if section.blocks.size > 1 -%}
-            <span class="announcement-bar__content-nav announcement-bar__content-nav--left announcement-bar__content-nav--disabled">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
-          {%- endif -%}
-
-          <div class="announcement-bar__slider" data-js-slider>
-            {%- for block in section.blocks -%}
-              <span class="announcement" {{ block.shopify_attributes }}>
-                {%- if block.settings.link != blank -%}
-                  <a href="{{ block.settings.link }}" {% if block.settings.target %} target="_blank" {% endif %}>
-                {%- endif -%}
-                  {{ block.settings.text | escape }}
-                {%- if block.settings.link != blank -%} </a> {%- endif -%}
-              </span>
-            {%- endfor -%}
+        {%- if section.settings.show_social_icons -%}
+          <div class="announcement-bar__social-icons lap-hide">
+            {%- liquid
+              if section.settings.show_social_icons
+                render 'social-icons'
+              endif
+            -%}
           </div>
+        {%- endif -%}
+        
+        {%- if section.settings.enable_slider -%}
+          <div class="announcement-bar__content">
+            {%- if section.blocks.size > 1 -%}
+              <span class="announcement-bar__content-nav announcement-bar__content-nav--left announcement-bar__content-nav--disabled">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
+            {%- endif -%}
+            
+              <div class="announcement-bar__slider" data-js-slider>
+                {%- for block in section.blocks -%}
+                  <span class="announcement" {{ block.shopify_attributes }}>
+                    {%- if block.settings.link != blank -%}
+                      <a href="{{ block.settings.link }}" {% if block.settings.target %} target="_blank" {% endif %}>
+                    {%- endif -%}
+                      {{ block.settings.text | escape }}
+                    {%- if block.settings.link != blank -%} </a> {%- endif -%}
+                  </span>
+                {%- endfor -%}
+              </div>
+            {%- if section.blocks.size > 1 -%}
+              <span class="announcement-bar__content-nav announcement-bar__content-nav--right">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            <span class="announcement bioligent-button-text" {{ block.shopify_attributes }}>
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" {% if block.settings.target %} target="_blank" {% endif %}>
+              {%- endif -%}
+                {{ block.settings.text | escape }}
+              {%- if block.settings.link != blank -%} </a> {%- endif -%}
+            </span>
+          {%- endfor -%}
+        {%- endif -%}
 
-          {%- if section.blocks.size > 1 -%}
-            <span class="announcement-bar__content-nav announcement-bar__content-nav--right">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
-          {%- endif -%}
-
-        </div>
-
+        {%- if section.settings.show_locale_selector or section.settings.show_country_selector -%}
         <div class="announcement-bar__localization-form lap-hide">
           {%- render 'localization-form', show_country_selector: section.settings.show_country_selector, show_locale_selector: section.settings.show_locale_selector, location: 'ancmt' -%}
         </div>
+        {%- endif -%}
 
       </div>
     </div>      
@@ -134,9 +148,15 @@
       },
       {
         "type": "checkbox",
+        "id": "enable_slider",
+        "label": "Enable Slider",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "show_locale_selector",
         "label": "t:sections.footer.settings.language_selector_show.label",
-        "default": true
+        "default": false
       },
       {
         "type": "header",

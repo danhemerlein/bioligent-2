@@ -300,7 +300,7 @@
       <div class="header__top header__top--logo-{{ section.settings.alignment }} {% if section.settings.custom_icon_select == 'no-icon' %}no-custom-link{% endif %} site-header--menu-{{ section.settings.menu_type }}" id="header-top" style="height:calc(var(--header-logo) + var(--header-vertical-space))">
 
         <div class="header-container header-container--bottom no-header-blocks">
-          <div class="header__bottom {% if section.settings.show_header_border_top %} header__bottom--border {% endif %} container--large">
+          <div class="header__bottom">
             {{ header_menu_classic }}
           </div>
         </div>
@@ -733,13 +733,6 @@
       "id": "show_header_border_bottom",
       "label": "t:bundle-220.header_border_bottom",
       "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_header_border_top",
-      "label": "t:bundle-220.header_border_top",
-      "info": "t:bundle-220.header_border_top_info",
-      "default": false
     },
     {
       "type": "checkbox",
