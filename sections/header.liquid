@@ -167,7 +167,6 @@
             {%- when 'mega-menu' -%}
               {%- render 'site-nav-mega', items: block.settings.products, isproduct: true, linklist: block.settings.linklist, menu_name: block.settings.title, show_promotion_1: block.settings.show_promotion_block_1, promotion_image_1: block.settings.promotion_image_1, promotion_image_link_1: block.settings.promotion_image_link_1, promotion_content_1: block.settings.promotion_content_1, show_promotion_2: block.settings.show_promotion_block_2, promotion_image_2: block.settings.promotion_image_2, promotion_image_link_2: block.settings.promotion_image_link_2, promotion_content_2: block.settings.promotion_content_2, promotion_width: block.settings.promotion_width, type: 'classic', shopify_attributes: block.shopify_attributes, image_border_radius: block.settings.image_border_radius, desktop_columns: section.settings.desktop_columns -%}
               {%- assign any_mega_menu_nav = true -%}
-
             {%- endcase -%}
         {%- endfor -%}
 
@@ -1067,10 +1066,10 @@
           "label": "t:sections.refactor_words.header.promotion_block.image_link"
         },
         {
-          "type": "richtext",
+          "type": "text",
           "id": "promotion_content_1",
           "label": "t:sections.bundle-extra-words.sections.header.promotion.text",
-          "default": "<p>Lead customers to your best offers or great product stories.<br/><a href=\"#\">Learn more</a></p>"
+          "default": "Build A Bundle & Save Up To 25%"
         },
         {
           "type": "header",
@@ -1093,10 +1092,10 @@
           "label": "t:sections.refactor_words.header.promotion_block.image_link"
         },
         {
-          "type": "richtext",
+          "type": "text",
           "id": "promotion_content_2",
           "label": "t:sections.bundle-extra-words.sections.header.promotion.text",
-          "default": "<p>Lead customers to your best offers or great product stories.<br/><a href=\"#\">Learn more</a></p>"
+          "default": "Subscriber Rewards"
         },
         {
           "type": "header",
@@ -1107,6 +1106,10 @@
           "id": "promotion_width",
           "label": "t:sections.bundle-extra-words.sections.header.promotion.width",
           "options": [
+            {
+              "value": "half",
+              "label": "Half"
+            },
             {
               "value": "fourth",
               "label": "t:sections.bundle-extra-words.settings_schema.labels.options.option_6"

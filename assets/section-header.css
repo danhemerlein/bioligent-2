@@ -796,10 +796,44 @@ html[dir="ltr"] .site-nav.style--classic .submenu:after {
 
   .desktop-submenu-holder .desktop-link-lists {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
     width: 30%;
+    background-color: var(--edgewater-300);
+    height: 100%;
   }
+
+  .desktop-submenu-holder .desktop-link-lists .mega-link {
+    padding: 24px 70px !important;
+    border-bottom: 1px solid var(--edgewater-500);
+    background-color: var(--edgewater-300);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .desktop-submenu-holder
+    .desktop-link-lists
+    .mega-link:not(.has-promotion):hover,
+  .desktop-submenu-holder .desktop-link-lists .mega-link.active {
+    background-color: var(--edgewater-600);
+  }
+
+  .desktop-submenu-holder .desktop-link-lists span {
+    font-weight: var(--font-weight-demi-bold);
+    font-size: 16px;
+    line-height: 120%;
+    letter-spacing: 4%;
+    color: var(--bioligent-green-500);
+  }
+
+  .desktop-submenu-holder .desktop-link-lists span.icon-chevron {
+    margin-left: 10px;
+    display: inline-block;
+    transform: rotate(-90deg);
+  }
+  .desktop-submenu-holder .desktop-link-lists span.icon-chevron svg {
+    fill: var(--bioligent-green-500);
+  }
+
   .desktop-submenu-holder .desktop-link-lists .menu-link span {
     font-size: 16px;
     line-height: 1.2;
@@ -1626,4 +1660,36 @@ html[dir="ltr"] .sticky-header {
 
 .mega-menu-product-grid {
   padding: 70px;
+}
+
+.desktop-link-lists-promotion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 24px;
+  margin-top: auto;
+}
+
+.desktop-link-lists-promotion .mega-link.has-promotion {
+  border-bottom: none !important;
+}
+
+.menu-promotion {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.menu-promotion-content {
+  padding: 0 !important;
+  font-size: 16px !important;
+  line-height: 120% !important;
+  font-weight: var(--font-weight-demi-bold) !important;
+  color: var(--bioligent-green-500) !important;
+  padding: 8px !important;
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  border-radius: 0 0 8px 8px;
 }

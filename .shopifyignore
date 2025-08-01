@@ -2,7 +2,7 @@
 templates/*.json
 locales/en.default.json
 locales/zh-TW.json
-config/*_data.json
+config/settings_data.json
 notifications/*
 customer-app-forms/*
 ordergroove-offers/*
@@ -13,3 +13,4 @@ remote/*
 wishlist-king/*
 cordial-webhooks/*
 findation/*
+config/*_data.json
