@@ -90,7 +90,7 @@
   </announcement-bar>
 
   {% style %}
-    {%- if section.settings.bar_txtcolor != 'rgba(0,0,0,0)' -%}
+    /* {%- if section.settings.bar_txtcolor != 'rgba(0,0,0,0)' -%}
       #announcement-{{ section.id }} .announcement-bar, #announcement-{{ section.id }} a, #announcement-{{ section.id }} .localization-form__item-text {
         color: {{ section.settings.bar_txtcolor }};
       }
@@ -107,7 +107,7 @@
       #announcement-{{ section.id }} {
         border-bottom: solid 1px {{ section.settings.border_color }};
       }
-    {%- endif -%}
+    {%- endif -%} */
   {% endstyle %}
 
 {%- endif -%}
@@ -180,28 +180,6 @@
         "label": "t:sections.local-extra-words.sections.announcement-bar.settings.social.label",
         "default": true
       },
-      {
-        "type": "header",
-        "content": "t:settings_schema.colors.name"
-      },
-      {
-        "type": "color",
-        "id": "bar_bgcolor",
-        "label": "t:sections.announcement-bar.settings.bar_bgcolor.label",
-        "default": "#111111"
-      },
-      {
-        "type": "color",
-        "id": "bar_txtcolor",
-        "label": "t:sections.announcement-bar.settings.bar_txtcolor.label",
-        "default": "#ffffff"
-      },
-      {
-        "type": "color",
-        "id": "border_color",
-        "label": "t:sections.local-extra-words.settings_schema.colors.settings.borders",
-        "default": "rgba(0,0,0,0)"
-      }
     ],
     "blocks": [
       {

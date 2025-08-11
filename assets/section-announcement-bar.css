@@ -148,3 +148,8 @@ html[dir="rtl"] .announcement-bar__content-nav {
     display: block;
   }
 }
+
+announcement-bar {
+  background-color: var(--edgewater-500);
+  color: var(--bioligent-green-500);
+}
