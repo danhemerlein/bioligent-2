@@ -1696,9 +1696,21 @@ html[dir="ltr"] .sticky-header {
 }
 
 .mega-menu-product-grid.product-grid {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 350ms linear, transform 350ms linear,
+    visibility 350ms linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  z-index: 1;
 }
 
 .mega-menu-product-grid.product-grid.product-grid--active {
-  display: grid;
+  opacity: 1;
+  visibility: visible;
 }
