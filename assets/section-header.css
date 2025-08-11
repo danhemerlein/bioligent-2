@@ -792,6 +792,7 @@ html[dir="ltr"] .site-nav.style--classic .submenu:after {
   .desktop-submenu-holder {
     display: flex !important;
     justify-content: center;
+    min-height: 75vh;
   }
 
   .desktop-submenu-holder .desktop-link-lists {
@@ -1692,4 +1693,12 @@ html[dir="ltr"] .sticky-header {
   display: flex;
   align-items: center;
   border-radius: 0 0 8px 8px;
+}
+
+.mega-menu-product-grid.product-grid {
+  display: none;
+}
+
+.mega-menu-product-grid.product-grid.product-grid--active {
+  display: grid;
 }

@@ -24,12 +24,14 @@
   endif;
 -%}
 
-<li class="has-submenu focus submenu-is-mega-menu js-mega-menu-item" {{ shopify_attributes }}>
+<script src="{{ 'shop-mega-nav.js' | asset_url }}" defer></script>
+
+<li class="has-submenu submenu-is-mega-menu js-mega-menu-item" {{ shopify_attributes }}>
 
   <a class="menu-link {{ links_weight }}"
     {% if show_more_url %} href="{{ show_more_url }}" {% else %} tabindex="0" {% endif %}
   >
-    <span><span  class="{{ links_class }}">{{ menu_name | escape }}</span></span>
+    <span><span class="{{ links_class }}" >{{ menu_name | escape }}</span></span>
     <span class="icon">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
   </a>
 
@@ -50,7 +52,7 @@
 
         <ul class="desktop-link-lists">
           {%- for link in linklists[linklist].links -%}
-            <li class="mega-link {% if forloop.index == 1 %} active {% endif %}">
+            <li class="mega-link {% if forloop.index == 1 %} active {% endif %}" data-mega-menu-product-grid-id="mega-menu-product-grid-{{ forloop.index0 }}">
               <span class="{{ links_class }}">
                 {{ link.title | escape }}
               </span>
@@ -148,81 +150,91 @@
         </div>
         </ul>
 
-        <div 
-          class="mega-menu-product-grid grid product-grid grid--layout {% if type == 'sidebar' %} grid-2 {% else %} grid-6 {% endif %} grid-portable-2"
-          style="{% if desktop_columns == 'three' %} grid-template-columns: 1fr 1fr 1fr !important; {% elsif desktop_columns == 'four' %} grid-template-columns: 1fr 1fr 1fr 1fr !important; {% elsif desktop_columns == 'five' %} grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important; {% endif %}"
-        >
-          {%- for link in linklists[linklist].links -%}
-            {%- comment -%} Check if link points to a collection and get its handle {%- endcomment -%}
-            {%- if link.type == 'collection_link' -%}
-              {%- assign collection_handle = link.object.handle -%}
-              {%- assign collection = link.object -%}
-              
-              {%- comment -%} Get all products from the collection and loop over them {%- endcomment -%}
-              {%- for item in collection.products -%}
-                {%- liquid
-                  if iscollection
-                    assign image = item.featured_image
-                  else
-                    assign image = item.featured_media
-                  endif
-                -%}
-                <a href="{{ item.url }}" title="{{ item.title | escape }}" class="product-item">
+        {%- for link in linklists[linklist].links -%}
+          <div 
+            class="
+              mega-menu-product-grid grid product-grid grid--layout
+              {% if type == 'sidebar' %} grid-2 {% else %} grid-6 {% endif %} grid-portable-2
+              {% if forloop.index == 1 %} product-grid--active {% endif %}
+            "
 
+            style="
+              {% if desktop_columns == 'three' %} grid-template-columns: 1fr 1fr 1fr !important; 
+              {% elsif desktop_columns == 'four' %} grid-template-columns: 1fr 1fr 1fr 1fr !important; 
+              {% elsif desktop_columns == 'five' %} grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important; {% endif %}
+            "
+            id="mega-menu-product-grid-{{ forloop.index0 }}"
+          >
+              {%- comment -%} Check if link points to a collection and get its handle {%- endcomment -%}
+              {%- if link.type == 'collection_link' -%}
+                {%- assign collection_handle = link.object.handle -%}
+                {%- assign collection = link.object -%}
+                
+                {%- comment -%} Get all products from the collection and loop over them {%- endcomment -%}
+                {%- for item in collection.products -%}
                   {%- liquid
-    
-                    if settings.product_card_aspect_ratio == 'natural'
-                      if item.media.size == 0 or blank_product
-                        assign aspect_ratio = 1
-                      else
-                        unless item.featured_media.aspect_ratio > 0
+                    if iscollection
+                      assign image = item.featured_image
+                    else
+                      assign image = item.featured_media
+                    endif
+                  -%}
+                  <a href="{{ item.url }}" title="{{ item.title | escape }}" class="product-item">
+
+                    {%- liquid
+      
+                      if settings.product_card_aspect_ratio == 'natural'
+                        if item.media.size == 0 or blank_product
                           assign aspect_ratio = 1
                         else
-                          assign aspect_ratio = item.featured_media.aspect_ratio
-                        endunless
-                      endif
-                    else
-                      assign aspect_ratio = settings.product_card_aspect_ratio
-                    endif
-    
-                  -%}
-    
-                  <div
-                    class="card__image product-item__image
-                    {% if section_blocks.size == 0 %} product-item__image--no-text {% endif %}"
-                    style="padding-top:{{ 100 | divided_by: aspect_ratio }}%"
-                  >
-                    {%- capture sizes -%}
-                      sizes="(max-width: {{ settings.theme_max_width }}px) calc((100vw - 200px) / 6), {{ settings.theme_max_width | divided_by: 6 }}px"
-                    {%- endcapture -%}
-    
-                    {%- liquid
-                      if image == blank
-                        echo 'image' | placeholder_svg_tag
-                      else
-                        if settings.product_card_border_radius > 0
-                          assign image_class = 'product-item__image-figure lazy-image--zoom-animation lazy-image--to-reveal'
-                        else
-                          assign image_class = 'product-item__image-figure lazy-image--animation lazy-image--to-reveal'
+                          unless item.featured_media.aspect_ratio > 0
+                            assign aspect_ratio = 1
+                          else
+                            assign aspect_ratio = item.featured_media.aspect_ratio
+                          endunless
                         endif
-                        render 'lazy-image', image: image, alt: item.title, ratio: aspect_ratio, type: 'background', class: image_class, sizes: sizes
+                      else
+                        assign aspect_ratio = settings.product_card_aspect_ratio
                       endif
+      
                     -%}
-    
-                    <div class="mega-menu-product-item__title">
-                      <span class="text-size--regular text-weight--bold">
-                        {{ item.title | escape}}
-                      </span>
-                    </div>      
-                    <div class="product-item__price mega-menu-product-item__price">
-                      {%- render 'product-price', target: item, variant: product_variant, product_price_varies: item.price_varies -%}
+      
+                    <div
+                      class="card__image product-item__image
+                      {% if section_blocks.size == 0 %} product-item__image--no-text {% endif %}"
+                      style="padding-top:{{ 100 | divided_by: aspect_ratio }}%"
+                    >
+                      {%- capture sizes -%}
+                        sizes="(max-width: {{ settings.theme_max_width }}px) calc((100vw - 200px) / 6), {{ settings.theme_max_width | divided_by: 6 }}px"
+                      {%- endcapture -%}
+      
+                      {%- liquid
+                        if image == blank
+                          echo 'image' | placeholder_svg_tag
+                        else
+                          if settings.product_card_border_radius > 0
+                            assign image_class = 'product-item__image-figure lazy-image--zoom-animation lazy-image--to-reveal'
+                          else
+                            assign image_class = 'product-item__image-figure lazy-image--animation lazy-image--to-reveal'
+                          endif
+                          render 'lazy-image', image: image, alt: item.title, ratio: aspect_ratio, type: 'background', class: image_class, sizes: sizes
+                        endif
+                      -%}
+      
+                      <div class="mega-menu-product-item__title">
+                        <span class="text-size--regular text-weight--bold">
+                          {{ item.title | escape}}
+                        </span>
+                      </div>      
+                      <div class="product-item__price mega-menu-product-item__price">
+                        {%- render 'product-price', target: item, variant: product_variant, product_price_varies: item.price_varies -%}
+                      </div>
                     </div>
-                  </div>
-                </a>
-              {%- endfor -%}
-            {%- endif -%}
-          {%- endfor-%}
-        </div>
+                  </a>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+        {%- endfor-%}
       {%- else -%}
 
         <div class="submenu-masonry
