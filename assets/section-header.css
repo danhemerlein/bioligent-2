@@ -927,8 +927,8 @@ html[dir="ltr"] .site-nav.style--classic .submenu:after {
   max-width: 22.5rem;
 }
 .site-nav.style--classic .submenu.normal-menu .submenu-holder {
-  margin-top: -1px;
-  border-radius: 8px;
+  /* margin-top: -1px; */
+  /* border-radius: 8px; */
   background-color: var(--edgewater-300);
   min-width: 215px;
 }
@@ -1044,8 +1044,14 @@ html[dir="rtl"] .site-nav.style--classic .submenu.mega-menu {
 }
 html[dir="ltr"] .site-nav.style--classic .submenu.mega-menu {
   left: 0;
-  top: 160%;
+  top: 273%;
 }
+
+.site-nav.style--classic .submenu.normal-menu {
+  left: 0;
+  top: 273%;
+}
+
 body.header-loaded .site-nav.style--classic .submenu.mega-menu {
   display: flex;
 }
@@ -1730,4 +1736,19 @@ html[dir="ltr"] .sticky-header {
 .mega-menu-product-grid.product-grid.product-grid--active {
   opacity: 1;
   visibility: visible;
+}
+
+.has-submenu {
+  position: relative;
+}
+
+.has-submenu:after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -25%;
+  width: 150%;
+  height: 200%;
+  background-color: transparent;
+  z-index: 1;
 }
