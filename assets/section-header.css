@@ -1748,3 +1748,7 @@ html[dir="ltr"] .sticky-header {
   background-color: transparent;
   z-index: 1;
 }
+
+.desktop-link-lists-promotion img {
+  border-radius: 12px 12px 0 0 !important;
+}
