@@ -153,3 +153,49 @@ announcement-bar {
   background-color: var(--edgewater-500);
   color: var(--bioligent-green-500);
 }
+
+/* single products */
+.announcement-bar__berberine-berberine-chromium {
+  background-color: #ffe9c7 !important;
+}
+
+.announcement-bar__black-seed-oil {
+  background-color: #e3d6e7 !important;
+}
+
+.announcement-bar__daily-core-adult-multivitamin {
+  background-color: #e8f5f6 !important;
+}
+
+/* bundles */
+.announcement-bar__the-defense-squad {
+  background-color: #e8f5f6 !important;
+}
+
+.announcement-bar__the-digestive-duo {
+  background-color: #e4d6e8 !important;
+}
+
+.announcement-bar__the-perk-up-pair {
+  background-color: #ffe9c6 !important;
+}
+
+.announcement-bar__total-body-trio {
+  background-color: #e8f5f6 !important;
+}
+
+.announcement-bar__adrenal-adapt {
+  background-color: #f8e3ae !important;
+}
+
+.announcement-bar__next-phase {
+  background-color: #e3d6e7 !important;
+}
+
+.announcement-bar__tribiotic-plus {
+  background-color: #d2ebbf !important;
+}
+
+.announcement-bar__glp-1-booster {
+  background-color: #e8f6f6 !important;
+}

@@ -32,7 +32,53 @@
     <script src="{{ 'section-announcement-bar.js' | asset_url }}" defer></script>
   {%- endif -%}
 
-  <announcement-bar id="announcement-{{ section.id }}" data-js-inert>
+  <announcement-bar  class="
+    {% if product.handle == 'berberine-plus' %}
+      announcement-bar__berberine-berberine-chromium
+    {%- endif -%}
+  
+    {% if product.handle == 'black-seed-oil' %}
+      announcement-bar__black-seed-oil
+    {%- endif -%}
+  
+    {% if product.handle == 'daily-core' %}
+      announcement-bar__daily-core-adult-multivitamin
+    {%- endif -%}
+  
+    {% if product.handle == 'the-defense-squad' %}
+      announcement-bar__the-defense-squad
+    {%- endif -%}
+  
+    {% if product.handle == 'the-digestive-duo' %}
+      announcement-bar__the-digestive-duo
+    {%- endif -%}
+  
+    {% if product.handle == 'the-perk-up-pair' %}
+      announcement-bar__the-perk-up-pair
+    {%- endif -%}
+  
+    {% if product.handle == 'total-body-trio' %}
+      announcement-bar__total-body-trio
+    {%- endif -%}
+  
+    {% if product.handle == 'adrenal-adapt' %}
+      announcement-bar__adrenal-adapt
+    {%- endif -%}
+  
+    {% if product.handle == 'next-phase' %}
+      announcement-bar__next-phase
+    {%- endif -%}
+  
+    {% if product.handle == 'tribiotic-plus' %}
+      announcement-bar__tribiotic-plus
+    {%- endif -%}
+  
+    {% if product.handle == 'glp-1-support' %}
+      announcement-bar__glp-1-booster
+    {%- endif -%}
+     "
+    
+    id="announcement-{{ section.id }}" data-js-inert>
     <div class="container--large">
       <div class="announcement-bar {% if section.settings.enable_slider == false %} announcement-bar--no-slider {% endif %}">
 
