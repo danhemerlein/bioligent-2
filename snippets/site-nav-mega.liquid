@@ -82,7 +82,7 @@
             #SiteNavLabel-{{ link.handle }}-{{ type }} figure,
             #SiteNavLabel-{{ link.handle }}-{{ type }} img,
             #SiteNavLabel-{{ link.handle }}-{{ type }} a.menu-promotion-background-image {
-              border-radius: {{ image_border_radius }}px {{ image_border_radius }}px 0px 0px;
+              /* border-radius: {{ image_border_radius }}px {{ image_border_radius }}px 0px 0px; */
             }
           {% endstyle %}
         {%- endif -%}
@@ -150,6 +150,7 @@
         </div>
         </ul>
 
+        <div style="position: relative; width: 70%;">
         {%- for link in linklists[linklist].links -%}
           <div 
             class="
@@ -209,15 +210,9 @@
                       {%- endcapture -%}
       
                       {%- liquid
-                        if image == blank
-                          echo 'image' | placeholder_svg_tag
-                        else
-                          if settings.product_card_border_radius > 0
-                            assign image_class = 'product-item__image-figure lazy-image--zoom-animation lazy-image--to-reveal'
-                          else
-                            assign image_class = 'product-item__image-figure lazy-image--animation lazy-image--to-reveal'
-                          endif
-                          render 'lazy-image', image: image, alt: item.title, ratio: aspect_ratio, type: 'background', class: image_class, sizes: sizes
+                        if image != blank
+                          assign image_class = 'mega-menu-product-item__image product-item__image-figure lazy-image--zoom-animation lazy-image--to-reveal'
+                          render 'lazy-image', image: image, alt: item.title, ratio: aspect_ratio, type: 'background', class: image_class, sizes: sizes   
                         endif
                       -%}
       
@@ -235,6 +230,7 @@
               {%- endif -%}
             </div>
         {%- endfor-%}
+      </div>
       {%- else -%}
 
         <div class="submenu-masonry
