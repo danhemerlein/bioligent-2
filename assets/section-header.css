@@ -759,9 +759,22 @@ search-form {
   /* padding-top: calc(var(--header-vertical-space) / 2); */
   margin-top: -0.0625rem;
   z-index: 10;
+  pointer-events: none; /* Prevent hover on hidden submenu */
 }
+
 .site-header--style-one-row .site-nav.style--classic .submenu {
   top: calc(var(--header-logo) + var(--header-vertical-space) / 2 + 0.1875rem);
+}
+
+/* Only allow pointer events when submenu is visible */
+.no-touchevents .site-nav.style--classic .has-submenu:hover .submenu,
+.site-nav.style--classic .has-submenu.focus .submenu,
+.site-nav.style--classic .submenu-is-mega-menu.focus .submenu {
+  z-index: 99;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 100ms linear, visibility 100ms linear;
+  pointer-events: auto; /* Re-enable pointer events when visible */
 }
 .site-nav.style--classic .submenu:after {
   content: "";
