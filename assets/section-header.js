@@ -17,106 +17,106 @@ if (typeof MainHeader !== "function") {
 
       // Sticky header
 
-      // if (this.hasAttribute("data-sticky-header")) {
-      //   const stickyHeader = document.createElement("div");
-      //   stickyHeader.classList = "sticky-header site-header";
+      if (this.hasAttribute("data-sticky-header")) {
+        const stickyHeader = document.createElement("div");
+        stickyHeader.classList = "sticky-header site-header";
 
-      //   if (this.classList.contains("site-header--style-one-row")) {
-      //     stickyHeader.innerHTML = `<div class="container--large">
-      // 			<div class="${
-      //         this.querySelector(".header__top").className
-      //       }" style="height:calc(var(--header-logo) + var(--header-vertical-space))">
-      // 				${this.querySelector(".header__top").innerHTML}
-      // 			</div>
-      // 		</div>`;
-      //     stickyHeader.className = `sticky-header ${this.className}`;
-      //     stickyHeader.classList.remove("site-header--absolute");
-      //   } else {
-      //     stickyHeader.innerHTML = `<div class="header__bottom header-container container--large portable-hide">
-      // 			${this.querySelector(".header__bottom").innerHTML}
-      // 			<div style="display:flex;gap:15px;">
-      // 				${
-      //           this.querySelector(".area--custom-icon")
-      //             ? this.querySelector(".area--custom-icon").outerHTML
-      //             : ""
-      //         }
-      // 				${this.querySelector(".area--search").outerHTML}
-      // 				${
-      //           this.querySelector(".area--account")
-      //             ? this.querySelector(".area--account").outerHTML
-      //             : ""
-      //         }
-      // 				${this.querySelector(".area--cart").outerHTML}
-      // 			</div>
-      // 		</div>
-      // 		<div class="site-header element--hide-on-portable-plus">
-      // 			${this.querySelector(".header-container--top").innerHTML}
-      // 		</div>`;
-      //   }
+        if (this.classList.contains("site-header--style-one-row")) {
+          stickyHeader.innerHTML = `<div class="container--large">
+      			<div class="${
+              this.querySelector(".header__top").className
+            }" style="height:calc(var(--header-logo) + var(--header-vertical-space))">
+      				${this.querySelector(".header__top").innerHTML}
+      			</div>
+      		</div>`;
+          stickyHeader.className = `sticky-header ${this.className}`;
+          stickyHeader.classList.remove("site-header--absolute");
+        } else {
+          stickyHeader.innerHTML = `<div class="header__bottom header-container container--large portable-hide">
+      			${this.querySelector(".header__bottom").innerHTML}
+      			<div style="display:flex;gap:15px;">
+      				${
+                this.querySelector(".area--custom-icon")
+                  ? this.querySelector(".area--custom-icon").outerHTML
+                  : ""
+              }
+      				${this.querySelector(".area--search").outerHTML}
+      				${
+                this.querySelector(".area--account")
+                  ? this.querySelector(".area--account").outerHTML
+                  : ""
+              }
+      				${this.querySelector(".area--cart").outerHTML}
+      			</div>
+      		</div>
+      		<div class="site-header element--hide-on-portable-plus">
+      			${this.querySelector(".header-container--top").innerHTML}
+      		</div>`;
+        }
 
-      //   document.body.append(stickyHeader);
+        document.body.append(stickyHeader);
 
-      //   stickyHeader.querySelectorAll("[id]").forEach((elm) => {
-      //     elm.id = `${elm.id}-sticky`;
-      //   });
-      //   stickyHeader
-      //     .querySelectorAll(".site-nav [aria-controls]")
-      //     .forEach((elm) => {
-      //       elm.setAttribute(
-      //         "aria-controls",
-      //         `${elm.getAttribute("aria-controls")}-sticky`
-      //       );
-      //     });
+        stickyHeader.querySelectorAll("[id]").forEach((elm) => {
+          elm.id = `${elm.id}-sticky`;
+        });
+        stickyHeader
+          .querySelectorAll(".site-nav [aria-controls]")
+          .forEach((elm) => {
+            elm.setAttribute(
+              "aria-controls",
+              `${elm.getAttribute("aria-controls")}-sticky`
+            );
+          });
 
-      //   window.lst = window.scrollY;
-      //   window.lhp = 0;
+        window.lst = window.scrollY;
+        window.lhp = 0;
 
-      //   const stickyHeaderDeskBound = this.classList.contains(
-      //     "site-header--style-one-row"
-      //   )
-      //     ? this.querySelector(".header__top")
-      //     : this.querySelector(".header__bottom");
-      //   const stickyHeaderMobileBound = this.querySelector(".header__top");
+        const stickyHeaderDeskBound = this.classList.contains(
+          "site-header--style-one-row"
+        )
+          ? this.querySelector(".header__top")
+          : this.querySelector(".header__bottom");
+        const stickyHeaderMobileBound = this.querySelector(".header__top");
 
-      //   this.SCROLL_StickyHelper = () => {
-      //     var st = window.scrollY;
+        this.SCROLL_StickyHelper = () => {
+          var st = window.scrollY;
 
-      //     if (
-      //       (st <= 0 ||
-      //         (window.innerWidth >= 1024
-      //           ? stickyHeaderDeskBound.getBoundingClientRect().top >= 0
-      //           : stickyHeaderMobileBound.getBoundingClientRect().top >= 0)) &&
-      //       stickyHeader.classList.contains("show")
-      //     ) {
-      //       stickyHeader.classList.remove("show");
-      //       return;
-      //     }
+          if (
+            (st <= 0 ||
+              (window.innerWidth >= 1024
+                ? stickyHeaderDeskBound.getBoundingClientRect().top >= 0
+                : stickyHeaderMobileBound.getBoundingClientRect().top >= 0)) &&
+            stickyHeader.classList.contains("show")
+          ) {
+            stickyHeader.classList.remove("show");
+            return;
+          }
 
-      //     if (st < 0 || Math.abs(lst - st) <= 5) return;
+          if (st < 0 || Math.abs(lst - st) <= 5) return;
 
-      //     if (st > window.lhp) {
-      //       if (st == 0 && stickyHeader.classList.contains("show")) {
-      //         stickyHeader.classList.remove("show");
-      //       } else if (st <= lst && !stickyHeader.classList.contains("show")) {
-      //         window.lhp = stickyHeader.offsetTop;
-      //         if (
-      //           document.body.id !=
-      //           "create-your-bundle-subscribe-amp-save-up-to-25-off"
-      //         ) {
-      //           stickyHeader.classList.add("show");
-      //         }
-      //       } else if (st > lst && stickyHeader.classList.contains("show")) {
-      //         stickyHeader.classList.remove("show");
-      //       }
-      //     }
+          if (st > window.lhp) {
+            if (st == 0 && stickyHeader.classList.contains("show")) {
+              stickyHeader.classList.remove("show");
+            } else if (st <= lst && !stickyHeader.classList.contains("show")) {
+              window.lhp = stickyHeader.offsetTop;
+              if (
+                document.body.id !=
+                "create-your-bundle-subscribe-amp-save-up-to-25-off"
+              ) {
+                stickyHeader.classList.add("show");
+              }
+            } else if (st > lst && stickyHeader.classList.contains("show")) {
+              stickyHeader.classList.remove("show");
+            }
+          }
 
-      //     window.lst = st;
-      //   };
+          window.lst = st;
+        };
 
-      //   window.addEventListener("scroll", this.SCROLL_StickyHelper, {
-      //     passive: true,
-      //   });
-      // }
+        window.addEventListener("scroll", this.SCROLL_StickyHelper, {
+          passive: true,
+        });
+      }
 
       // drawer connections
 
