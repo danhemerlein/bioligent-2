@@ -33,7 +33,7 @@
 .site-header__product.site-header:hover
   span:not(.icon-button__text):not(.desktop-link-lists span):not(
     .submenu-holder span
-  ) {
+  ):not(.build-a-bundle-button span) {
   color: white;
 }
 
