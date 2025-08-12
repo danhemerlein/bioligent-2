@@ -16,184 +16,65 @@ if (typeof MainHeader !== "function") {
       window.inertElems = document.querySelectorAll("[data-js-inert]");
 
       // Sticky header
+      if (this.hasAttribute("data-sticky-header")) {
+        const stickyHeader = document.querySelector("main-header");
+        let isHeaderVisible = false;
+        let lastScrollTime = Date.now();
 
-      // if (this.hasAttribute("data-sticky-header")) {
-      //   const stickyHeader = document.createElement("div");
-      //   stickyHeader.classList = "sticky-header site-header";
+        window.lst = window.scrollY;
+        window.lhp = 0;
 
-      //   if (this.classList.contains("site-header--style-one-row")) {
-      //     stickyHeader.innerHTML = `<div class="container--large">
-      // 			<div class="${
-      //         this.querySelector(".header__top").className
-      //       }" style="height:calc(var(--header-logo) + var(--header-vertical-space))">
-      // 				${this.querySelector(".header__top").innerHTML}
-      // 			</div>
-      // 		</div>`;
-      //     stickyHeader.className = `sticky-header ${this.className}`;
-      //     stickyHeader.classList.remove("site-header--absolute");
-      //   } else {
-      //     stickyHeader.innerHTML = `<div class="header__bottom header-container container--large portable-hide">
-      // 			${this.querySelector(".header__bottom").innerHTML}
-      // 			<div style="display:flex;gap:15px;">
-      // 				${
-      //           this.querySelector(".area--custom-icon")
-      //             ? this.querySelector(".area--custom-icon").outerHTML
-      //             : ""
-      //         }
-      // 				${this.querySelector(".area--search").outerHTML}
-      // 				${
-      //           this.querySelector(".area--account")
-      //             ? this.querySelector(".area--account").outerHTML
-      //             : ""
-      //         }
-      // 				${this.querySelector(".area--cart").outerHTML}
-      // 			</div>
-      // 		</div>
-      // 		<div class="site-header element--hide-on-portable-plus">
-      // 			${this.querySelector(".header-container--top").innerHTML}
-      // 		</div>`;
-      //   }
+        const stickyHeaderDeskBound = this;
+        const stickyHeaderMobileBound = this;
 
-      //   document.body.append(stickyHeader);
+        this.SCROLL_StickyHelper = () => {
+          var st = window.scrollY;
+          const now = Date.now();
 
-      //   stickyHeader.querySelectorAll("[id]").forEach((elm) => {
-      //     elm.id = `${elm.id}-sticky`;
-      //   });
-      //   stickyHeader
-      //     .querySelectorAll(".site-nav [aria-controls]")
-      //     .forEach((elm) => {
-      //       elm.setAttribute(
-      //         "aria-controls",
-      //         `${elm.getAttribute("aria-controls")}-sticky`
-      //       );
-      //     });
-
-      //   window.lst = window.scrollY;
-      //   window.lhp = 0;
-
-      //   const stickyHeaderDeskBound = this.classList.contains(
-      //     "site-header--style-one-row"
-      //   )
-      //     ? this.querySelector(".header__top")
-      //     : this.querySelector(".header__bottom");
-      //   const stickyHeaderMobileBound = this.querySelector(".header__top");
-
-      //   this.SCROLL_StickyHelper = () => {
-      //     var st = window.scrollY;
-
-      //     if (
-      //       (st <= 0 ||
-      //         (window.innerWidth >= 1024
-      //           ? stickyHeaderDeskBound.getBoundingClientRect().top >= 0
-      //           : stickyHeaderMobileBound.getBoundingClientRect().top >= 0)) &&
-      //       stickyHeader.classList.contains("show")
-      //     ) {
-      //       stickyHeader.classList.remove("show");
-      //       return;
-      //     }
-
-      //     if (st < 0 || Math.abs(lst - st) <= 5) return;
-
-      //     if (st > window.lhp) {
-      //       if (st == 0 && stickyHeader.classList.contains("show")) {
-      //         stickyHeader.classList.remove("show");
-      //       } else if (st <= lst && !stickyHeader.classList.contains("show")) {
-      //         window.lhp = stickyHeader.offsetTop;
-      //         if (
-      //           document.body.id !=
-      //           "create-your-bundle-subscribe-amp-save-up-to-25-off"
-      //         ) {
-      //           stickyHeader.classList.add("show");
-      //         }
-      //       } else if (st > lst && stickyHeader.classList.contains("show")) {
-      //         stickyHeader.classList.remove("show");
-      //       }
-      //     }
-
-      //     window.lst = st;
-      //   };
-
-      //   window.addEventListener("scroll", this.SCROLL_StickyHelper, {
-      //     passive: true,
-      //   });
-      // }
-
-      // sticky header
-
-      const header = document.querySelector(".site-header");
-      const announcementBar = document.querySelector("announcement-bar");
-
-      // const headerHeight = header.offsetHeight;
-
-      let lastScrollY = window.scrollY;
-      let throttleTimer;
-      let lastDirection = null;
-      let directionChangeTimeout;
-
-      const handleScroll = () => {
-        const currentScrollY = window.scrollY;
-
-        // If at the top of the document, always show header
-        if (currentScrollY < 10) {
-          if (!header.classList.contains("show")) {
-            header.classList.add("show");
-          }
-          if (!announcementBar.classList.contains("show")) {
-            announcementBar.classList.add("show");
-          }
-          lastDirection = null;
-          return;
-        }
-
-        // Determine current direction
-        let currentDirection = null;
-        if (currentScrollY < lastScrollY) {
-          currentDirection = "up";
-        } else if (currentScrollY > lastScrollY) {
-          currentDirection = "down";
-        }
-
-        // Only change direction if it's different and we're not in a rapid change
-        if (currentDirection && currentDirection !== lastDirection) {
-          // Clear any existing timeout
-          if (directionChangeTimeout) {
-            clearTimeout(directionChangeTimeout);
+          // Prevent rapid state changes (debounce)
+          if (now - lastScrollTime < 100) {
+            return;
           }
 
-          // Set a small delay before allowing direction change
-          directionChangeTimeout = setTimeout(() => {
-            lastDirection = currentDirection;
-          }, 10); // 50ms delay to prevent rapid changes
-
-          return; // Skip this frame to prevent rapid toggling
-        }
-
-        // Apply direction-based actions
-        if (currentDirection === "up") {
-          // Scrolling up - show header
-          if (!header.classList.contains("show")) {
-            header.classList.add("show");
+          // At the top - always show
+          if (st <= 0) {
+            if (!isHeaderVisible) {
+              stickyHeader.classList.add("show");
+              isHeaderVisible = true;
+            }
+            lastScrollTime = now;
+            window.lst = st;
+            return;
           }
-          if (!announcementBar.classList.contains("show")) {
-            announcementBar.classList.add("show");
-          }
-        } else if (currentDirection === "down") {
-          // Scrolling down - hide header
-          if (header.classList.contains("show")) {
-            header.classList.remove("show");
-          }
-          if (announcementBar.classList.contains("show")) {
-            announcementBar.classList.remove("show");
-          }
-        }
 
-        lastScrollY = currentScrollY;
-      };
+          // Check if scroll position changed significantly
+          if (Math.abs(st - window.lst) < 10) {
+            return;
+          }
 
-      // Throttled scroll handler - runs at most every 16ms (60fps)
-      window.addEventListener("scroll", () => {
-        handleScroll();
-      });
+          // Determine scroll direction
+          if (st < window.lst) {
+            // Scrolling up - show header
+            if (!isHeaderVisible) {
+              stickyHeader.classList.add("show");
+              isHeaderVisible = true;
+            }
+          } else if (st > window.lst) {
+            // Scrolling down - hide header
+            if (isHeaderVisible) {
+              stickyHeader.classList.remove("show");
+              isHeaderVisible = false;
+            }
+          }
+
+          window.lst = st;
+          lastScrollTime = now;
+        };
+
+        window.addEventListener("scroll", this.SCROLL_StickyHelper, {
+          passive: true,
+        });
+      }
 
       // drawer connections
 
