@@ -1053,16 +1053,12 @@ html[dir="rtl"] .site-nav.style--classic .submenu.mega-menu {
 
 html[dir="ltr"] .site-nav.style--classic .submenu.mega-menu {
   left: 0;
-  top: 273%;
-}
-.site-nav.style--classic .submenu.normal-menu {
-  left: 0;
-  top: 273%;
+  top: 240%;
 }
 
-.stickey-header.site-header .site-nav.style--classic .submenu.normal-menu {
+.site-nav.style--classic .submenu.normal-menu {
   left: 0;
-  top: 246%;
+  top: 240%;
 }
 
 body.header-loaded .site-nav.style--classic .submenu.mega-menu {

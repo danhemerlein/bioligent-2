@@ -126,35 +126,73 @@ if (typeof MainHeader !== "function") {
       // const headerHeight = header.offsetHeight;
 
       let lastScrollY = window.scrollY;
-      let ticking = false;
+      let throttleTimer;
+      let lastDirection = null;
+      let directionChangeTimeout;
 
-      window.addEventListener("scroll", () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const currentScrollY = window.scrollY;
+      const handleScroll = () => {
+        const currentScrollY = window.scrollY;
 
-            // If at the top of the document, always show header
-            if (currentScrollY < 10) {
-              header.classList.add("show");
-              announcementBar.classList.add("show");
-            } else {
-              // Check scroll direction
-              if (currentScrollY < lastScrollY) {
-                // Scrolling up - show header
-                header.classList.add("show");
-                announcementBar.classList.add("show");
-              } else if (currentScrollY > lastScrollY) {
-                // Scrolling down - hide header
-                header.classList.remove("show");
-                announcementBar.classList.remove("show");
-              }
-            }
-
-            lastScrollY = currentScrollY;
-            ticking = false;
-          });
-          ticking = true;
+        // If at the top of the document, always show header
+        if (currentScrollY < 10) {
+          if (!header.classList.contains("show")) {
+            header.classList.add("show");
+          }
+          if (!announcementBar.classList.contains("show")) {
+            announcementBar.classList.add("show");
+          }
+          lastDirection = null;
+          return;
         }
+
+        // Determine current direction
+        let currentDirection = null;
+        if (currentScrollY < lastScrollY) {
+          currentDirection = "up";
+        } else if (currentScrollY > lastScrollY) {
+          currentDirection = "down";
+        }
+
+        // Only change direction if it's different and we're not in a rapid change
+        if (currentDirection && currentDirection !== lastDirection) {
+          // Clear any existing timeout
+          if (directionChangeTimeout) {
+            clearTimeout(directionChangeTimeout);
+          }
+
+          // Set a small delay before allowing direction change
+          directionChangeTimeout = setTimeout(() => {
+            lastDirection = currentDirection;
+          }, 10); // 50ms delay to prevent rapid changes
+
+          return; // Skip this frame to prevent rapid toggling
+        }
+
+        // Apply direction-based actions
+        if (currentDirection === "up") {
+          // Scrolling up - show header
+          if (!header.classList.contains("show")) {
+            header.classList.add("show");
+          }
+          if (!announcementBar.classList.contains("show")) {
+            announcementBar.classList.add("show");
+          }
+        } else if (currentDirection === "down") {
+          // Scrolling down - hide header
+          if (header.classList.contains("show")) {
+            header.classList.remove("show");
+          }
+          if (announcementBar.classList.contains("show")) {
+            announcementBar.classList.remove("show");
+          }
+        }
+
+        lastScrollY = currentScrollY;
+      };
+
+      // Throttled scroll handler - runs at most every 16ms (60fps)
+      window.addEventListener("scroll", () => {
+        handleScroll();
       });
 
       // drawer connections
