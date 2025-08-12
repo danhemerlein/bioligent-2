@@ -182,12 +182,7 @@
 {% endcapture %}
 
 
-<main-header id="site-header" class="site-header show
-  {% if section.settings.show_header_border_bottom %} site-header--border {% endif %}
-  site-header--alignment-{{ section.settings.alignment }}
-  {% if header_absolute %} site-header--absolute {% unless section.settings.hide_header_border %} site-header--absolute-show-border {% endunless %} {% endif %}
-  site-header--style-{{ section.settings.style }}
-
+<main-header id="site-header" class="site-header sticky-header show
   {% if template.name == 'product' %}
     site-header__product
   {%- endif -%}
@@ -237,7 +232,7 @@
   {%- endif -%}
 
 
-  " data-js-inert {% if section.settings.sticky_header %} data-sticky-header {% endif %}>
+  " data-sticky-header>
 
   <div class="header-container header-container--top">
     {% liquid
