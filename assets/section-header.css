@@ -6,7 +6,15 @@
   position: relative;
   z-index: 999;
   padding-top: calc(var(--header-vertical-space) / 2);
-  transition: background-color 250ms ease-in-out;
+  transition: background-color 250ms ease-in-out, transform 250ms linear;
+  position: fixed;
+  width: 100vw;
+  height: 99px;
+  transform: translateY(-100%);
+}
+
+.site-header.show {
+  transform: translateY(0);
 }
 
 .site-header__product.site-header li,
@@ -1038,14 +1046,19 @@ html[dir="ltr"] .site-nav.style--classic .submenu.normal-menu .babymenu {
 html[dir="rtl"] .site-nav.style--classic .submenu.mega-menu {
   right: 0;
 }
+
 html[dir="ltr"] .site-nav.style--classic .submenu.mega-menu {
   left: 0;
   top: 273%;
 }
-
 .site-nav.style--classic .submenu.normal-menu {
   left: 0;
   top: 273%;
+}
+
+.stickey-header.site-header .site-nav.style--classic .submenu.normal-menu {
+  left: 0;
+  top: 246%;
 }
 
 body.header-loaded .site-nav.style--classic .submenu.mega-menu {
@@ -1345,7 +1358,7 @@ html[dir="ltr"] .sticky-header {
   }
 }
 .sticky-header .submenu.mega-menu {
-  padding-top: 2.5rem !important;
+  /* padding-top: 2.5rem !important; */
 }
 .sticky-header:after {
   display: none;
@@ -1354,7 +1367,7 @@ html[dir="ltr"] .sticky-header {
   justify-content: flex-start;
 }
 .sticky-header:not(.site-header--style-one-row) .mega-menu {
-  margin-inline-start: 0 !important;
+  /* margin-inline-start: 0 !important; */
 }
 .sticky-header:not(.site-header--style-one-row) .mega-menu .submenu-masonry {
   transform: 0;

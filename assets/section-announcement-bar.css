@@ -154,6 +154,10 @@ announcement-bar {
   color: var(--bioligent-green-500);
 }
 
+announcement-bar.show {
+  padding-top: 98px;
+}
+
 /* single products */
 .announcement-bar__berberine-berberine-chromium {
   background-color: #ffe9c7 !important;
