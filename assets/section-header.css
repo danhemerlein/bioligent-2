@@ -21,7 +21,7 @@
 .site-header__product.site-header a,
 .site-header__product.site-header span {
   color: rgb(0, 48, 26);
-  transition: color 250ms ease-in-out;
+  /* transition: color 250ms ease-in-out; */
 }
 
 .site-header__product.site-header:hover {
@@ -30,8 +30,18 @@
 
 .site-header__product.site-header:hover li,
 .site-header__product.site-header:hover a,
-.site-header__product.site-header:hover span:not(.icon-button__text) {
+.site-header__product.site-header:hover
+  span:not(.icon-button__text):not(.desktop-link-lists span):not(
+    .submenu-holder span
+  ) {
   color: white;
+}
+
+.site-header__product.site-header:hover
+  .link-list
+  svg
+  *:not(.desktop-link-lists svg *) {
+  fill: white !important;
 }
 
 .site-header__product.site-header .button__icon svg * {
@@ -52,10 +62,6 @@
 
 .site-header__product.site-header:hover .button__icon svg * {
   stroke: white !important;
-}
-
-.site-header__product.site-header:hover .link-list svg * {
-  fill: white !important;
 }
 
 .site-header__product.site-header span[data-header-cart-count] {
