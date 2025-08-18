@@ -6,17 +6,10 @@
   position: relative;
   z-index: 999;
   padding-top: calc(var(--header-vertical-space) / 2);
-  padding-bottom: calc(var(--header-vertical-space) / 2);
   transition: background-color 250ms ease-in-out, transform 250ms linear;
-  /* position: fixed; */
   width: 100vw;
   height: 99px;
-  /* transform: translateY(-100%); */
 }
-
-/* .site-header.show {
-  transform: translateY(0);
-} */
 
 .site-header__product.site-header li,
 .site-header__product.site-header a,
@@ -1364,8 +1357,7 @@ html[dir="ltr"] .sticky-header {
 }
 .sticky-header.show {
   transform: translateY(0);
-  margin-top: 40px;
-  transition: linear transform 0.2s;
+  transition: all transform 0.25s ease-in-out;
 }
 .sticky-header .header__bottom {
   border-bottom: 0;
@@ -1751,4 +1743,8 @@ html[dir="ltr"] .sticky-header {
 
 .desktop-link-lists-promotion img {
   border-radius: 12px 12px 0 0 !important;
+}
+
+.area--logo {
+  max-width: 270px;
 }

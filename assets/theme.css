@@ -3319,6 +3319,7 @@ body.sidebar-opened {
 
 .main-content {
   position: relative;
+  margin-top: 99px;
 }
 
 .search-page-form form {
