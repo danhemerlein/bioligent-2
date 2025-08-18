@@ -6,6 +6,7 @@
   position: relative;
   z-index: 999;
   padding-top: calc(var(--header-vertical-space) / 2);
+  padding-bottom: calc(var(--header-vertical-space) / 2);
   transition: background-color 250ms ease-in-out, transform 250ms linear;
   /* position: fixed; */
   width: 100vw;
@@ -348,7 +349,7 @@
   position: relative;
   display: grid;
   align-items: center;
-  margin: 0 -0.625rem;
+  margin: 0;
 }
 .header__top.header__top--logo-left {
   margin-inline-start: 0;
@@ -615,12 +616,6 @@ html[dir="ltr"] .icon-button .button__icon {
   max-height: 100%;
 }
 
-.header__bottom {
-  padding-bottom: calc(var(--header-vertical-space) / 2);
-}
-.header__bottom--border {
-  padding-top: calc(var(--header-vertical-space) / 2);
-}
 .header__bottom--border:before {
   content: "";
   display: block;
@@ -639,7 +634,7 @@ html[dir="ltr"] .icon-button .button__icon {
   background: var(--color-borders-main);
 }
 .show .header__bottom {
-  padding-top: calc(var(--header-vertical-space) / 2);
+  /* padding-top: calc(var(--header-vertical-space) / 2); */
 }
 .header__bottom .site-menu-handle {
   position: absolute;
@@ -708,21 +703,21 @@ search-form {
 .site-nav.style--classic nav > ul {
   display: flex;
   flex-wrap: wrap;
-  margin-inline-start: -1.25rem;
+  /* margin-inline-start: -1.25rem; */
 }
 @media screen and (max-width: 1920px) {
   .site-nav.style--classic nav > ul {
-    margin-inline-start: -0.625rem;
+    /* margin-inline-start: -0.625rem; */
   }
 }
 @media screen and (min-width: 1281px) {
   .site-header--alignment-left .site-nav.style--classic nav > ul {
-    margin-inline-start: -1.25rem;
+    /* margin-inline-start: -1.25rem; */
   }
 }
 @media screen and (min-width: 1024px) and (max-width: 1280px) {
   .site-header--alignment-left .site-nav.style--classic nav > ul {
-    margin-inline-start: -0.9375rem;
+    /* margin-inline-start: -0.9375rem; */
   }
 }
 .site-nav.style--classic nav > ul > li {
@@ -1369,6 +1364,7 @@ html[dir="ltr"] .sticky-header {
 }
 .sticky-header.show {
   transform: translateY(0);
+  margin-top: 40px;
   transition: linear transform 0.2s;
 }
 .sticky-header .header__bottom {

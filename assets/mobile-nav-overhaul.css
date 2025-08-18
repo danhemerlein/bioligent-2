@@ -3,6 +3,12 @@
   flex-direction: column;
 }
 
+.new-mobile-nav__links-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
 .new-mobile-nav__ul a.menu-link,
 .new-mobile-nav__ul p.menu-link {
   width: 100%;

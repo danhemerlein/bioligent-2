@@ -453,9 +453,9 @@
 <sidebar-drawer id="site-menu-sidebar" class="sidebar sidebar--left" tabindex="-1" role="dialog" aria-modal="true" style="display:none">
 
   <div class="sidebar__header">
-    <span class="sidebar__title">
+    {% comment %} <span class="sidebar__title">
       {{ 'general.accessibility_labels.menu' | t }}
-    </span>
+    </span> {% endcomment %}
     <button class="sidebar__close" data-js-close>
       <span class="visually-hidden">{{ 'general.accessibility_labels.close_sidebar' | t }}</span>
       <span aria-hidden="true" aria-role="img">{%- render 'theme-symbols', icon: 'close' -%}</span>
@@ -526,7 +526,18 @@
         </div>
       </mobile-navigation>
     {% else %}
-      {% render 'mobile-nav-overhaul' products_list: section.settings.new_mobile_nav_products_list sub_save_image: section.settings.sub_save_image sub_save_cta: section.settings.sub_save_cta sub_save_url: section.settings.sub_save_url text_link_list: section.settings.new_mobile_nav_linklist, mobile_columns: section.settings.mobile_columns %}
+      {% render 'mobile-nav-overhaul' 
+        products_list: section.settings.new_mobile_nav_products_list, 
+        collection_list: section.settings.new_mobile_nav_collection_list,
+        sub_save_image: section.settings.sub_save_image,
+        sub_save_cta: section.settings.sub_save_cta,
+        sub_save_url: section.settings.sub_save_url,
+        sub_save_image_two: section.settings.sub_save_image_two,
+        sub_save_cta_two: section.settings.sub_save_cta_two,
+        sub_save_url_two: section.settings.sub_save_url_two,
+        text_link_list: section.settings.new_mobile_nav_linklist,
+        mobile_columns: section.settings.mobile_columns 
+%}
     {% endif %}
   </div>
 
@@ -986,6 +997,11 @@
       "limit": 12
     },
     {
+      "type": "collection_list",
+      "id": "new_mobile_nav_collection_list",
+      "label": "New Mobile Nav Collection List",
+    },
+    {
       "type": "image_picker",
       "id": "sub_save_image",
       "label": "Subscribe & Save Image"
@@ -999,6 +1015,21 @@
     "type": "url",
     "id": "sub_save_url",
     "label": "Subscribe & Save URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "sub_save_image_two",
+      "label": "Subscriber Rewards Image"
+    },
+    {
+      "type": "text",
+      "id": "sub_save_cta_two",
+      "label": "Subscriber Rewards CTA"
+    },
+    {
+      "type": "url",
+      "id": "sub_save_url_two",
+      "label": "Subscriber Rewards URL"
     },
     {
       "type": "link_list",
