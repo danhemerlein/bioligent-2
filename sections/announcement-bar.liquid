@@ -79,8 +79,18 @@
      "
     
     id="announcement-{{ section.id }}" data-js-inert>
+
     <div class="container--large">
-      <div class="announcement-bar {% if section.settings.enable_slider == false %} announcement-bar--no-slider {% endif %}">
+      <div class="announcement-bar {% if section.settings.enable_slider == false %} announcement-bar--no-slider {% endif %}
+        {% if section.blocks.size == 1 %}
+          announcement-bar--one-announcement
+        {% elsif section.blocks.size == 2 %}
+          announcement-bar--two-announcements
+        {% else %}
+          announcement-bar--three-announcements
+        {% endif %}
+        "
+      >
 
         {%- if section.settings.show_social_icons -%}
           <div class="announcement-bar__social-icons lap-hide">
@@ -134,27 +144,6 @@
       </div>
     </div>      
   </announcement-bar>
-
-  {% style %}
-    /* {%- if section.settings.bar_txtcolor != 'rgba(0,0,0,0)' -%}
-      #announcement-{{ section.id }} .announcement-bar, #announcement-{{ section.id }} a, #announcement-{{ section.id }} .localization-form__item-text {
-        color: {{ section.settings.bar_txtcolor }};
-      }
-      #announcement-{{ section.id }} svg *, #announcement-{{ section.id }} .localization-form__item-symbol * {
-        fill: {{ section.settings.bar_txtcolor }} !important;
-      }
-    {%- endif -%}
-    {%- if section.settings.bar_bgcolor != 'rgba(0,0,0,0)' -%}
-      #announcement-{{ section.id }},#announcement-{{ section.id }} .announcement-bar__content-nav {
-        background: {{ section.settings.bar_bgcolor }};
-      }
-    {%- endif -%}
-    {%- if section.settings.border_color != 'rgba(0,0,0,0)' -%}
-      #announcement-{{ section.id }} {
-        border-bottom: solid 1px {{ section.settings.border_color }};
-      }
-    {%- endif -%} */
-  {% endstyle %}
 
 {%- endif -%}
 
