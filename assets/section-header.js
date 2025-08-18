@@ -24,8 +24,15 @@ if (typeof MainHeader !== "function") {
         window.lst = window.scrollY;
         window.lhp = 0;
 
-        const stickyHeaderDeskBound = this;
-        const stickyHeaderMobileBound = this;
+        // Immediately set initial state to prevent flash
+        const st = window.scrollY;
+        if (st <= 0) {
+          stickyHeader.classList.add("show");
+          isHeaderVisible = true;
+        } else {
+          stickyHeader.classList.remove("show");
+          isHeaderVisible = false;
+        }
 
         this.SCROLL_StickyHelper = () => {
           var st = window.scrollY;
@@ -40,6 +47,7 @@ if (typeof MainHeader !== "function") {
           if (st <= 0) {
             if (!isHeaderVisible) {
               stickyHeader.classList.add("show");
+
               isHeaderVisible = true;
             }
             lastScrollTime = now;
@@ -57,6 +65,7 @@ if (typeof MainHeader !== "function") {
             // Scrolling up - show header
             if (!isHeaderVisible) {
               stickyHeader.classList.add("show");
+
               isHeaderVisible = true;
             }
           } else if (st > window.lst) {
@@ -71,9 +80,29 @@ if (typeof MainHeader !== "function") {
           lastScrollTime = now;
         };
 
+        // Initialize header state on page load
+        const initializeHeaderState = () => {
+          const st = window.scrollY;
+
+          // At the top - always show
+          if (st <= 0) {
+            stickyHeader.classList.add("show");
+
+            isHeaderVisible = true;
+          } else {
+            // Not at top - hide header
+            stickyHeader.classList.remove("show");
+
+            isHeaderVisible = false;
+          }
+        };
+
         window.addEventListener("scroll", this.SCROLL_StickyHelper, {
           passive: true,
         });
+
+        // Initialize header state on page load
+        initializeHeaderState();
       }
 
       // drawer connections
