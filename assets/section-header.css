@@ -931,10 +931,8 @@ html[dir="ltr"] .site-nav.style--classic .submenu:after {
   max-width: 22.5rem;
 }
 .site-nav.style--classic .submenu.normal-menu .submenu-holder {
-  /* margin-top: -1px; */
-  /* border-radius: 8px; */
-  background-color: var(--edgewater-300);
-  min-width: 215px;
+  background-color: var(--edgewater-50);
+  /* min-width: 215px; */
 }
 .site-nav.style--classic .submenu.normal-menu .submenu-holder > li {
   display: block;
@@ -949,12 +947,6 @@ html[dir="ltr"] .site-nav.style--classic .submenu:after {
   width: 100%;
   display: flex;
   align-items: center;
-}
-.site-nav.style--classic
-  .submenu.normal-menu
-  .submenu-holder
-  li:not(:first-of-type) {
-  border-top: 1px solid var(--edgewater-500);
 }
 
 .site-nav.style--classic .submenu.normal-menu .submenu-holder .icon {
@@ -1641,11 +1633,7 @@ html[dir="ltr"] .sticky-header {
 }
 
 .learn-submenu-holder .text-animation--underline-in-header {
-  background-image: linear-gradient(
-    to right,
-    var(--bioligent-green-500),
-    var(--bioligent-green-500)
-  );
+  background-image: linear-gradient(to right, #fff, #fff);
 }
 
 .mega-menu-product-item__price,
@@ -1753,4 +1741,60 @@ html[dir="ltr"] .sticky-header {
 
 .area--logo {
   max-width: 270px;
+}
+
+.submenu.normal-menu.learn-submenu {
+  width: 100vw !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  margin-inline-start: 0 !important;
+  background-color: var(--edgewater-50);
+}
+
+.submenu.normal-menu.learn-submenu .submenu-holder {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1500px;
+  margin: 0 auto;
+  gap: 32px;
+  padding: 22px 70px;
+  height: 345px;
+}
+
+.submenu.normal-menu.learn-submenu .submenu-holder .menu-link {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start !important;
+  padding: 32px !important;
+}
+
+.submenu.normal-menu.learn-submenu .submenu-holder > li {
+  min-width: 25%;
+  max-width: 302px;
+}
+
+.submenu.normal-menu.learn-submenu .submenu-holder .menu-link img {
+  border-radius: 16px;
+}
+
+.learn-menu-link-title {
+  font-size: 26px;
+  line-height: 120%;
+  font-weight: var(--font-weight-demi-bold);
+  color: #fff;
+  z-index: 50;
+  text-align: left;
+}
+
+.learn-menu-link-icon {
+  z-index: 50;
+}
+.learn-menu-link-icon svg {
+  fill: #fff !important;
+}
+
+.learn-menu-link-icon svg path {
+  fill: #fff !important;
 }
