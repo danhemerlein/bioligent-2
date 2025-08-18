@@ -15,13 +15,9 @@
       padding-inline-start: calc(var(--gutter-container) + 10px) !important;
     }
   }
-  @media screen and (min-width: {{ settings.theme_max_width | plus: 1 }}px) {
+  @media screen and (min-width: 1024px) {
     .site-nav.style--classic .submenu.mega-menu {
       width: var(--window-width);
-      margin-inline-start: calc((var(--window-width) - 1300px) / -2);
-    }
-    .site-header--style-one-row .site-nav.style--classic .submenu.mega-menu  {
-      margin-inline-start: calc(((var(--window-width) - {{ settings.theme_max_width }}px) / -2) - var(--gutter-container));
     }
   }
 {% endstyle %}
