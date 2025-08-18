@@ -148,7 +148,7 @@
               </li>
 
             {%- when 'menu' -%}
-              {%- render 'site-nav', linklist: block.settings.linklist, type: 'classic', shopify_attributes: block.shopify_attributes -%}
+              {%- render 'site-nav', linklist: block.settings.linklist, type: 'classic', shopify_attributes: block.shopify_attributes, site_nav_image_one: block.settings.site_nav_image_one, site_nav_image_two: block.settings.site_nav_image_two, site_nav_image_three: block.settings.site_nav_image_three, site_nav_image_four: block.settings.site_nav_image_four -%}
 
             {%- when 'products-list' -%}
               {%- render 'site-nav-mega', items: block.settings.products, isproduct: true, menu_name: block.settings.title, show_more_label: block.settings.show_more_products_cta_label, show_more_url: block.settings.show_more_products_cta_url, type: 'classic', shopify_attributes: block.shopify_attributes, desktop_columns: section.settings.desktop_columns
@@ -1043,6 +1043,26 @@
           "id": "linklist",
           "label": "t:sections.bundle-extra-words.sections.header.blocks.menu.select_menu",
           "default": "main-menu"
+        },
+        {
+          "type": "image_picker",
+          "id": "site_nav_image_one",
+          "label": "Site Nav Image One"
+        },
+        {
+          "type": "image_picker",
+          "id": "site_nav_image_two",
+          "label": "Site Nav Image Two"
+        },
+        {
+          "type": "image_picker",
+          "id": "site_nav_image_three",
+          "label": "Site Nav Image Three" 
+        },
+        {
+          "type": "image_picker",
+          "id": "site_nav_image_four",
+          "label": "Site Nav Image Four"
         }
       ]
     },
@@ -1258,3 +1278,4 @@
   }
 }
 {% endschema %}
+

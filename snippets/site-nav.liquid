@@ -38,7 +38,7 @@
 
 		{% if link.links != blank %}
 
-			<ul class="submenu normal-menu" id="SiteNavLabel-{{ link.handle }}-{{ type }}">
+			<ul class="submenu normal-menu learn-submenu" id="SiteNavLabel-{{ link.handle }}-{{ type }}">
 
 				<div class="submenu-holder learn-submenu-holder">
 
@@ -57,12 +57,34 @@
 							>
 
 								<a class="menu-link menu-link--babymenu {% if childlink.active or childlink.child_active %} active {% endif %} {% unless childlink.links != blank %} no-focus-link {% endunless %} {{ links_weight }}" href="{{ childlink.url }}">
-									<span class="{{ links_class }} pps">
+									<span class="learn-menu-link-title {{ links_class }} pps">
 										{{ childlink.title | escape }}
 									</span>
-									<span class="icon">
-										{%- render 'theme-symbols', icon: 'chevron-2' -%}
-									</span>									
+
+									<span class="learn-menu-link-icon">
+										<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
+											<path d="M16.25 3.54541C13.6788 3.54541 11.1654 4.30785 9.02759 5.73631C6.88975 7.16476 5.22351 9.19509 4.23957 11.5705C3.25563 13.946 2.99819 16.5598 3.4998 19.0816C4.00141 21.6033 5.23953 23.9197 7.05762 25.7378C8.8757 27.5559 11.1921 28.794 13.7138 29.2956C16.2356 29.7972 18.8495 29.5398 21.2249 28.5558C23.6003 27.5719 25.6307 25.9057 27.0591 23.7678C28.4876 21.63 29.25 19.1166 29.25 16.5454C29.2464 13.0987 27.8756 9.79423 25.4384 7.35704C23.0012 4.91986 19.6967 3.54905 16.25 3.54541ZM16.25 27.5454C14.0744 27.5454 11.9477 26.9003 10.1387 25.6916C8.32979 24.4829 6.91989 22.7649 6.08733 20.7549C5.25477 18.7449 5.03693 16.5332 5.46137 14.3994C5.88581 12.2656 6.93345 10.3056 8.47183 8.76724C10.0102 7.22886 11.9702 6.18121 14.104 5.75677C16.2378 5.33233 18.4495 5.55017 20.4595 6.38274C22.4695 7.2153 24.1875 8.6252 25.3962 10.4341C26.6049 12.2431 27.25 14.3698 27.25 16.5454C27.2467 19.4618 26.0867 22.2577 24.0245 24.3199C21.9623 26.3821 19.1664 27.5421 16.25 27.5454ZM21.9575 15.8379C22.0505 15.9308 22.1242 16.0411 22.1746 16.1625C22.2249 16.2839 22.2508 16.414 22.2508 16.5454C22.2508 16.6768 22.2249 16.807 22.1746 16.9284C22.1242 17.0497 22.0505 17.16 21.9575 17.2529L17.9575 21.2529C17.7699 21.4406 17.5154 21.546 17.25 21.546C16.9846 21.546 16.7301 21.4406 16.5425 21.2529C16.3549 21.0653 16.2494 20.8108 16.2494 20.5454C16.2494 20.28 16.3549 20.0256 16.5425 19.8379L18.8363 17.5454H11.25C10.9848 17.5454 10.7304 17.4401 10.5429 17.2525C10.3554 17.065 10.25 16.8106 10.25 16.5454C10.25 16.2802 10.3554 16.0258 10.5429 15.8383C10.7304 15.6508 10.9848 15.5454 11.25 15.5454H18.8363L16.5425 13.2529C16.3549 13.0653 16.2494 12.8108 16.2494 12.5454C16.2494 12.28 16.3549 12.0256 16.5425 11.8379C16.7301 11.6503 16.9846 11.5449 17.25 11.5449C17.5154 11.5449 17.7699 11.6503 17.9575 11.8379L21.9575 15.8379Z" fill="white"/>
+										</svg>
+									</span>
+									{%- liquid
+										assign image_class = 'mega-menu-product-item__image product-item__image-figure lazy-image--zoom-animation'
+										if site_nav_image_one != blank and forloop.index == 1
+										  render 'lazy-image', image: site_nav_image_one, type: 'background', class: image_class   
+										endif
+
+										if site_nav_image_two != blank and forloop.index == 2
+										  render 'lazy-image', image: site_nav_image_two, type: 'background', class: image_class   
+										endif
+
+										if site_nav_image_three != blank and forloop.index == 3
+										  render 'lazy-image', image: site_nav_image_three, type: 'background', class: image_class   
+										endif
+
+										if site_nav_image_four != blank and forloop.index == 4
+										  render 'lazy-image', image: site_nav_image_four, type: 'background', class: image_class   
+										endif
+									-%}
+
 								</a>
 
 								{%- if childlink.links != blank -%}
