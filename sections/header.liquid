@@ -400,7 +400,9 @@
             <span data-header-cart-count aria-hidden="true" class="icon-button__label">{{ cart.item_count }}</span>
           </a>
 
-          <a class="build-a-bundle-button bioligent-button-text" href="{{ section.settings.desktop_nav_link }}">
+          <a class="build-a-bundle-button
+            {% if template.name == 'product' %} build-a-bundle-button--pdp {% endif %}
+            bioligent-button-text" href="{{ section.settings.desktop_nav_link }}">
             <span class="bioligent-button-text">
               {{ section.settings.desktop_nav_cta }}
             </span>

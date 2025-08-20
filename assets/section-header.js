@@ -18,6 +18,7 @@ if (typeof MainHeader !== "function") {
       // Sticky header
       if (this.hasAttribute("data-sticky-header")) {
         const stickyHeader = document.querySelector("main-header");
+        const announcementBar = document.querySelector("announcement-bar");
         let isHeaderVisible = false;
         let lastScrollTime = Date.now();
 
@@ -28,9 +29,11 @@ if (typeof MainHeader !== "function") {
         const st = window.scrollY;
         if (st <= 0) {
           stickyHeader.classList.add("show");
+          announcementBar.classList.add("show");
           isHeaderVisible = true;
         } else {
           stickyHeader.classList.remove("show");
+          announcementBar.classList.remove("show");
           isHeaderVisible = false;
         }
 
@@ -47,7 +50,7 @@ if (typeof MainHeader !== "function") {
           if (st <= 0) {
             if (!isHeaderVisible) {
               stickyHeader.classList.add("show");
-
+              announcementBar.classList.add("show");
               isHeaderVisible = true;
             }
             lastScrollTime = now;
@@ -65,13 +68,14 @@ if (typeof MainHeader !== "function") {
             // Scrolling up - show header
             if (!isHeaderVisible) {
               stickyHeader.classList.add("show");
-
+              announcementBar.classList.add("show");
               isHeaderVisible = true;
             }
           } else if (st > window.lst) {
             // Scrolling down - hide header
             if (isHeaderVisible) {
               stickyHeader.classList.remove("show");
+              announcementBar.classList.remove("show");
               isHeaderVisible = false;
             }
           }

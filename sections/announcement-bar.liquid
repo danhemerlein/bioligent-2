@@ -33,6 +33,11 @@
   {%- endif -%}
 
   <announcement-bar  class="show 
+
+    {% if section.id == 'sections--17964106186822__announcement_bar_rLJtdi' %}
+      announcement-bar__top
+    {%- endif -%}
+
     {% if product.handle == 'berberine-plus' %}
       announcement-bar__berberine-berberine-chromium
     {%- endif -%}
@@ -81,6 +86,7 @@
     id="announcement-{{ section.id }}" data-js-inert>
 
     <div class="container--large">
+      
       <div class="announcement-bar {% if section.settings.enable_slider == false %} announcement-bar--no-slider {% endif %}
         {% if section.blocks.size == 1 %}
           announcement-bar--one-announcement

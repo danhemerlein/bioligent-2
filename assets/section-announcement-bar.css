@@ -184,13 +184,23 @@ announcement-bar {
   color: var(--bioligent-green-500);
 }
 
-announcement-bar.show {
-  /* padding-top: 98px; */
+announcement-bar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
+}
+
+announcement-bar.announcement-bar__top {
+  position: fixed;
+  z-index: 9999;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(-100%);
+}
+
+announcement-bar.show.announcement-bar__top {
+  transform: translateY(0%);
 }
 
 /* single products */
