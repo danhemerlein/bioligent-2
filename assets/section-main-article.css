@@ -23,10 +23,10 @@
   position: sticky;
   top: 1.25rem;
 }
-html[dir=rtl] .article__meta__sticky {
+html[dir="rtl"] .article__meta__sticky {
   right: 0;
 }
-html[dir=ltr] .article__meta__sticky {
+html[dir="ltr"] .article__meta__sticky {
   left: 0;
 }
 .article__meta-tags .tags {
@@ -59,4 +59,19 @@ html[dir=ltr] .article__meta__sticky {
 }
 .article__featured-image svg {
   max-height: 25rem;
+}
+
+@media screen and (min-width: 1024px) {
+  article .container--compact.container--vertical-space-small {
+    padding-top: clamp(
+      2.5rem,
+      var(--container-vertical-space),
+      4.375rem
+    ) !important;
+  }
+  article
+    .container--compact.container--vertical-space-small
+    .article__featured-image {
+    margin-top: 0;
+  }
 }

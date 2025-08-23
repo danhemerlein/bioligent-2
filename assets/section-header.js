@@ -42,7 +42,7 @@ if (typeof MainHeader !== "function") {
           const now = Date.now();
 
           // Prevent rapid state changes (debounce)
-          if (now - lastScrollTime < 100) {
+          if (now - lastScrollTime < 5) {
             return;
           }
 
@@ -72,8 +72,8 @@ if (typeof MainHeader !== "function") {
               isHeaderVisible = true;
             }
           } else if (st > window.lst) {
-            // Scrolling down - hide header
-            if (isHeaderVisible) {
+            // Scrolling down - only hide header if scrolled 139px or more
+            if (isHeaderVisible && st >= 139) {
               stickyHeader.classList.remove("show");
               announcementBar.classList.remove("show");
               isHeaderVisible = false;
@@ -91,12 +91,12 @@ if (typeof MainHeader !== "function") {
           // At the top - always show
           if (st <= 0) {
             stickyHeader.classList.add("show");
-
+            announcementBar.classList.add("show");
             isHeaderVisible = true;
           } else {
             // Not at top - hide header
             stickyHeader.classList.remove("show");
-
+            announcementBar.classList.remove("show");
             isHeaderVisible = false;
           }
         };

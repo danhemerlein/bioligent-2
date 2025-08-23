@@ -13,7 +13,8 @@
   border-radius: var(--blog-item-border-radius);
   overflow: hidden;
 }
-.blog-item__image figure, .blog-item__image img {
+.blog-item__image figure,
+.blog-item__image img {
   border-radius: var(--blog-item-border-radius);
 }
 .blog-item__meta {
@@ -50,5 +51,14 @@
   .blog-header {
     gap: 0;
     grid-template-columns: 100%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .blog-header {
+    padding-top: clamp(
+      2.5rem,
+      var(--container-vertical-space),
+      4.375rem
+    ) !important;
   }
 }
