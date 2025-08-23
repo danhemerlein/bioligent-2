@@ -71,6 +71,10 @@
   background-color: #e8f5f6 !important;
 }
 
+.site-header__k2-d3 {
+  background-color: #bcdea2 !important;
+}
+
 /* bundles */
 .site-header__the-defense-squad {
   background-color: #e8f5f6 !important;
@@ -112,7 +116,7 @@
 }
 
 .site-header--border:after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   width: 100%;
@@ -374,7 +378,7 @@
       2,
       minmax(max-content, 0)
     );
-  grid-template-areas: 'search custom-icon logo account cart';
+  grid-template-areas: "search custom-icon logo account cart";
 }
 @media screen and (max-width: 1023px) {
   .header__top--logo-center {
@@ -382,7 +386,7 @@
         2,
         minmax(max-content, 0)
       );
-    grid-template-areas: 'search custom-icon logo cart menu';
+    grid-template-areas: "search custom-icon logo cart menu";
   }
 }
 .header__top--logo-center.no-custom-link {
@@ -390,7 +394,7 @@
       2,
       minmax(max-content, 0)
     );
-  grid-template-areas: 'search logo account cart';
+  grid-template-areas: "search logo account cart";
 }
 @media screen and (max-width: 1023px) {
   .header__top--logo-center.no-custom-link {
@@ -399,7 +403,7 @@
         minmax(max-content, 0)
       );
     /* grid-template-areas: 'search logo cart menu'; */
-    grid-template-areas: 'menu logo cart';
+    grid-template-areas: "menu logo cart";
   }
 }
 .header__top--logo-center .logo {
@@ -464,8 +468,8 @@
 .icon-button--text-inline .icon-button__text {
   font-weight: var(--font-weight-body-primary);
 }
-html[lang='ko'] .icon-button--text-inline .icon-button__text,
-html[lang='ja'] .icon-button--text-inline .icon-button__text {
+html[lang="ko"] .icon-button--text-inline .icon-button__text,
+html[lang="ja"] .icon-button--text-inline .icon-button__text {
   writing-mode: vertical-lr;
 }
 @media screen and (max-width: 1023px) {
@@ -520,7 +524,7 @@ html[lang='ja'] .icon-button--text-inline .icon-button__text {
   top: 100%;
   left: 50%;
   border: solid transparent;
-  content: '';
+  content: "";
   height: 0;
   width: 0;
   position: absolute;
@@ -552,7 +556,7 @@ html[lang='ja'] .icon-button--text-inline .icon-button__text {
   transform: translate(0, -35%);
   transition: all 175ms linear;
 }
-html[dir='rtl'] .icon-button__label {
+html[dir="rtl"] .icon-button__label {
   right: -12.5px;
 }
 .icon-button .button__icon {
@@ -566,16 +570,16 @@ html[dir='rtl'] .icon-button__label {
   transition: all ease 550ms;
   cursor: pointer;
 }
-html[dir='rtl'] .icon-button .button__icon {
+html[dir="rtl"] .icon-button .button__icon {
   right: 0;
 }
-html[dir='ltr'] .icon-button .button__icon {
+html[dir="ltr"] .icon-button .button__icon {
   left: 0;
 }
 .icon-button .button__icon:after {
   position: absolute;
   display: inline-block;
-  content: '';
+  content: "";
   width: calc(100% + 20px);
   height: calc(100% + 20px);
   top: 50%;
@@ -607,7 +611,7 @@ html[dir='ltr'] .icon-button .button__icon {
   padding-top: calc(var(--header-vertical-space) / 2);
 }
 .header__bottom--border:before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   width: 100%;
@@ -759,7 +763,7 @@ search-form {
   top: calc(var(--header-logo) + var(--header-vertical-space) / 2 + 0.1875rem);
 }
 .site-nav.style--classic .submenu:after {
-  content: '';
+  content: "";
   position: absolute;
   top: calc(var(--header-vertical-space) / 2 + 1px);
   width: 100%;
@@ -768,10 +772,10 @@ search-form {
   z-index: 0;
   transition: height 100ms ease-in-out 40ms;
 }
-html[dir='rtl'] .site-nav.style--classic .submenu:after {
+html[dir="rtl"] .site-nav.style--classic .submenu:after {
   right: 0;
 }
-html[dir='ltr'] .site-nav.style--classic .submenu:after {
+html[dir="ltr"] .site-nav.style--classic .submenu:after {
   left: 0;
 }
 .site-header--style-one-row .site-nav.style--classic .submenu:after {
@@ -902,16 +906,16 @@ html[dir='ltr'] .site-nav.style--classic .submenu:after {
   transition: opacity 100ms linear 40ms, visibility 100ms linear 40ms,
     clip-path 100ms ease-in-out 40ms;
 }
-html[dir='rtl'] .site-nav.style--classic .submenu.normal-menu .babymenu {
+html[dir="rtl"] .site-nav.style--classic .submenu.normal-menu .babymenu {
   right: 100%;
 }
-html[dir='ltr'] .site-nav.style--classic .submenu.normal-menu .babymenu {
+html[dir="ltr"] .site-nav.style--classic .submenu.normal-menu .babymenu {
   left: 100%;
 }
-html[dir='rtl'] .site-nav.style--classic .submenu.normal-menu .babymenu {
+html[dir="rtl"] .site-nav.style--classic .submenu.normal-menu .babymenu {
   border-right: 1px solid var(--color-borders-header);
 }
-html[dir='ltr'] .site-nav.style--classic .submenu.normal-menu .babymenu {
+html[dir="ltr"] .site-nav.style--classic .submenu.normal-menu .babymenu {
   border-left: 1px solid var(--color-borders-header);
 }
 .site-nav.style--classic .submenu.normal-menu .babymenu li {
@@ -963,10 +967,10 @@ html[dir='ltr'] .site-nav.style--classic .submenu.normal-menu .babymenu {
   padding: 3.75rem 0 5.625rem;
   display: none;
 }
-html[dir='rtl'] .site-nav.style--classic .submenu.mega-menu {
+html[dir="rtl"] .site-nav.style--classic .submenu.mega-menu {
   right: 0;
 }
-html[dir='ltr'] .site-nav.style--classic .submenu.mega-menu {
+html[dir="ltr"] .site-nav.style--classic .submenu.mega-menu {
   left: 0;
 }
 body.header-loaded .site-nav.style--classic .submenu.mega-menu {
@@ -1104,10 +1108,10 @@ body.header-loaded .site-nav.style--classic .submenu.mega-menu {
   position: relative;
   font-weight: var(--font-weight-body-primary);
 }
-html[dir='rtl'] .menu-promotion {
+html[dir="rtl"] .menu-promotion {
   text-align: right;
 }
-html[dir='ltr'] .menu-promotion {
+html[dir="ltr"] .menu-promotion {
   text-align: left;
 }
 .menu-promotion-background-image {
@@ -1246,10 +1250,10 @@ html[dir='ltr'] .menu-promotion {
   visibility: hidden;
   opacity: 0;
 }
-html[dir='rtl'] .sticky-header {
+html[dir="rtl"] .sticky-header {
   right: 0;
 }
-html[dir='ltr'] .sticky-header {
+html[dir="ltr"] .sticky-header {
   left: 0;
 }
 @media screen and (max-width: 1023px) {
@@ -1369,7 +1373,7 @@ html[dir='ltr'] .sticky-header {
   display: flex;
 }
 .site-header--style-one-row .header__top--logo-left {
-  grid-template-areas: 'logo custom-icon search cart menu' !important;
+  grid-template-areas: "logo custom-icon search cart menu" !important;
   grid-template-columns: minmax(max-content, auto) repeat(
       4,
       minmax(max-content, 0)
@@ -1378,7 +1382,7 @@ html[dir='ltr'] .sticky-header {
 @media screen and (min-width: 767px) {
   .site-header--style-one-row
     .header__top--logo-left.site-header--menu-classic {
-    grid-template-areas: 'logo menu-classic custom-icon account search cart' !important;
+    grid-template-areas: "logo menu-classic custom-icon account search cart" !important;
     grid-template-columns: minmax(max-content, auto) repeat(
         5,
         minmax(max-content, 0)
@@ -1404,7 +1408,7 @@ html[dir='ltr'] .sticky-header {
       3,
       minmax(max-content, 0)
     );
-  grid-template-areas: 'menu custom-icon logo account cart search';
+  grid-template-areas: "menu custom-icon logo account cart search";
 }
 @media screen and (min-width: 767px) {
   .site-header--style-one-row
@@ -1413,7 +1417,7 @@ html[dir='ltr'] .sticky-header {
         3,
         minmax(max-content, 0)
       );
-    grid-template-areas: 'menu-classic custom-icon logo account cart search';
+    grid-template-areas: "menu-classic custom-icon logo account cart search";
   }
 }
 @media screen and (min-width: 767px) {
@@ -1435,7 +1439,7 @@ html[dir='ltr'] .sticky-header {
       2,
       minmax(max-content, 0)
     );
-  grid-template-areas: 'menu logo cart search';
+  grid-template-areas: "menu logo cart search";
 }
 @media screen and (min-width: 767px) {
   .site-header--style-one-row
@@ -1444,7 +1448,7 @@ html[dir='ltr'] .sticky-header {
         3,
         minmax(max-content, 0)
       );
-    grid-template-areas: 'menu-classic logo account cart search';
+    grid-template-areas: "menu-classic logo account cart search";
   }
 }
 @media screen and (min-width: 767px) {
@@ -1468,7 +1472,7 @@ html[dir='ltr'] .sticky-header {
         4,
         minmax(max-content, 0)
       ) !important;
-    grid-template-areas: 'logo menu-classic account cart search' !important;
+    grid-template-areas: "logo menu-classic account cart search" !important;
   }
 }
 @media screen and (min-width: 767px) {

@@ -5,11 +5,15 @@
 
 <div class="container--large remove-empty-space" style="margin-top: 24px;">
   <div class="ingredient-grid-container">
-    {% assign sorted_ingredients = shop.metaobjects.ingredient.values | sort: 'pill_text' %}
-    {% assign vitamins = shop.metaobjects.ingredient.values | where: 'pill_text', 'Vitamins' %}
-    {% assign specialty_compounds = shop.metaobjects.ingredient.values | where: 'pill_text', 'Specialty Compounds' %}
-    {% assign minerals = shop.metaobjects.ingredient.values | where: 'pill_text', 'Minerals' %}
-    {% assign plants_herbs = shop.metaobjects.ingredient.values | where: 'pill_text', 'Plants/Herbs' %}
+    {% paginate shop.metaobjects.ingredient.values by 1000 %}
+      {% assign all_ingredients = shop.metaobjects.ingredient.values %}
+      {% assign sorted_ingredients = all_ingredients | sort: 'pill_text' %}
+      {% assign vitamins = all_ingredients | where: 'pill_text', 'Vitamins' %}
+      {% assign specialty_compounds = all_ingredients | where: 'pill_text', 'Specialty Compounds' %}
+      {% assign minerals = all_ingredients | where: 'pill_text', 'Minerals' %}
+      {% assign plants_herbs = all_ingredients | where: 'pill_text', 'Plants/Herbs' %}
+    {% endpaginate %}
+
 
     <div class="search-grids-container js-ingredient-search-results">
       <form class="search-bar-container js-ingredient-search-form">
@@ -55,9 +59,9 @@
   </div>
 </div>
 
-<script src="{{ 'ingredient-pagination.js' | asset_url }}" ></script>
-<script src="{{ 'ingredient-search.js' | asset_url }}" ></script>
-<script src="{{ 'ingredient-carousel.js' | asset_url }}" ></script>
+<script src="{{ 'ingredient-pagination.js' | asset_url }}" defer></script>
+<script src="{{ 'ingredient-search.js' | asset_url }}" defer></script>
+<script src="{{ 'ingredient-carousel.js' | asset_url }}" defer></script>
 
 <script>
   document.querySelectorAll('.ingredient-card-link').forEach(link => {
