@@ -88,7 +88,7 @@ html[dir="ltr"] .sidebar--left {
 .sidebar__header {
   position: sticky;
   top: 0;
-  padding: 1rem var(--sidebar-gutter) 0.75rem;
+  padding: 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -97,6 +97,10 @@ html[dir="ltr"] .sidebar--left {
   z-index: 99;
   text-transform: uppercase;
   font-weight: var(--font-weight-body-primary-bold);
+  border-radius: 32px;
+  margin-top: 4px;
+  height: 46px;
+  margin-bottom: 4px;
 }
 @media screen and (max-width: 474px) {
   .sidebar__header {

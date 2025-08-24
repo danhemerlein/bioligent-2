@@ -454,13 +454,14 @@
 <sidebar-drawer id="site-menu-sidebar" class="sidebar sidebar--left" tabindex="-1" role="dialog" aria-modal="true" style="display:none">
 
   <div class="sidebar__header">
-    {% comment %} <span class="sidebar__title">
-      {{ 'general.accessibility_labels.menu' | t }}
-    </span> {% endcomment %}
-    {% comment %} <button class="sidebar__close" data-js-close>
-      <span class="visually-hidden">{{ 'general.accessibility_labels.close_sidebar' | t }}</span>
-      <span aria-hidden="true" aria-role="img">{%- render 'theme-symbols', icon: 'close' -%}</span>
-    </button> {% endcomment %}
+    <div class="mobile-nav-toggle">
+      <button class="toggle-option toggle-option--active" data-toggle="product">
+        PRODUCTS
+      </button>
+      <button class="toggle-option" data-toggle="learn">
+        LEARN
+      </button>
+    </div>
   </div>
 
   <div class="sidebar__body">
@@ -555,6 +556,7 @@
   </div>
 
   <link rel="stylesheet" href="{{ 'component-mobile-navigation.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'mobile-nav-overhaul.js' | asset_url }}" defer></script>
 
 </sidebar-drawer>
 
