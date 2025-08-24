@@ -3318,8 +3318,14 @@ body.sidebar-opened {
 }
 
 .main-content {
-  position: relative;
   margin-top: 139px;
+}
+
+@media screen and (max-width: 1023px) {
+  .main-content {
+    position: relative;
+    margin-top: 92px;
+  }
 }
 
 .search-page-form form {
@@ -3627,6 +3633,13 @@ product-recommendations.sidebar-widget {
   display: block !important;
 }
 
+.new-mobile-nav__social-icons {
+  gap: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .social-icons {
   display: flex;
   flex-wrap: wrap;
@@ -3654,7 +3667,7 @@ product-recommendations.sidebar-widget {
   width: 100%;
 }
 .social-icons svg path {
-  fill: var(--color-text-main);
+  /* fill: var(--color-text-main); */
 }
 .social-icons img {
   width: 100%;

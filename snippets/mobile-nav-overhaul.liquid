@@ -26,27 +26,35 @@
     {% endif %}
   </li>
 
-  <li class="new-mobile-nav__links-container">
-    <div>
-      <a href="{{ sub_save_url }}">
-        <img class="new-mobile-nav__product-image" src="{{ sub_save_image | img_url: '300x300' }}" alt="{{ sub_save_cta }}">
+  <div class="new-mobile-nav__hr"></div>
 
-        <p class="text-weight--bold text-size--large">
-          {{ sub_save_cta }}
-        </p>
+  <li class="new-mobile-nav__links-container">
+    <div class="new-mobile-nav__promo-link-container">
+      <a href="{{ sub_save_url }}" class="new-mobile-nav__promo-link">
+        <img class="new-mobile-nav__promo-image" src="{{ sub_save_image | img_url: '300x300' }}" alt="{{ sub_save_cta }}">
+
+        <div class="new-mobile-nav__promo-title-container">
+          <p class="new-mobile-nav__promo-title text-weight--bold text-size--large">
+            {{ sub_save_cta }}
+          </p>
+        </div>
       </a>
     </div>
 
-    <div>
-      <a href="{{ sub_save_url_two }}">
-        <img class="new-mobile-nav__product-image" src="{{ sub_save_image_two | image_url: width: 300, height: 300 }}" alt="{{ sub_save_cta_two }}">
+    <div class="new-mobile-nav__promo-link-container">
+      <a href="{{ sub_save_url_two }}" class="new-mobile-nav__promo-link">
+        <img class="new-mobile-nav__promo-image" src="{{ sub_save_image_two | image_url: width: 300, height: 300 }}" alt="{{ sub_save_cta_two }}">
 
-        <p class="text-weight--bold text-size--large">
-          {{ sub_save_cta_two }}
-        </p>
+        <div class="new-mobile-nav__promo-title-container">
+          <p class="new-mobile-nav__promo-title text-weight--bold text-size--large">
+            {{ sub_save_cta_two }}
+          </p>
+        </div>
       </a>
     </div>
   </li>
+
+  <div class="new-mobile-nav__hr"></div>
 
   <div class="new-mobile-nav__links-container">
   {% for link in linklists[text_link_list].links %}

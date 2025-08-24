@@ -457,10 +457,10 @@
     {% comment %} <span class="sidebar__title">
       {{ 'general.accessibility_labels.menu' | t }}
     </span> {% endcomment %}
-    <button class="sidebar__close" data-js-close>
+    {% comment %} <button class="sidebar__close" data-js-close>
       <span class="visually-hidden">{{ 'general.accessibility_labels.close_sidebar' | t }}</span>
       <span aria-hidden="true" aria-role="img">{%- render 'theme-symbols', icon: 'close' -%}</span>
-    </button>
+    </button> {% endcomment %}
   </div>
 
   <div class="sidebar__body">
@@ -538,12 +538,12 @@
         sub_save_url_two: section.settings.sub_save_url_two,
         text_link_list: section.settings.new_mobile_nav_linklist,
         mobile_columns: section.settings.mobile_columns 
-%}
+      %}
     {% endif %}
   </div>
 
   <div class="sidebar__footer site-menu-sidebar-footer">
-
+    
     {%- liquid
       if section.settings.show_social_icons
         render 'social-icons'

@@ -27,9 +27,10 @@
 
 .sidebar#site-menu-sidebar {
   height: calc(var(--window-height) - 99px);
-  margin-top: 99px;
+  margin-top: 92px;
   background-color: var(--edgewater-300);
   width: 100vw;
+  height: calc(100vh - 92px);
 }
 
 html[dir="rtl"] .sidebar * {
@@ -52,7 +53,7 @@ body:not(.sidebar-has-scrollbars) .sidebar::-webkit-scrollbar-thumb:hover {
   opacity: 0.86;
 }
 .sidebar svg * {
-  fill: var(--color-text-main);
+  /* fill: var(--color-text-main); */
 }
 html[dir="rtl"] .sidebar--right {
   left: 0;
@@ -138,8 +139,8 @@ html[dir="ltr"] .sidebar--left {
 .sidebar__footer {
   bottom: 0;
   width: 100%;
-  padding: calc(var(--sidebar-gutter) / 2) var(--sidebar-gutter);
-  border-top: 1px solid var(--color-borders-main);
+  padding: 16px;
+  padding-top: 0;
   z-index: 9;
 }
 .sidebar__footer:empty {
@@ -179,7 +180,7 @@ html[dir="ltr"] .site-overlay {
 }
 .site-menu-sidebar-footer .social-icons,
 .site-menu-sidebar-footer .localization-form__item-button {
-  opacity: 0.62;
+  /* opacity: 0.62; */
 }
 .site-menu-sidebar-footer .localization-form__content {
   max-width: 20rem;

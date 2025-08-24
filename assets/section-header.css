@@ -8,7 +8,12 @@
   padding-top: calc(var(--header-vertical-space) / 2);
   transition: background-color 250ms ease-in-out, transform 250ms linear;
   width: 100vw;
-  height: 99px;
+}
+
+@media screen and (min-width: 1024px) {
+  .site-header {
+    height: 99px;
+  }
 }
 
 .site-header__product.site-header li,
@@ -1312,7 +1317,6 @@ html[dir="ltr"] .menu-promotion {
   }
 }
 .sticky-header {
-  margin-top: 40px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -1322,13 +1326,19 @@ html[dir="ltr"] .menu-promotion {
   transform: translateY(calc(-100% - 40px));
 }
 
+@media screen and (min-width: 1024px) {
+  .sticky-header {
+    margin-top: 40px;
+  }
+}
+
 html[dir="rtl"] .sticky-header {
   right: 0;
 }
 html[dir="ltr"] .sticky-header {
   left: 0;
 }
-@media screen and (max-width: 1023px) {
+@media screen and (min-width: 1024px) {
   .sticky-header {
     padding-top: 0;
   }
