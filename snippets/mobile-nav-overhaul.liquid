@@ -2,7 +2,7 @@
 {{ 'mobile-nav-toggle.css' | asset_url | stylesheet_tag }}
 
 <ul class="new-mobile-nav__ul">
-  <li>
+  <li class="js-new-mobile-nav-product-container new-mobile-nav__product">
     {% if products_list != blank %}
       <div class="new-mobile-nav__product-grid new-mobile-nav__with-border {% if mobile_columns == 'two' %} new-mobile-nav__two-column-grid {% elsif mobile_columns == 'three' %} new-mobile-nav__three-column-grid {% elsif mobile_columns == 'four' %} new-mobile-nav__four-column-grid {% endif %}">
         {% for product in products_list %}
@@ -18,13 +18,27 @@
 
     {% if collection_list != blank %}
       {% for collection in collection_list %}
-        <div>
-          <p class="text-weight--bold text-size--large">
+        <div class="new-mobile-nav__collection-dropdown">
+          <p class="new-mobile-nav__collection-title text-weight--bold text-size--large">
             {{ collection.title }}
+            <span class="new-mobile-nav__collection-dropdown-icon">
+              {% render 'theme-symbols', icon: 'chevron-down' %}
+            </span>
           </p>
+          <div class="new-mobile-nav__collection-dropdown-content">
+            {% for product in collection.products %}
+              <a href="{{ product.url }}">
+                {{ product.title }}
+              </a>
+            {% endfor %}
+          </div>
         </div>
       {% endfor %}
     {% endif %}
+  </li>
+
+  <li class="js-new-mobile-nav-learn-container new-mobile-nav__learn">
+
   </li>
 
   <div class="new-mobile-nav__hr"></div>
