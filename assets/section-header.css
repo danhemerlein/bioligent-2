@@ -1756,8 +1756,8 @@ html[dir="ltr"] .sticky-header {
   position: absolute;
   top: 100%;
   left: -25%;
-  width: 150%;
-  height: 200%;
+  width: 155%;
+  height: 225%;
   background-color: transparent;
   z-index: 1;
 }

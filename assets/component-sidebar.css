@@ -339,3 +339,7 @@ html[dir="ltr"] .site-menu-sidebar-footer .localization-form__content {
   left: 0;
   right: auto;
 }
+
+.sidebar#site-menu-sidebar .sidebar__header {
+  position: unset !important;
+}

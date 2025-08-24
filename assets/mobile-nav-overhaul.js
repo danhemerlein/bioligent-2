@@ -35,3 +35,66 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+const mobileNavCollectionTriggers = document.querySelectorAll(
+  ".js-new-mobile-nav-dropdown-trigger"
+);
+
+const closeGrid = (grid) => {
+  grid.style.height = grid.scrollHeight + "px";
+  grid.style.overflow = "hidden";
+
+  requestAnimationFrame(() => {
+    grid.style.height = "0px";
+    grid.style.opacity = "0";
+  });
+
+  grid.parentElement.classList.remove(
+    "new-mobile-nav__collection-dropdown--active"
+  );
+};
+
+const openGrid = (grid) => {
+  grid.style.height = "0";
+  grid.style.overflow = "hidden";
+
+  const fullHeight = grid.scrollHeight + "px";
+  requestAnimationFrame(() => {
+    grid.style.height = fullHeight;
+    grid.style.opacity = "1";
+  });
+
+  grid.parentElement.classList.add(
+    "new-mobile-nav__collection-dropdown--active"
+  );
+};
+
+mobileNavCollectionTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", function () {
+    const key = this.getAttribute("data-collection-id");
+    const isOpen = this.parentElement.classList.contains(
+      "new-mobile-nav__collection-dropdown--active"
+    );
+
+    const hiddenGrid = document.querySelector(
+      `.new-mobile-nav__collection-dropdown-content[data-collection-id="${key}"]`
+    );
+
+    hiddenGrid.style.transition = "all 0.3s ease-in-out";
+
+    if (!isOpen) {
+      // Close all other grids first
+      const allGrids = document.querySelectorAll(
+        ".new-mobile-nav__collection-dropdown-content"
+      );
+      allGrids.forEach((grid) => {
+        if (grid !== hiddenGrid) {
+          closeGrid(grid);
+        }
+      });
+      openGrid(hiddenGrid);
+    } else {
+      closeGrid(hiddenGrid);
+    }
+  });
+});
