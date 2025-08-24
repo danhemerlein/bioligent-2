@@ -109,3 +109,14 @@
   transition: opacity 0.3s ease;
   visibility: hidden;
 }
+
+.new-mobile-nav__collection-dropdown-content {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.new-mobile-nav__product-item,
+.new-mobile-nav__product-item figure {
+  border-radius: 8px;
+}

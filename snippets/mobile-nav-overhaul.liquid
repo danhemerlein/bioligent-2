@@ -19,16 +19,60 @@
     {% if collection_list != blank %}
       {% for collection in collection_list %}
         <div class="new-mobile-nav__collection-dropdown">
-          <p class="new-mobile-nav__collection-title text-weight--bold text-size--large">
-            {{ collection.title }}
-            <span class="new-mobile-nav__collection-dropdown-icon">
-              {% render 'theme-symbols', icon: 'chevron-down' %}
-            </span>
-          </p>
+
+          <div class="js-new-mobile-nav-dropdown-trigger" data-collection-id="{{ collection.id }}">
+            <p class="new-mobile-nav__collection-title text-weight--bold text-size--large ">
+              {{ collection.title }}
+            </p>
+            <span class="icon-chevron">{%- render 'theme-symbols', icon: 'chevron-2' -%}</span>
+          </div>
+
           <div class="new-mobile-nav__collection-dropdown-content">
-            {% for product in collection.products %}
-              <a href="{{ product.url }}">
-                {{ product.title }}
+            {%- liquid
+      
+              if settings.product_card_aspect_ratio == 'natural'
+                if item.media.size == 0 or blank_product
+                  assign aspect_ratio = 1
+                else
+                  unless item.featured_media.aspect_ratio > 0
+                    assign aspect_ratio = 1
+                  else
+                    assign aspect_ratio = item.featured_media.aspect_ratio
+                  endunless
+                endif
+              else
+                assign aspect_ratio = settings.product_card_aspect_ratio
+              endif
+              
+
+            -%}
+            {% for item in collection.products %}
+
+              {%- liquid
+                assign image = item.featured_media
+              -%}
+              <a href="{{ item.url }}">
+                <div style="padding-top:{{ 100 | divided_by: aspect_ratio }}%; position: relative;" class="new-mobile-nav__product-item">
+                  {%- capture sizes -%}
+                    sizes="(max-width: {{ settings.theme_max_width }}px) calc((100vw - 200px) / 6), {{ settings.theme_max_width | divided_by: 6 }}px"
+                  {%- endcapture -%}
+  
+                  {%- liquid
+                    if image != blank
+                      assign image_class = 'product-item__image-figure lazy-image--zoom-animation lazy-image--to-reveal'
+                      render 'lazy-image', image: image, alt: item.title, ratio: aspect_ratio, type: 'background', class: image_class, sizes: sizes   
+                    endif
+                  -%}
+  
+                  <div class="mega-menu-product-item__title">
+                    <span class="text-size--regular text-weight--bold">
+                      {{ item.title | escape}}
+                    </span>
+                  </div>      
+                  <div class="product-item__price mega-menu-product-item__price">
+                    {%- render 'product-price', target: item, variant: product_variant, product_price_varies: item.price_varies -%}
+                  </div>
+                </div>
               </a>
             {% endfor %}
           </div>
