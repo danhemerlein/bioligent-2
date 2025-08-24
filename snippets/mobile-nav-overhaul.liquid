@@ -20,14 +20,17 @@
       {% for collection in collection_list %}
         <div class="new-mobile-nav__collection-dropdown">
 
-          <div class="js-new-mobile-nav-dropdown-trigger" data-collection-id="{{ collection.id }}">
-            <p class="new-mobile-nav__collection-title text-weight--bold text-size--large ">
+          <div class="js-new-mobile-nav-dropdown-trigger new-mobile-nav__collection-dropdown-header" data-collection-id="{{ collection.id }}">
+            <p class="new-mobile-nav__collection-title text-weight--bold text-size--large">
               {{ collection.title }}
             </p>
             <span class="icon-chevron">{%- render 'theme-symbols', icon: 'chevron-2' -%}</span>
           </div>
+          
+          <div class="new-mobile-nav__hr"></div>
 
-          <div class="new-mobile-nav__collection-dropdown-content">
+
+          <div class="new-mobile-nav__collection-dropdown-content" data-collection-id="{{ collection.id }}">
             {%- liquid
       
               if settings.product_card_aspect_ratio == 'natural'

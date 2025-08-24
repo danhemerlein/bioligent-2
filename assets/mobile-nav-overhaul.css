@@ -120,3 +120,20 @@
 .new-mobile-nav__product-item figure {
   border-radius: 8px;
 }
+
+.new-mobile-nav__collection-title {
+  margin: 0;
+}
+
+.new-mobile-nav__collection-dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.new-mobile-nav__collection-dropdown-header .icon-chevron {
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease;
+}
