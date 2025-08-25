@@ -437,8 +437,12 @@
         <button data-js-sidebar-handle class="mobile-menu-button hide lap-show area--menu icon-button icon-button--text-{{ section.settings.label_style }}" aria-expanded="false" aria-controls="site-menu-sidebar" style="height: auto;">
 
           <span class="visually-hidden">{{ 'general.accessibility_labels.open_menu' | t }}</span>
-          {%- render 'theme-symbols', icon: 'burger' -%}
-
+          <span class="mobile-menu-button__icon mobile-menu-button__icon--burger">
+            {%- render 'theme-symbols', icon: 'burger' -%}
+          </span>
+          <span class="mobile-menu-button__icon mobile-menu-button__icon--close is-hidden">
+            {%- render 'theme-symbols', icon: 'close' -%}
+          </span>
 
           {%- if section.settings.label_style != 'none' -%}
             <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}" {% unless section.settings.label_style == 'inline' %} style="margin-top:-15px" {% endunless %}>{{ 'general.accessibility_labels.menu' | t }}</span>
@@ -543,7 +547,9 @@
         sub_save_cta_two: section.settings.sub_save_cta_two,
         sub_save_url_two: section.settings.sub_save_url_two,
         text_link_list: section.settings.new_mobile_nav_linklist,
-        mobile_columns: section.settings.mobile_columns 
+        mobile_columns: section.settings.mobile_columns,
+        blocks: section.blocks,
+    
       %}
     {% endif %}
   </div>

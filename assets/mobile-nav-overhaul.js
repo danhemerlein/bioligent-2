@@ -1,3 +1,16 @@
+// Scroll lock functionality
+const lockScroll = () => {
+  document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";
+  document.body.style.width = "100%";
+};
+
+const unlockScroll = () => {
+  document.body.style.overflow = "";
+  document.body.style.position = "";
+  document.body.style.width = "";
+};
+
 // Toggle UI functionality
 document.addEventListener("DOMContentLoaded", function () {
   const toggleOptions = document.querySelectorAll(".toggle-option");
@@ -8,6 +21,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const learnContainer = document.querySelector(
     ".js-new-mobile-nav-learn-container"
   );
+
+  // Lock scroll when mobile nav is open
+  if (document.body.classList.contains("mobile-nav-open")) {
+    lockScroll();
+  }
+
+  // Listen for mobile nav state changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (
+        mutation.type === "attributes" &&
+        mutation.attributeName === "class"
+      ) {
+        if (document.body.classList.contains("mobile-nav-open")) {
+          lockScroll();
+        } else {
+          unlockScroll();
+        }
+      }
+    });
+  });
+
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
 
   toggleOptions.forEach((option) => {
     option.addEventListener("click", function () {
@@ -21,16 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (toggleType === "product") {
         toggleTrack.classList.remove("toggle-track--right");
-        productContainer.style.opacity = "1";
-        learnContainer.style.opacity = "0";
-        productContainer.style.visibility = "visible";
-        learnContainer.style.visibility = "hidden";
+        productContainer.style.display = "block";
+        learnContainer.style.display = "none";
       } else if (toggleType === "learn") {
         toggleTrack.classList.add("toggle-track--right");
-        productContainer.style.opacity = "0";
-        learnContainer.style.opacity = "1";
-        productContainer.style.visibility = "hidden";
-        learnContainer.style.visibility = "visible";
+        learnContainer.style.display = "grid";
+        productContainer.style.display = "none";
       }
     });
   });

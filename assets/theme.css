@@ -3318,7 +3318,7 @@ body.sidebar-opened {
 }
 
 .main-content {
-  margin-top: 139px;
+  margin-top: 124px;
 }
 
 @media screen and (max-width: 1023px) {
@@ -3748,4 +3748,14 @@ video-background-element.lazy-image html[dir="ltr"] video {
 .junip-powered-by-footer {
   display: none;
   visibility: hidden;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.mobile-menu-button__icon--close svg,
+.mobile-menu-button__icon--close svg path {
+  fill: white !important;
+  stroke: white !important;
 }

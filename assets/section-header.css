@@ -10,12 +10,6 @@
   width: 100vw;
 }
 
-@media screen and (min-width: 1024px) {
-  .site-header {
-    height: 99px;
-  }
-}
-
 .site-header__product.site-header li,
 .site-header__product.site-header a,
 .site-header__product.site-header span {
@@ -1833,10 +1827,10 @@ html[dir="ltr"] .sticky-header {
   transform: rotate(180deg);
 }
 
-.site-nav-container nav .link-list {
+/* .site-nav-container nav .link-list {
   margin-top: -8px;
 }
 
 .header-right-container.area--cart {
   margin-top: -8px;
-}
+} */

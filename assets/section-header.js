@@ -119,6 +119,20 @@ if (typeof MainHeader !== "function") {
           elm.addEventListener("click", (e) => {
             e.preventDefault();
             elm.setAttribute("aria-expanded", "true");
+
+            const id = elm.getAttribute("aria-controls");
+            console.log(id);
+
+            if (id === "site-menu-sidebar") {
+              document.body.classList.add("mobile-nav-open");
+              elm
+                .querySelector(".mobile-menu-button__icon--burger")
+                .classList.add("is-hidden");
+              elm
+                .querySelector(".mobile-menu-button__icon--close")
+                .classList.remove("is-hidden");
+            }
+
             elmSidebar.show();
           });
           elm.addEventListener("keyup", (e) => {
@@ -167,15 +181,31 @@ if (typeof MainHeader !== "function") {
             }
           });
         });
+
       document.querySelector(".site-overlay").addEventListener("click", () => {
         if (document.querySelector(".sidebar--opened")) {
           document.querySelector(".sidebar--opened").hide();
+          document.body.classList.remove("mobile-nav-open");
+          document
+            .querySelector(".mobile-menu-button__icon--burger")
+            .classList.remove("is-hidden");
+          document
+            .querySelector(".mobile-menu-button__icon--close")
+            .classList.add("is-hidden");
         }
       });
+
       document.addEventListener("keydown", (e) => {
         if (e.keyCode == window.KEYCODES.ESC) {
           if (document.querySelector(".sidebar--opened")) {
             document.querySelector(".sidebar--opened").hide();
+            document.body.classList.remove("mobile-nav-open");
+            document
+              .querySelector(".mobile-menu-button__icon--burger")
+              .classList.remove("is-hidden");
+            document
+              .querySelector(".mobile-menu-button__icon--close")
+              .classList.add("is-hidden");
           }
         }
       });
