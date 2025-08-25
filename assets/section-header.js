@@ -121,7 +121,6 @@ if (typeof MainHeader !== "function") {
             elm.setAttribute("aria-expanded", "true");
 
             const id = elm.getAttribute("aria-controls");
-            console.log(id);
 
             if (id === "site-menu-sidebar") {
               document.body.classList.add("mobile-nav-open");

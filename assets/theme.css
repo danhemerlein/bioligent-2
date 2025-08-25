@@ -3633,6 +3633,21 @@ product-recommendations.sidebar-widget {
   display: block !important;
 }
 
+@media screen and (max-width: 500px) {
+  .new-mobile-nav__social-icons {
+    margin-bottom: 5rem;
+  }
+}
+
+/* Chrome and Safari only (excludes Firefox) */
+@supports (-webkit-appearance: none) {
+  @media screen and (max-width: 500px) {
+    .new-mobile-nav__social-icons {
+      margin-bottom: 5rem;
+    }
+  }
+}
+
 .new-mobile-nav__social-icons {
   gap: 1rem;
   width: 100%;

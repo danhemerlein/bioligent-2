@@ -95,19 +95,19 @@
               {%- liquid
                 assign image_class = 'mega-menu-product-item__image product-item__image-figure lazy-image--zoom-animation'
                 if block.settings.site_nav_image_one != blank and forloop.index == 1
-                  render 'lazy-image', image: block.settings.site_nav_image_one, class: image_class   
+                  render 'lazy-image', image: block.settings.site_nav_image_one, class: image_class, preload: true
                 endif
 
                 if block.settings.site_nav_image_two != blank and forloop.index == 2
-                  render 'lazy-image', image: block.settings.site_nav_image_two, class: image_class   
+                  render 'lazy-image', image: block.settings.site_nav_image_two, class: image_class, preload: true
                 endif
 
                 if block.settings.site_nav_image_three != blank and forloop.index == 3
-                  render 'lazy-image', image: block.settings.site_nav_image_three, class: image_class   
+                  render 'lazy-image', image: block.settings.site_nav_image_three, class: image_class, preload: true
                 endif
 
                 if block.settings.site_nav_image_four != blank and forloop.index == 4
-                  render 'lazy-image', image: block.settings.site_nav_image_four, class: image_class   
+                  render 'lazy-image', image: block.settings.site_nav_image_four, class: image_class, preload: true
                 endif
               -%}
 
