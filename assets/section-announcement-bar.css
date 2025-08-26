@@ -173,12 +173,6 @@ html[dir="rtl"] .announcement-bar__content-nav {
   text-align: right !important;
 }
 
-@media screen and (min-width: 1023px) {
-  announcement-bar {
-    display: block;
-  }
-}
-
 announcement-bar {
   background-color: var(--bioligent-green-500);
   color: #fff;
@@ -271,12 +265,10 @@ announcement-bar.announcement-bar__bottom .new-mobile-nav__hr {
 announcement-bar.announcement-bar__bottom .announcement.bioligent-button-text {
   border: 1px solid white;
   padding: 0.5rem !important;
-
   flex-shrink: 0;
   text-align: center;
   scroll-snap-align: start;
   line-height: 1.1;
-  display: flex;
   align-items: center;
   word-break: break-word;
   justify-content: center;
@@ -285,4 +277,14 @@ announcement-bar.announcement-bar__bottom .announcement.bioligent-button-text {
   cursor: default;
   text-decoration: none;
   font-weight: 400 !important;
+}
+
+announcement-bar.announcement-bar__top {
+  display: none;
+}
+
+@media screen and (min-width: 1023px) {
+  announcement-bar.announcement-bar__top {
+    display: flex;
+  }
 }
