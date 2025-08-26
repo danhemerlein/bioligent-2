@@ -32,11 +32,17 @@
     <script src="{{ 'section-announcement-bar.js' | asset_url }}" defer></script>
   {%- endif -%}
 
-  <announcement-bar  class="show 
-
-    {% if section.id == 'sections--17964106186822__announcement_bar_rLJtdi' %}
+  <announcement-bar  
+    class="show 
+    {% if section.id == settings.announcement_bar_id %}
       announcement-bar__top
+    {% else %}
+      announcement-bar__bottom
     {%- endif -%}
+
+    {% comment %} {% if section.id == 'sections--17964106186822__announcement_bar_rLJtdi' %}
+      announcement-bar__top
+    {%- endif -%} {% endcomment %}
 
     {% if product.handle == 'berberine-plus' %}
       announcement-bar__berberine-berberine-chromium
@@ -102,7 +108,7 @@
           <div class="announcement-bar__social-icons lap-hide">
             {%- liquid
               if section.settings.show_social_icons
-                render 'social-icons'
+                render 'social-icons' svg_color: '#fff'
               endif
             -%}
           </div>

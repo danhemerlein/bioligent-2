@@ -118,6 +118,10 @@
   overflow: hidden;
 }
 
+.new-mobile-nav__collection-dropdown--active {
+  padding-bottom: 24px;
+}
+
 .new-mobile-nav__product-item,
 .new-mobile-nav__product-item figure {
   border-radius: 8px;
