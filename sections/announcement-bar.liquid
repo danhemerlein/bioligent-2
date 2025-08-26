@@ -32,69 +32,130 @@
     <script src="{{ 'section-announcement-bar.js' | asset_url }}" defer></script>
   {%- endif -%}
 
-  <announcement-bar id="announcement-{{ section.id }}" style="display:block" data-js-inert>
+  <announcement-bar  
+    class="show 
+    {% if section.id == settings.announcement_bar_id %}
+      announcement-bar__top
+    {% else %}
+      announcement-bar__bottom
+    {%- endif -%}
+
+    {% comment %} {% if section.id == 'sections--17964106186822__announcement_bar_rLJtdi' %}
+      announcement-bar__top
+    {%- endif -%} {% endcomment %}
+
+    {% if product.handle == 'berberine-plus' %}
+      announcement-bar__berberine-berberine-chromium
+    {%- endif -%}
+  
+    {% if product.handle == 'black-seed-oil' %}
+      announcement-bar__black-seed-oil
+    {%- endif -%}
+  
+    {% if product.handle == 'daily-core' %}
+      announcement-bar__daily-core-adult-multivitamin
+    {%- endif -%}
+  
+    {% if product.handle == 'the-defense-squad' %}
+      announcement-bar__the-defense-squad
+    {%- endif -%}
+  
+    {% if product.handle == 'the-digestive-duo' %}
+      announcement-bar__the-digestive-duo
+    {%- endif -%}
+  
+    {% if product.handle == 'the-perk-up-pair' %}
+      announcement-bar__the-perk-up-pair
+    {%- endif -%}
+  
+    {% if product.handle == 'total-body-trio' %}
+      announcement-bar__total-body-trio
+    {%- endif -%}
+  
+    {% if product.handle == 'adrenal-adapt' %}
+      announcement-bar__adrenal-adapt
+    {%- endif -%}
+  
+    {% if product.handle == 'next-phase' %}
+      announcement-bar__next-phase
+    {%- endif -%}
+  
+    {% if product.handle == 'tribiotic-plus' %}
+      announcement-bar__tribiotic-plus
+    {%- endif -%}
+  
+    {% if product.handle == 'glp-1-support' %}
+      announcement-bar__glp-1-booster
+    {%- endif -%}
+     "
+    
+    id="announcement-{{ section.id }}" data-js-inert>
+
     <div class="container--large">
-      <div class="announcement-bar">
+      
+      <div class="announcement-bar {% if section.settings.enable_slider == false %} announcement-bar--no-slider {% endif %}
+        {% if section.blocks.size == 1 %}
+          announcement-bar--one-announcement
+        {% elsif section.blocks.size == 2 %}
+          announcement-bar--two-announcements
+        {% else %}
+          announcement-bar--three-announcements
+        {% endif %}
+        "
+      >
 
-        <div class="announcement-bar__social-icons lap-hide">
-          {%- liquid
-            if section.settings.show_social_icons
-              render 'social-icons'
-            endif
-          -%}
-        </div>
-        
-        <div class="announcement-bar__content">
-          {%- if section.blocks.size > 1 -%}
-            <span class="announcement-bar__content-nav announcement-bar__content-nav--left announcement-bar__content-nav--disabled">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
-          {%- endif -%}
-
-          <div class="announcement-bar__slider" data-js-slider>
-            {%- for block in section.blocks -%}
-              <span class="announcement" {{ block.shopify_attributes }}>
-                {%- if block.settings.link != blank -%}
-                  <a href="{{ block.settings.link }}" {% if block.settings.target %} target="_blank" {% endif %}>
-                {%- endif -%}
-                  {{ block.settings.text | escape }}
-                {%- if block.settings.link != blank -%} </a> {%- endif -%}
-              </span>
-            {%- endfor -%}
+        {%- if section.settings.show_social_icons -%}
+          <div class="announcement-bar__social-icons lap-hide">
+            {%- liquid
+              if section.settings.show_social_icons
+                render 'social-icons' svg_color: '#fff'
+              endif
+            -%}
           </div>
+        {%- endif -%}
+        
+        {%- if section.settings.enable_slider -%}
+          <div class="announcement-bar__content">
+            {%- if section.blocks.size > 1 -%}
+              <span class="announcement-bar__content-nav announcement-bar__content-nav--left announcement-bar__content-nav--disabled">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
+            {%- endif -%}
+            
+              <div class="announcement-bar__slider" data-js-slider>
+                {%- for block in section.blocks -%}
+                  <span class="announcement" {{ block.shopify_attributes }}>
+                    {%- if block.settings.link != blank -%}
+                      <a href="{{ block.settings.link }}" {% if block.settings.target %} target="_blank" {% endif %}>
+                    {%- endif -%}
+                      {{ block.settings.text | escape }}
+                    {%- if block.settings.link != blank -%} </a> {%- endif -%}
+                  </span>
+                {%- endfor -%}
+              </div>
+            {%- if section.blocks.size > 1 -%}
+              <span class="announcement-bar__content-nav announcement-bar__content-nav--right">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            <span class="announcement bioligent-button-text" {{ block.shopify_attributes }}>
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" {% if block.settings.target %} target="_blank" {% endif %}>
+              {%- endif -%}
+                {{ block.settings.text | escape }}
+              {%- if block.settings.link != blank -%} </a> {%- endif -%}
+            </span>
+          {%- endfor -%}
+        {%- endif -%}
 
-          {%- if section.blocks.size > 1 -%}
-            <span class="announcement-bar__content-nav announcement-bar__content-nav--right">{%- render 'theme-symbols', icon: 'chevron' -%}</span>
-          {%- endif -%}
-
-        </div>
-
+        {%- if section.settings.show_locale_selector or section.settings.show_country_selector -%}
         <div class="announcement-bar__localization-form lap-hide">
           {%- render 'localization-form', show_country_selector: section.settings.show_country_selector, show_locale_selector: section.settings.show_locale_selector, location: 'ancmt' -%}
         </div>
+        {%- endif -%}
 
       </div>
     </div>      
   </announcement-bar>
-
-  {% style %}
-    {%- if section.settings.bar_txtcolor != 'rgba(0,0,0,0)' -%}
-      #announcement-{{ section.id }} .announcement-bar, #announcement-{{ section.id }} a, #announcement-{{ section.id }} .localization-form__item-text {
-        color: {{ section.settings.bar_txtcolor }};
-      }
-      #announcement-{{ section.id }} svg *, #announcement-{{ section.id }} .localization-form__item-symbol * {
-        fill: {{ section.settings.bar_txtcolor }} !important;
-      }
-    {%- endif -%}
-    {%- if section.settings.bar_bgcolor != 'rgba(0,0,0,0)' -%}
-      #announcement-{{ section.id }},#announcement-{{ section.id }} .announcement-bar__content-nav {
-        background: {{ section.settings.bar_bgcolor }};
-      }
-    {%- endif -%}
-    {%- if section.settings.border_color != 'rgba(0,0,0,0)' -%}
-      #announcement-{{ section.id }} {
-        border-bottom: solid 1px {{ section.settings.border_color }};
-      }
-    {%- endif -%}
-  {% endstyle %}
 
 {%- endif -%}
 
@@ -134,9 +195,15 @@
       },
       {
         "type": "checkbox",
+        "id": "enable_slider",
+        "label": "Enable Slider",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "show_locale_selector",
         "label": "t:sections.footer.settings.language_selector_show.label",
-        "default": true
+        "default": false
       },
       {
         "type": "header",
@@ -160,28 +227,6 @@
         "label": "t:sections.local-extra-words.sections.announcement-bar.settings.social.label",
         "default": true
       },
-      {
-        "type": "header",
-        "content": "t:settings_schema.colors.name"
-      },
-      {
-        "type": "color",
-        "id": "bar_bgcolor",
-        "label": "t:sections.announcement-bar.settings.bar_bgcolor.label",
-        "default": "#111111"
-      },
-      {
-        "type": "color",
-        "id": "bar_txtcolor",
-        "label": "t:sections.announcement-bar.settings.bar_txtcolor.label",
-        "default": "#ffffff"
-      },
-      {
-        "type": "color",
-        "id": "border_color",
-        "label": "t:sections.local-extra-words.settings_schema.colors.settings.borders",
-        "default": "rgba(0,0,0,0)"
-      }
     ],
     "blocks": [
       {

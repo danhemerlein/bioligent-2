@@ -1,4 +1,4 @@
-.announcement-bar__slider {
+announcement-bar.announcement-bar__top.announcement-bar__slider {
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -24,10 +24,11 @@
 }
 
 announcement-bar {
-  border-bottom: solid 1px transparent;
   position: relative;
-  z-index: 1001;
+  z-index: 100;
+  display: none;
 }
+
 .sidebar-opened announcement-bar {
   z-index: 999;
 }
@@ -37,14 +38,15 @@ announcement-bar {
     overflow-x: hidden;
   }
 }
-.announcement-bar {
+
+.announcement-bar.announcement-bar__top {
   display: grid;
   align-items: center;
   min-height: 2.5rem;
-  grid-template-columns: 27% 46% 27%;
 }
+
 @media screen and (max-width: 767px) {
-  .announcement-bar {
+  .announcement-bar.announcement-bar__top {
     grid-template-columns: 1fr;
   }
 }
@@ -87,22 +89,22 @@ announcement-bar {
 .announcement-bar__content-nav--left svg {
   transform: rotate(90deg);
 }
-html[dir='rtl'] .announcement-bar__content-nav--left {
+html[dir="rtl"] .announcement-bar__content-nav--left {
   right: -1.25rem;
 }
-html[dir='ltr'] .announcement-bar__content-nav--left {
+html[dir="ltr"] .announcement-bar__content-nav--left {
   left: -1.25rem;
 }
 .announcement-bar__content-nav--right svg {
   transform: rotate(-90deg);
 }
-html[dir='rtl'] .announcement-bar__content-nav--right {
+html[dir="rtl"] .announcement-bar__content-nav--right {
   left: -1.25rem;
 }
-html[dir='ltr'] .announcement-bar__content-nav--right {
+html[dir="ltr"] .announcement-bar__content-nav--right {
   right: -1.25rem;
 }
-html[dir='rtl'] .announcement-bar__content-nav {
+html[dir="rtl"] .announcement-bar__content-nav {
   transform: scale(-1);
 }
 .announcement-bar__content-nav--disabled {
@@ -124,6 +126,163 @@ html[dir='rtl'] .announcement-bar__content-nav {
   align-items: center;
   padding-inline-start: 1.25rem;
 }
+
 .announcement-bar__localization-form .localization-form {
   justify-content: flex-end;
+}
+
+.announcement-bar.announcement-bar--no-slider .announcement {
+  text-decoration: underline;
+  text-align: center;
+}
+
+.announcement-bar.announcement-bar--one-announcement {
+  grid-template-columns: 1fr;
+}
+
+.announcement-bar.announcement-bar--one-announcement
+  .announcement:first-of-type {
+  text-align: center !important;
+}
+
+.announcement-bar.announcement-bar--two-announcements {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.announcement-bar.announcement-bar--two-announcements
+  .announcement:first-of-type {
+  text-align: left !important;
+}
+
+.announcement-bar.announcement-bar--two-announcements
+  .announcement:last-of-type {
+  text-align: right !important;
+}
+
+.announcement-bar.announcement-bar--three-announcements {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.announcement-bar.announcement-bar--three-announcements
+  .announcement:first-of-type {
+  text-align: left !important;
+}
+
+.announcement-bar.announcement-bar--three-announcements
+  .announcement:last-of-type {
+  text-align: right !important;
+}
+
+@media screen and (min-width: 1023px) {
+  announcement-bar {
+    display: block;
+  }
+}
+
+announcement-bar {
+  background-color: var(--bioligent-green-500);
+  color: #fff;
+}
+
+announcement-bar.announcement-bar__top {
+  background-color: var(--edgewater-500);
+  color: var(--bioligent-green-500);
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  height: 40px;
+  z-index: 9999;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(-100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+announcement-bar.announcement-bar__top .announcement-bar {
+  display: grid;
+}
+
+announcement-bar.show.announcement-bar__top {
+  transform: translateY(0%);
+}
+
+/* single products */
+announcement-bar.announcement-bar__top.announcement-bar__berberine-berberine-chromium {
+  background-color: #ffe9c7 !important;
+}
+
+announcement-bar.announcement-bar__top.announcement-bar__black-seed-oil {
+  background-color: #e3d6e7 !important;
+}
+
+announcement-bar.announcement-bar__top.announcement-bar__daily-core-adult-multivitamin {
+  background-color: #e8f5f6 !important;
+}
+
+/* bundles */
+announcement-bar.announcement-bar__top.announcement-bar__the-defense-squad {
+  background-color: #e8f5f6 !important;
+}
+
+announcement-bar.announcement-bar__top.announcement-bar__the-digestive-duo {
+  background-color: #e4d6e8 !important;
+}
+
+announcement-bar.announcement-bar__top.announcement-bar__the-perk-up-pair {
+  background-color: #ffe9c6 !important;
+}
+
+announcement-bar.announcement-bar__top.announcement-bar__total-body-trio {
+  background-color: #e8f5f6 !important;
+}
+
+announcement-bar.announcement-bar__top.announcement-bar__adrenal-adapt {
+  background-color: #f8e3ae !important;
+}
+
+announcement-bar.announcement-bar__top.announcement-bar__next-phase {
+  background-color: #e3d6e7 !important;
+}
+
+announcement-bar.announcement-bar__top.announcement-bar__tribiotic-plus {
+  background-color: #d2ebbf !important;
+}
+
+announcement-bar.announcement-bar__top.announcement-bar__glp-1-booster {
+  background-color: #e8f6f6 !important;
+}
+
+announcement-bar.announcement-bar__bottom .announcement-bar {
+  display: grid;
+  align-items: center;
+  min-height: 2.5rem;
+  grid-template-columns: 27% 46% 27%;
+  margin-top: 0px;
+  margin-bottom: 0px !important;
+  padding-bottom: 75px;
+}
+
+announcement-bar.announcement-bar__bottom .new-mobile-nav__hr {
+  display: none;
+}
+
+announcement-bar.announcement-bar__bottom .announcement.bioligent-button-text {
+  border: 1px solid white;
+  padding: 0.5rem !important;
+
+  flex-shrink: 0;
+  text-align: center;
+  scroll-snap-align: start;
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  word-break: break-word;
+  justify-content: center;
+  padding: 0.3125rem 1.25rem;
+  font-size: calc(14px / 16 * var(--base-body-primary-size) + 0px);
+  cursor: default;
+  text-decoration: none;
+  font-weight: 400 !important;
 }

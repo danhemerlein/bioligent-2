@@ -24,7 +24,16 @@
   transition: transform 0.3s ease-in-out;
   display: none;
 }
-html[dir=rtl] .sidebar * {
+
+.sidebar#site-menu-sidebar {
+  height: calc(var(--window-height) - 99px);
+  margin-top: 92px;
+  background-color: var(--edgewater-300);
+  width: 100vw;
+  height: calc(100vh - 92px);
+}
+
+html[dir="rtl"] .sidebar * {
   direction: rtl;
 }
 body:not(.sidebar-has-scrollbars) .sidebar {
@@ -44,30 +53,30 @@ body:not(.sidebar-has-scrollbars) .sidebar::-webkit-scrollbar-thumb:hover {
   opacity: 0.86;
 }
 .sidebar svg * {
-  fill: var(--color-text-main);
+  /* fill: var(--color-text-main); */
 }
-html[dir=rtl] .sidebar--right {
+html[dir="rtl"] .sidebar--right {
   left: 0;
 }
-html[dir=ltr] .sidebar--right {
+html[dir="ltr"] .sidebar--right {
   right: 0;
 }
-html[dir=rtl] .sidebar--right {
+html[dir="rtl"] .sidebar--right {
   transform: translateX(-100%);
 }
-html[dir=ltr] .sidebar--right {
+html[dir="ltr"] .sidebar--right {
   transform: translateX(100%);
 }
-html[dir=rtl] .sidebar--left {
+html[dir="rtl"] .sidebar--left {
   right: 0;
 }
-html[dir=ltr] .sidebar--left {
+html[dir="ltr"] .sidebar--left {
   left: 0;
 }
-html[dir=rtl] .sidebar--left {
+html[dir="rtl"] .sidebar--left {
   transform: translateX(100%);
 }
-html[dir=ltr] .sidebar--left {
+html[dir="ltr"] .sidebar--left {
   transform: translateX(-100%);
 }
 .sidebar.sidebar--opened {
@@ -79,7 +88,7 @@ html[dir=ltr] .sidebar--left {
 .sidebar__header {
   position: sticky;
   top: 0;
-  padding: 1rem var(--sidebar-gutter) 0.75rem;
+  padding: 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -88,6 +97,10 @@ html[dir=ltr] .sidebar--left {
   z-index: 99;
   text-transform: uppercase;
   font-weight: var(--font-weight-body-primary-bold);
+  border-radius: 32px;
+  margin-top: 4px;
+  height: 46px;
+  margin-bottom: 4px;
 }
 @media screen and (max-width: 474px) {
   .sidebar__header {
@@ -130,8 +143,8 @@ html[dir=ltr] .sidebar--left {
 .sidebar__footer {
   bottom: 0;
   width: 100%;
-  padding: calc(var(--sidebar-gutter) / 2) var(--sidebar-gutter);
-  border-top: 1px solid var(--color-borders-main);
+  padding: 16px;
+  padding-top: 0;
   z-index: 9;
 }
 .sidebar__footer:empty {
@@ -152,10 +165,15 @@ html[dir=ltr] .sidebar--left {
   transition: all 300ms linear;
   display: block !important;
 }
-html[dir=rtl] .site-overlay {
+
+body.mobile-nav-open .site-overlay {
+  background: transparent !important;
+}
+
+html[dir="rtl"] .site-overlay {
   right: 0;
 }
-html[dir=ltr] .site-overlay {
+html[dir="ltr"] .site-overlay {
   left: 0;
 }
 .sidebar-opened .site-overlay {
@@ -169,28 +187,29 @@ html[dir=ltr] .site-overlay {
   justify-content: space-between;
   align-items: center;
 }
-.site-menu-sidebar-footer .social-icons, .site-menu-sidebar-footer .localization-form__item-button {
-  opacity: 0.62;
+.site-menu-sidebar-footer .social-icons,
+.site-menu-sidebar-footer .localization-form__item-button {
+  /* opacity: 0.62; */
 }
 .site-menu-sidebar-footer .localization-form__content {
   max-width: 20rem;
 }
-html[dir=rtl] .site-menu-sidebar-footer .localization-form__content {
+html[dir="rtl"] .site-menu-sidebar-footer .localization-form__content {
   left: 0;
 }
-html[dir=ltr] .site-menu-sidebar-footer .localization-form__content {
+html[dir="ltr"] .site-menu-sidebar-footer .localization-form__content {
   right: 0;
 }
-html[dir=rtl] .site-menu-sidebar-footer .localization-form__content {
+html[dir="rtl"] .site-menu-sidebar-footer .localization-form__content {
   left: 0;
 }
-html[dir=ltr] .site-menu-sidebar-footer .localization-form__content {
+html[dir="ltr"] .site-menu-sidebar-footer .localization-form__content {
   right: 0;
 }
-html[dir=rtl] .site-menu-sidebar-footer .localization-form__content {
+html[dir="rtl"] .site-menu-sidebar-footer .localization-form__content {
   right: auto;
 }
-html[dir=ltr] .site-menu-sidebar-footer .localization-form__content {
+html[dir="ltr"] .site-menu-sidebar-footer .localization-form__content {
   left: auto;
 }
 @media screen and (max-width: 374px) {
@@ -230,7 +249,8 @@ html[dir=ltr] .site-menu-sidebar-footer .localization-form__content {
   height: 6.875rem;
   background: var(--color-third-background-main);
 }
-.search-item--blank .title, .search-item--blank .caption {
+.search-item--blank .title,
+.search-item--blank .caption {
   display: block;
   width: 11.25rem;
   background: var(--color-third-background-main);
@@ -242,10 +262,14 @@ html[dir=ltr] .site-menu-sidebar-footer .localization-form__content {
   width: 60%;
   margin-top: 10px;
 }
-.search-item--blank .thumbnail, .search-item--blank .title, .search-item--blank .caption {
+.search-item--blank .thumbnail,
+.search-item--blank .title,
+.search-item--blank .caption {
   position: relative;
 }
-.search-item--blank .thumbnail:after, .search-item--blank .title:after, .search-item--blank .caption:after {
+.search-item--blank .thumbnail:after,
+.search-item--blank .title:after,
+.search-item--blank .caption:after {
   position: absolute;
   top: 0;
   width: 100%;
@@ -254,10 +278,14 @@ html[dir=ltr] .site-menu-sidebar-footer .localization-form__content {
   content: "";
   animation: fill-progress 2s infinite;
 }
-html[dir=rtl] .search-item--blank .thumbnail:after, html[dir=rtl] .search-item--blank .title:after, html[dir=rtl] .search-item--blank .caption:after {
+html[dir="rtl"] .search-item--blank .thumbnail:after,
+html[dir="rtl"] .search-item--blank .title:after,
+html[dir="rtl"] .search-item--blank .caption:after {
   right: 0;
 }
-html[dir=ltr] .search-item--blank .thumbnail:after, html[dir=ltr] .search-item--blank .title:after, html[dir=ltr] .search-item--blank .caption:after {
+html[dir="ltr"] .search-item--blank .thumbnail:after,
+html[dir="ltr"] .search-item--blank .title:after,
+html[dir="ltr"] .search-item--blank .caption:after {
   left: 0;
 }
 .search-link {
@@ -312,7 +340,11 @@ cart-recommendations .product-price--unit {
   opacity: 0.76;
 }
 
-html[dir=ltr] .site-menu-sidebar-footer .localization-form__content {
+html[dir="ltr"] .site-menu-sidebar-footer .localization-form__content {
   left: 0;
   right: auto;
+}
+
+.sidebar#site-menu-sidebar .sidebar__header {
+  position: unset !important;
 }

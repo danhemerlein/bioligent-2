@@ -15,13 +15,9 @@
       padding-inline-start: calc(var(--gutter-container) + 10px) !important;
     }
   }
-  @media screen and (min-width: {{ settings.theme_max_width | plus: 1 }}px) {
+  @media screen and (min-width: 1024px) {
     .site-nav.style--classic .submenu.mega-menu {
       width: var(--window-width);
-      margin-inline-start: calc((var(--window-width) - {{ settings.theme_max_width }}px) / -2);
-    }
-    .site-header--style-one-row .site-nav.style--classic .submenu.mega-menu  {
-      margin-inline-start: calc(((var(--window-width) - {{ settings.theme_max_width }}px) / -2) - var(--gutter-container));
     }
   }
 {% endstyle %}
@@ -152,7 +148,7 @@
               </li>
 
             {%- when 'menu' -%}
-              {%- render 'site-nav', linklist: block.settings.linklist, type: 'classic', shopify_attributes: block.shopify_attributes -%}
+              {%- render 'site-nav', linklist: block.settings.linklist, type: 'classic', shopify_attributes: block.shopify_attributes, site_nav_image_one: block.settings.site_nav_image_one, site_nav_image_two: block.settings.site_nav_image_two, site_nav_image_three: block.settings.site_nav_image_three, site_nav_image_four: block.settings.site_nav_image_four -%}
 
             {%- when 'products-list' -%}
               {%- render 'site-nav-mega', items: block.settings.products, isproduct: true, menu_name: block.settings.title, show_more_label: block.settings.show_more_products_cta_label, show_more_url: block.settings.show_more_products_cta_url, type: 'classic', shopify_attributes: block.shopify_attributes, desktop_columns: section.settings.desktop_columns
@@ -167,7 +163,6 @@
             {%- when 'mega-menu' -%}
               {%- render 'site-nav-mega', items: block.settings.products, isproduct: true, linklist: block.settings.linklist, menu_name: block.settings.title, show_promotion_1: block.settings.show_promotion_block_1, promotion_image_1: block.settings.promotion_image_1, promotion_image_link_1: block.settings.promotion_image_link_1, promotion_content_1: block.settings.promotion_content_1, show_promotion_2: block.settings.show_promotion_block_2, promotion_image_2: block.settings.promotion_image_2, promotion_image_link_2: block.settings.promotion_image_link_2, promotion_content_2: block.settings.promotion_content_2, promotion_width: block.settings.promotion_width, type: 'classic', shopify_attributes: block.shopify_attributes, image_border_radius: block.settings.image_border_radius, desktop_columns: section.settings.desktop_columns -%}
               {%- assign any_mega_menu_nav = true -%}
-
             {%- endcase -%}
         {%- endfor -%}
 
@@ -183,12 +178,7 @@
 {% endcapture %}
 
 
-<main-header id="site-header" class="site-header
-  {% if section.settings.show_header_border_bottom %} site-header--border {% endif %}
-  site-header--alignment-{{ section.settings.alignment }}
-  {% if header_absolute %} site-header--absolute {% unless section.settings.hide_header_border %} site-header--absolute-show-border {% endunless %} {% endif %}
-  site-header--style-{{ section.settings.style }}
-
+<main-header id="site-header" class="site-header sticky-header show
   {% if template.name == 'product' %}
     site-header__product
   {%- endif -%}
@@ -241,8 +231,7 @@
     site-header__k2-d3
   {%- endif -%}
 
-
-  " data-js-inert {% if section.settings.sticky_header %} data-sticky-header {% endif %}>
+  " data-sticky-header>
 
   <div class="header-container header-container--top">
     {% liquid
@@ -299,6 +288,12 @@
     <div class="container--large">
       <div class="header__top header__top--logo-{{ section.settings.alignment }} {% if section.settings.custom_icon_select == 'no-icon' %}no-custom-link{% endif %} site-header--menu-{{ section.settings.menu_type }}" id="header-top" style="height:calc(var(--header-logo) + var(--header-vertical-space))">
 
+        <div class="header-container header-container--bottom no-header-blocks">
+          <div class="header__bottom">
+            {{ header_menu_classic }}
+          </div>
+        </div>
+
         <!-- logo -->
 
         <div id="logo" class="logo area--logo">
@@ -342,66 +337,79 @@
 
         </div>
 
-        {%- if section.settings.custom_icon_select != 'no-icon' -%}
-          <a href="{{ section.settings.custom_icon_link }}"
-            class="area--custom-icon icon-button icon-button--text-{{ section.settings.label_style }}"
-            {% if section.settings.open_in_new_window %}target="_blank"{% endif %}
-            title="{{ section.settings.label_text | escape }}"
-          >
-            <span class="button__icon button__icon--special" role="img" aria-hidden="true">
-              {%- render 'icon-pack', icon: section.settings.custom_icon_select -%}
-            </span>
+        <div class="header-right-container area--cart"> 
+          {%- if section.settings.custom_icon_select != 'no-icon' -%}
+            <a href="{{ section.settings.custom_icon_link }}"
+              class="area--custom-icon icon-button icon-button--text-{{ section.settings.label_style }}"
+              {% if section.settings.open_in_new_window %}target="_blank"{% endif %}
+              title="{{ section.settings.label_text | escape }}"
+            >
+              <span class="button__icon button__icon--special" role="img" aria-hidden="true">
+                {%- render 'icon-pack', icon: section.settings.custom_icon_select -%}
+              </span>
 
-            {%- if section.settings.label_text != blank and section.settings.label_style != 'none' -%}
-              <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ section.settings.label_text | escape }}</span>
-            {%- endif -%}
-          </a>
-        {%- endif -%}
-
-        <a href="{{ routes.search_url }}" class="area--search  icon-button icon-button--text-{{ section.settings.label_style }} {% if section.settings.hide_search %} element--hide {% endif %}"
-          title="{{ 'general.accessibility_labels.open_search' | t }}"
-          data-js-open-search-drawer data-js-sidebar-handle
-          aria-expanded="false" aria-controls="site-search-sidebar" role="button"
-        >
-          <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'search' -%}</span>
-          {%- if section.settings.label_style != 'none' -%}
-            <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.search' | t }}</span>
-          {%- endif -%}
-        </a>
-
-        {%- if shop.customer_accounts_enabled -%}
-          {% # theme-check-disable %}
-            {%- if customer -%}
-              <a class="area--account icon-button icon-button--text-{{ section.settings.label_style }}" href="{{ routes.account_url }}">
-            {%- else -%}
-              <a class="area--account icon-button icon-button--text-{{ section.settings.label_style }}" href="{{ routes.account_login_url }}">
-            {%- endif -%}
-              <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'account' -%}</span>
-              {%- if section.settings.label_style != 'none' -%}
-                <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.account.title' | t }}</span>
+              {%- if section.settings.label_text != blank and section.settings.label_style != 'none' -%}
+                <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ section.settings.label_text | escape }}</span>
               {%- endif -%}
             </a>
-          {% # theme-check-enable %}
-        {%- endif -%}
-
-        <a
-          class="no-js-hidden area--cart icon-button icon-button--text-{{ section.settings.label_style }} {% if section.settings.hide_cart %} element--hide {% endif %}"
-          {% if settings.cart_action == 'overlay' and template != 'cart' %}
-            data-js-sidebar-handle aria-expanded="false" aria-controls="site-cart-sidebar" role="button"
-          {% else %}
-            href="{{ routes.cart_url }}"
-          {% endif %}
-          title="{{ 'general.accessibility_labels.open_cart' | t }}" tabindex="0"
-        >
-          <span class="visually-hidden">{{ 'general.accessibility_labels.open_cart' | t }}</span>
-          <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'cart' -%}</span>
-
-          {%- if section.settings.label_style != 'none' -%}
-            <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.cart' | t }}</span>
           {%- endif -%}
 
-          <span data-header-cart-count aria-hidden="true" class="icon-button__label">{{ cart.item_count }}</span>
-        </a>
+          <a href="{{ routes.search_url }}" class="area--search  icon-button icon-button--text-{{ section.settings.label_style }} {% if section.settings.hide_search %} element--hide {% endif %}"
+            title="{{ 'general.accessibility_labels.open_search' | t }}"
+            data-js-open-search-drawer data-js-sidebar-handle
+            aria-expanded="false" aria-controls="site-search-sidebar" role="button"
+          >
+            <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'search' -%}</span>
+            {%- if section.settings.label_style != 'none' -%}
+              <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.search' | t }}</span>
+            {%- endif -%}
+          </a>
+
+          {%- if shop.customer_accounts_enabled -%}
+            {% # theme-check-disable %}
+              {%- if customer -%}
+                <a class="area--account icon-button icon-button--text-{{ section.settings.label_style }}" href="{{ routes.account_url }}">
+              {%- else -%}
+                <a class="area--account icon-button icon-button--text-{{ section.settings.label_style }}" href="{{ routes.account_login_url }}">
+              {%- endif -%}
+                <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'account' -%}</span>
+                {%- if section.settings.label_style != 'none' -%}
+                  <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.account.title' | t }}</span>
+                {%- endif -%}
+              </a>
+            {% # theme-check-enable %}
+          {%- endif -%}
+
+          <a
+            class="no-js-hidden area--cart icon-button icon-button--text-{{ section.settings.label_style }} {% if section.settings.hide_cart %} element--hide {% endif %}"
+            {% if settings.cart_action == 'overlay' and template != 'cart' %}
+              data-js-sidebar-handle aria-expanded="false" aria-controls="site-cart-sidebar" role="button"
+            {% else %}
+              href="{{ routes.cart_url }}"
+            {% endif %}
+            title="{{ 'general.accessibility_labels.open_cart' | t }}" tabindex="0"
+          >
+            <span class="visually-hidden">{{ 'general.accessibility_labels.open_cart' | t }}</span>
+            <span class="button__icon" role="img" aria-hidden="true">{%- render 'theme-symbols', icon: 'cart' -%}</span>
+
+            {%- if section.settings.label_style != 'none' -%}
+              <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}">{{ 'general.breadcrumb.cart' | t }}</span>
+            {%- endif -%}
+
+            <span data-header-cart-count aria-hidden="true" class="icon-button__label">{{ cart.item_count }}</span>
+          </a>
+
+          <a class="build-a-bundle-button
+            {% if template.name == 'product' %} build-a-bundle-button--pdp {% endif %}
+            bioligent-button-text" href="{{ section.settings.desktop_nav_link }}">
+            <span class="bioligent-button-text">
+              {{ section.settings.desktop_nav_cta }}
+            </span>
+            <span>
+              {{ section.settings.desktop_nav_cta_secondary }}
+            </span>
+          </a>
+        </div>
 
         <noscript>
           <a
@@ -429,8 +437,12 @@
         <button data-js-sidebar-handle class="mobile-menu-button hide lap-show area--menu icon-button icon-button--text-{{ section.settings.label_style }}" aria-expanded="false" aria-controls="site-menu-sidebar" style="height: auto;">
 
           <span class="visually-hidden">{{ 'general.accessibility_labels.open_menu' | t }}</span>
-          {%- render 'theme-symbols', icon: 'burger' -%}
-
+          <span class="mobile-menu-button__icon mobile-menu-button__icon--burger">
+            {%- render 'theme-symbols', icon: 'burger' -%}
+          </span>
+          <span class="mobile-menu-button__icon mobile-menu-button__icon--close is-hidden">
+            {%- render 'theme-symbols', icon: 'close' -%}
+          </span>
 
           {%- if section.settings.label_style != 'none' -%}
             <span class="icon-button__text {% if section.settings.label_style == 'inline' %} text-animation--underline-in-header {% endif %}" {% unless section.settings.label_style == 'inline' %} style="margin-top:-15px" {% endunless %}>{{ 'general.accessibility_labels.menu' | t }}</span>
@@ -439,17 +451,6 @@
         </button>
 
       </div>
-
-    </div>
-
-  </div>
-
-  <div class="header-container header-container--bottom no-header-blocks">
-
-    <div class="header__bottom {% if section.settings.show_header_border_top %} header__bottom--border {% endif %} container--large">
-
-      {{ header_menu_classic }}
-
     </div>
   </div>
 </main-header>
@@ -457,13 +458,19 @@
 <sidebar-drawer id="site-menu-sidebar" class="sidebar sidebar--left" tabindex="-1" role="dialog" aria-modal="true" style="display:none">
 
   <div class="sidebar__header">
-    <span class="sidebar__title">
-      {{ 'general.accessibility_labels.menu' | t }}
-    </span>
-    <button class="sidebar__close" data-js-close>
-      <span class="visually-hidden">{{ 'general.accessibility_labels.close_sidebar' | t }}</span>
-      <span aria-hidden="true" aria-role="img">{%- render 'theme-symbols', icon: 'close' -%}</span>
-    </button>
+    <div class="mobile-nav-toggle">
+      <div class="toggle-track"></div>
+      <button class="toggle-option toggle-option--active" data-toggle="product">
+        <span>
+          PRODUCTS
+        </span>
+      </button>
+      <button class="toggle-option" data-toggle="learn">
+        <span>
+          LEARN
+        </span>
+      </button>
+    </div>
   </div>
 
   <div class="sidebar__body">
@@ -530,15 +537,28 @@
         </div>
       </mobile-navigation>
     {% else %}
-      {% render 'mobile-nav-overhaul' products_list: section.settings.new_mobile_nav_products_list sub_save_image: section.settings.sub_save_image sub_save_cta: section.settings.sub_save_cta sub_save_url: section.settings.sub_save_url text_link_list: section.settings.new_mobile_nav_linklist, mobile_columns: section.settings.mobile_columns %}
+      {% render 'mobile-nav-overhaul' 
+        products_list: section.settings.new_mobile_nav_products_list, 
+        collection_list: section.settings.new_mobile_nav_collection_list,
+        sub_save_image: section.settings.sub_save_image,
+        sub_save_cta: section.settings.sub_save_cta,
+        sub_save_url: section.settings.sub_save_url,
+        sub_save_image_two: section.settings.sub_save_image_two,
+        sub_save_cta_two: section.settings.sub_save_cta_two,
+        sub_save_url_two: section.settings.sub_save_url_two,
+        text_link_list: section.settings.new_mobile_nav_linklist,
+        mobile_columns: section.settings.mobile_columns,
+        blocks: section.blocks,
+    
+      %}
     {% endif %}
   </div>
 
   <div class="sidebar__footer site-menu-sidebar-footer">
-
+    
     {%- liquid
       if section.settings.show_social_icons
-        render 'social-icons'
+        render 'social-icons' svg_color: '#01301B'
       endif
     -%}
 
@@ -547,6 +567,7 @@
   </div>
 
   <link rel="stylesheet" href="{{ 'component-mobile-navigation.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'mobile-nav-overhaul.js' | asset_url }}" defer></script>
 
 </sidebar-drawer>
 
@@ -584,6 +605,23 @@
       "max": 100,
       "step": 1,
       "default": 40
+    },
+    {
+      "type": "text",
+      "id": "desktop_nav_cta",
+      "label": "Desktop Nav CTA",
+      "default": "Build A Bundle"
+    },
+    {
+      "type": "text",
+      "id": "desktop_nav_cta_secondary",
+      "label": "Desktop Nav CTA Secondary",
+      "default": "Save 25%"
+    },
+    {
+      "type": "url",
+      "id": "desktop_nav_link",
+      "label": "Desktop Nav Link"
     },
     {
       "type": "header",
@@ -703,20 +741,13 @@
       "id": "sticky_header",
       "label": "t:sections.local-extra-words.sections.header.settings.sticky.label",
       "info": "t:sections.local-extra-words.sections.header.settings.sticky.info",
-      "default": true
+      "default": false
     },
     {
       "type": "checkbox",
       "id": "show_header_border_bottom",
       "label": "t:bundle-220.header_border_bottom",
       "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_header_border_top",
-      "label": "t:bundle-220.header_border_top",
-      "info": "t:bundle-220.header_border_top_info",
-      "default": false
     },
     {
       "type": "checkbox",
@@ -980,6 +1011,11 @@
       "limit": 12
     },
     {
+      "type": "collection_list",
+      "id": "new_mobile_nav_collection_list",
+      "label": "New Mobile Nav Collection List",
+    },
+    {
       "type": "image_picker",
       "id": "sub_save_image",
       "label": "Subscribe & Save Image"
@@ -993,6 +1029,21 @@
     "type": "url",
     "id": "sub_save_url",
     "label": "Subscribe & Save URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "sub_save_image_two",
+      "label": "Subscriber Rewards Image"
+    },
+    {
+      "type": "text",
+      "id": "sub_save_cta_two",
+      "label": "Subscriber Rewards CTA"
+    },
+    {
+      "type": "url",
+      "id": "sub_save_url_two",
+      "label": "Subscriber Rewards URL"
     },
     {
       "type": "link_list",
@@ -1010,6 +1061,26 @@
           "id": "linklist",
           "label": "t:sections.bundle-extra-words.sections.header.blocks.menu.select_menu",
           "default": "main-menu"
+        },
+        {
+          "type": "image_picker",
+          "id": "site_nav_image_one",
+          "label": "Site Nav Image One"
+        },
+        {
+          "type": "image_picker",
+          "id": "site_nav_image_two",
+          "label": "Site Nav Image Two"
+        },
+        {
+          "type": "image_picker",
+          "id": "site_nav_image_three",
+          "label": "Site Nav Image Three" 
+        },
+        {
+          "type": "image_picker",
+          "id": "site_nav_image_four",
+          "label": "Site Nav Image Four"
         }
       ]
     },
@@ -1055,10 +1126,10 @@
           "label": "t:sections.refactor_words.header.promotion_block.image_link"
         },
         {
-          "type": "richtext",
+          "type": "text",
           "id": "promotion_content_1",
           "label": "t:sections.bundle-extra-words.sections.header.promotion.text",
-          "default": "<p>Lead customers to your best offers or great product stories.<br/><a href=\"#\">Learn more</a></p>"
+          "default": "Build A Bundle & Save Up To 25%"
         },
         {
           "type": "header",
@@ -1081,10 +1152,10 @@
           "label": "t:sections.refactor_words.header.promotion_block.image_link"
         },
         {
-          "type": "richtext",
+          "type": "text",
           "id": "promotion_content_2",
           "label": "t:sections.bundle-extra-words.sections.header.promotion.text",
-          "default": "<p>Lead customers to your best offers or great product stories.<br/><a href=\"#\">Learn more</a></p>"
+          "default": "Subscriber Rewards"
         },
         {
           "type": "header",
@@ -1095,6 +1166,10 @@
           "id": "promotion_width",
           "label": "t:sections.bundle-extra-words.sections.header.promotion.width",
           "options": [
+            {
+              "value": "half",
+              "label": "Half"
+            },
             {
               "value": "fourth",
               "label": "t:sections.bundle-extra-words.settings_schema.labels.options.option_6"
@@ -1221,3 +1296,4 @@
   }
 }
 {% endschema %}
+
