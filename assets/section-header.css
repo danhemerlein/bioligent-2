@@ -757,7 +757,7 @@ search-form {
   visibility: hidden;
   transition: opacity 300ms linear, visibility 300ms linear;
   position: fixed;
-  top: 99px;
+  top: 84px;
   z-index: 10;
   pointer-events: none; /* Prevent hover on hidden submenu */
 }
