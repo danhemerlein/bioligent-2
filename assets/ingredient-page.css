@@ -1,3 +1,8 @@
+.ingredient-page {
+  margin-top: clamp(2.5rem, var(--container-vertical-space), 4.375rem);
+  padding-top: clamp(2.5rem, var(--container-vertical-space), 4.375rem);
+}
+
 .ingredient-page__image-container {
   grid-column: span 4;
 }
