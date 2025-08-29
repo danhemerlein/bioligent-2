@@ -21,7 +21,7 @@
 
 	<li 
 		{% if link.links != blank %}
-			class="has-submenu" aria-controls="SiteNavLabel-{{ link.handle }}-{{ type }}" aria-expanded="false" 
+			class="has-submenu focus" aria-controls="SiteNavLabel-{{ link.handle }}-{{ type }}" aria-expanded="false" 
 		{% endif %} 
 		id="menu-item-{{ link.handle }}-{{ type }}"
 	>
@@ -57,9 +57,14 @@
 							>
 
 								<a class="menu-link menu-link--babymenu {% if childlink.active or childlink.child_active %} active {% endif %} {% unless childlink.links != blank %} no-focus-link {% endunless %} {{ links_weight }}" href="{{ childlink.url }}">
-									<span class="learn-menu-link-title {{ links_class }} pps">
-										{{ childlink.title | escape }}
-									</span>
+									<div class="learn-menu-link-title-container {{ links_class }}">
+										{% assign title_words = childlink.title | split: ' ' %}
+										{% for word in title_words %}
+											<span class="learn-menu-link-title">
+												{{ word | escape }}
+											</span>
+										{% endfor %}
+									</div>
 
 									<span class="learn-menu-link-icon">
 										<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
